@@ -10,10 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180516190642) do
+ActiveRecord::Schema.define(version: 20180516193725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "max_spots"
+    t.string "departure_location"
+    t.date "date"
+    t.integer "price"
+    t.bigint "tour_store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tour_store_id"], name: "index_activities_on_tour_store_id"
+  end
+
+  create_table "tour_stores", force: :cascade do |t|
+    t.text "address"
+    t.string "phone"
+    t.string "website"
+    t.string "name"
+    t.text "description"
+    t.string "business_tax_id"
+    t.string "regulator_id"
+    t.string "logo"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tour_stores_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,4 +60,6 @@ ActiveRecord::Schema.define(version: 20180516190642) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "activities", "tour_stores"
+  add_foreign_key "tour_stores", "users"
 end
