@@ -1,0 +1,7 @@
+*{
+  --full-height: calc(100vh -  var(--navbar-height) - calc( var(--footer-height) / 4 ) - 0px);
+}
+
+.outside-wrapper {
+  min-height: var(--full-height);
+}
