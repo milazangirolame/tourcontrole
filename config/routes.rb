@@ -7,4 +7,5 @@ Rails.application.routes.draw do
     resources :activities, only: [:new, :create]
   end
   resources :activities, only: [:update, :edit, :destroy, :show]
+  get 'tour_stores/:id/dashboard', to: 'tour_stores#dashboard', as: :dashboard
 end

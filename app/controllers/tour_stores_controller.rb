@@ -1,5 +1,5 @@
 class TourStoresController < ApplicationController
-  before_action :set_tour_store, only: [:edit, :update, :show, :destroy]
+  before_action :set_tour_store, only: [:edit, :update, :show, :destroy, :dashboard]
   def index
     @tour_stores = TourStore.all.order(created_at: :desc)
   end
@@ -32,10 +32,16 @@ class TourStoresController < ApplicationController
   end
 
   def show
+    @activities = @tour_store.activities.order(created_at: :desc)
   end
 
   def destroy
     @tour_store.destroy
+  end
+
+  def dashboard
+    @activities = @tour_store.activities.order(created_at: :desc)
+    @activity = Activity.new
   end
 
 

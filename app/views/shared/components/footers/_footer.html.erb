@@ -1,0 +1,5 @@
+<%if (@tour_store.nil? && @activity.nil?)  ||  current_page?(controller: 'tour_stores', action: 'dashboard') %>
+  <%= render 'shared/components/footers/footer_tourcontrole' %>
+  <% else %>
+  <%= render 'shared/components/footers/footer_tour_store' %>
+<% end %>

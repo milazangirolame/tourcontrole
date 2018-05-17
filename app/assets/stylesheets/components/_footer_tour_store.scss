@@ -1,10 +1,5 @@
-*{
-  --footer-height: 80px;
-}
-
-
-.footer {
-  background: $contrast;
+.footer-tour-store {
+  background: $mid-gray;
   display: flex;
   align-items: center;
   justify-content: space-between;

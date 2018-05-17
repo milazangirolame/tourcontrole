@@ -1,4 +1,9 @@
-<div class="contianer">
+<div class="container">
   <h1>TourStores#index</h1>
+  <div class="row">
+    <% @tour_stores.each do |tour_store| %>
+      <%= render 'shared/components/card_tour_store', tour_store: tour_store %>
+    <% end %>
+  </div>
   <p>Find me in app/views/tour_stores/index.html.erb</p>
 </div>

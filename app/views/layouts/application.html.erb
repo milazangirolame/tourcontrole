@@ -11,13 +11,13 @@
   </head>
   <body>
     <div class="outside-wrapper">
-      <%= render 'shared/components/navbar' %>
+      <%= render 'shared/components/navbars/navbar' %>
       <%= render 'shared/components/flashes' %>
       <%= yield %>
       <%= javascript_include_tag 'application' %>
       <%= javascript_pack_tag 'application' %>
     </div>
-    <%= render 'shared/components/footer' %>
+    <%= render 'shared/components/footers/footer' %>
 
   </body>
 </html>
