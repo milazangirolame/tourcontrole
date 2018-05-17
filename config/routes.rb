@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   end
   resources :activities, only: [:update, :edit, :destroy, :show]
   get 'tour_stores/:id/dashboard', to: 'tour_stores#dashboard', as: :dashboard
+  get 'terms', to: 'pages#terms'
+  get 'about', to: 'pages#about'
 end

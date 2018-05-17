@@ -10,3 +10,9 @@
 @import "buttons";
 @import "forms";
 @import "containers";
+*{
+  --navbar-height: 70px;
+  --footer-height: 80px;
+  --full-height: calc(100vh -  var(--navbar-height) - calc( var(--footer-height) / 4 ) - 0px);
+
+}

@@ -3,8 +3,11 @@
   <%= f.input :description %>
   <%= f.input :max_spots %>
   <%= f.input :departure_location %>
-  <%= f.input :date %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.input :starts_at %>
+  <%= f.input :ends_at %>
   <%= f.input :price %>
   <%= f.input :photos, as: :file, :input_html => {:multiple => true}, name: "activity[activity_attributes][photos]" %>
-  <%= f.submit %>
+  <%= f.submit class: 'btn btn-primary btn-lg' %>
 <% end %>
