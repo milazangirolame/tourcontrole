@@ -1,7 +1,7 @@
 class TourStoresController < ApplicationController
   before_action :set_tour_store, only: [:edit, :update, :show, :destroy]
   def index
-    @tour_stores = TourStore.all
+    @tour_stores = TourStore.all.order(created_at: :desc)
   end
 
 

@@ -1,7 +1,9 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
+  before_action :set_tour_store, only: [:new, :create]
+
   def index
-    @activites = Activity.all
+    @activites = Activity.all.prder(created_at: :desc)
   end
 
 
@@ -11,6 +13,7 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = Activity.new(set_params)
+    @activity.tour_store = @tour_store
     if @activity.save
       redirect_to activity_path(@activity)
     else
@@ -43,12 +46,16 @@ class ActivitiesController < ApplicationController
   private
 
   def set_params
-    params.require(:activity).permit(:name, :description, :max_spots, :departure_location
+    params.require(:activity).permit(:name, :description, :max_spots, :departure_location,
                               :date, :price, :tour_store_id)
   end
 
   def set_activity
     @activity = Activity.find(params[:id])
+  end
+
+  def set_tour_store
+    @tour_store = TourStore.find(params[:tour_store_id])
   end
 
 end
