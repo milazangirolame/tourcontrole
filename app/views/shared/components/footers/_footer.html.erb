@@ -1,4 +1,4 @@
-<%if (@tour_store.nil? && @activity.nil?)  ||  current_page?(controller: 'tour_stores', action: 'dashboard') %>
+<%if (@tour_store.nil? && @activity.nil?)  ||  page?( 'tour_stores#dashboard, tour_stores#new, tour_stores#edit') %>
   <%= render 'shared/components/footers/footer_tourcontrole' %>
   <% else %>
   <%= render 'shared/components/footers/footer_tour_store' %>

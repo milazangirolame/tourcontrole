@@ -1,9 +1,10 @@
-<%= simple_form_for([tour_store, activity]) do |f| %>
+<%= simple_form_for([tour_store, activity], :html => {:multipart => :true}) do |f| %>
   <%= f.input :name  %>
   <%= f.input :description %>
   <%= f.input :max_spots %>
   <%= f.input :departure_location %>
   <%= f.input :date %>
   <%= f.input :price %>
+  <%= f.input :photos, as: :file, :input_html => {:multiple => true}, name: "activity[activity_attributes][photos]" %>
   <%= f.submit %>
 <% end %>

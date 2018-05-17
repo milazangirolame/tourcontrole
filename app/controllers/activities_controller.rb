@@ -15,6 +15,11 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(set_params)
     @activity.tour_store = @tour_store
     if @activity.save
+      unless params[:activity][:photos].nil?
+        params[:activity][:photos].each do |photo|
+          @photo = @activity.photos.create!(image: photo)
+        end
+      end
       redirect_to activity_path(@activity)
     else
       render :new
