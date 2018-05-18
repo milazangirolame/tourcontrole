@@ -3,12 +3,13 @@ class ActivitiesController < ApplicationController
   before_action :set_tour_store, only: [:new, :create]
 
   def index
-    @activites = Activity.all.prder(created_at: :desc)
+    @activites = policy_scope(Activity)
   end
-
 
   def new
     @activity = Activity.new
+    @activity.tour_store = @tour_store
+    authorize @activity
   end
 
   def create
@@ -57,10 +58,12 @@ class ActivitiesController < ApplicationController
 
   def set_activity
     @activity = Activity.find(params[:id])
+    authorize @activity
   end
 
   def set_tour_store
     @tour_store = TourStore.find(params[:tour_store_id])
+    authorize @tour_store
   end
 
 end

@@ -19,6 +19,8 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'carrierwave', '~> 1.2'
 gem 'cloudinary'
+gem "pundit"
+
 
 
 

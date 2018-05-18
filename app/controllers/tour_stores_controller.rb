@@ -1,18 +1,24 @@
 class TourStoresController < ApplicationController
   before_action :set_tour_store, only: [:edit, :update, :show, :destroy, :dashboard]
+  before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
+
   def index
-    @tour_stores = TourStore.all.order(created_at: :desc)
+    @tour_stores = policy_scope(TourStore)
   end
 
 
   def new
     @tour_store = TourStore.new
+    authorize @tour_store
   end
 
   def create
     @tour_store = TourStore.new(set_params)
     @tour_store.user = current_user
     if @tour_store.save
+      tour_store_admin = TourStoreAdmin.new(user: current_user, tour_store: @tour_store)
+      tour_store_admin.store_creator = true
+      tour_store_admin.save
       redirect_to tour_store_path(@tour_store)
     else
       render :new
@@ -54,6 +60,11 @@ class TourStoresController < ApplicationController
 
   def set_tour_store
     @tour_store = TourStore.find(params[:id])
+    authorize @tour_store
+  end
+
+  def set_current_user
+    @user = current_user
   end
 
 end
