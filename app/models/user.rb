@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :tour_stores
   has_many :activities, through: :tour_stores
+  has_many :tour_store_admins
   mount_uploader :user_photo, PhotoUploader
 
 end
