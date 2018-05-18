@@ -1,4 +1,7 @@
 //= require rails-ujs
+
+//= require jquery
+
 //= require flatpickr
 //= require flatpickr/l10n/pt
 
@@ -78,3 +81,6 @@ function loadflatpickruser() {
   }
 }
 loadflatpickruser()
+
+$('#flatpickr-input').flatpickr();
+
