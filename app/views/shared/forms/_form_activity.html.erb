@@ -4,7 +4,7 @@
   <%= f.input :description %>
   <%= f.input :max_spots %>
   <%= f.input :departure_location %>
-  <%= f.input :start_date %>
+  <%= f.input :start_date, input_html: { class: "flatpickr-input" }, as: :string %>
   <%= f.input :end_date %>
   <%= f.input :starts_at %>
   <%= f.input :ends_at %>
