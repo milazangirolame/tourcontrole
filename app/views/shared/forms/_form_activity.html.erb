@@ -4,11 +4,11 @@
   <%= f.input :description %>
   <%= f.input :max_spots %>
   <%= f.input :departure_location %>
-  <%= f.input :start_date %>
-  <%= f.input :end_date %>
-  <%= f.input :starts_at %>
-  <%= f.input :ends_at %>
+  <%= f.input :start_date,label: 'Começa', input_html: { class: "flatpickr-input" }, as: :string %>
+  <%= f.input :end_date, label: 'Finaliza', input_html: { class: "flatpickr-input" }, as: :string %>
   <%= f.input :price %>
   <%= f.input :photos, as: :file, :input_html => {:multiple => true}, name: "activity[activity_attributes][photos]" %>
   <%= f.submit class: 'btn btn-primary btn-lg' %>
 <% end %>
+
+
