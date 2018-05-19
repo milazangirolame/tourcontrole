@@ -22,6 +22,9 @@ gem 'cloudinary'
 gem "pundit"
 gem 'flatpickr_rails'
 
+gem 'simple_calendar'
+gem 'recurring_select', github: "RundownApp/recurring_select"
+
 
 
 

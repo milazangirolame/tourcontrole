@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180518124046) do
+ActiveRecord::Schema.define(version: 20180519160720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20180518124046) do
     t.text "description"
     t.integer "max_spots"
     t.string "departure_location"
-    t.date "start_date"
+    t.datetime "start_date"
     t.integer "price"
     t.bigint "tour_store_id"
     t.datetime "created_at", null: false
