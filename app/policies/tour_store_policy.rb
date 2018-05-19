@@ -13,9 +13,7 @@ class TourStorePolicy < ApplicationPolicy
     true
   end
 
-  def store_admin?
-    record.users.include?(user)
-  end
+
 
 
   def update?
