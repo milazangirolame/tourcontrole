@@ -24,7 +24,8 @@
             <%= f.input :price, label: false, placeholder: 'Preço R$' %>
           </div>
           <div class="col-xs-12">
-            <%= f.input :photos, as: :file, :input_html => {:multiple => true}, name: "activity[activity_attributes][photos]", label: false, label: 'Adicionar fotos do Tour' %>
+            <%= f.input :photos, as: :file, :input_html => {:multiple => true}, name: "activity[activity_attributes][photos]", label: "<span class='glyphicon glyphicon-picture' aria-hidden='true'></span>
+            Adicionar fotos do Tour".html_safe %>
           </div>
         </div>
       </div>

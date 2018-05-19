@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def customer_page?
-    page?('tour_stores#show, activites#show')
+    page?('tour_stores#show, activities#show')
   end
 
   def is_admin?
@@ -26,7 +26,8 @@ module ApplicationHelper
   end
 
   def pro_page?
-    page?('tour_stores#dashboard, tour_stores#users, tour_stores#tours, activities#new, activities#edit')
+    page?('tour_stores#dashboard, tour_stores#users, tour_stores#tours,
+      activities#new, activities#edit')
   end
 
 end

@@ -39,8 +39,10 @@
         </div>
       </div>
     <% else %>
+
+
       <!-- Login link (when logged out) -->
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-tour-store-item navbar-tour-store-link" %>
+      <%= link_to t(".sign_in", default: "Login "), new_user_session_path, class: "navbar-tour-store-item navbar-tour-store-link" %>
     <% end %>
   </div>
 

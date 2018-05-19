@@ -41,7 +41,7 @@
       </div>
     <% else %>
       <!-- Login link (when logged out) -->
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-tourcontrole-item navbar-tourcontrole-link" %>
+      <%= link_to t(".sign_in", default: "<span class='glyphicon glyphicon-log-in' aria-hidden='true'></span>  Entrar".html_safe), new_user_session_path, class: "navbar-tourcontrole-item navbar-tourcontrole-link" %>
     <% end %>
   </div>
 
