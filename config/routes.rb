@@ -4,10 +4,13 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :tour_stores do
-    resources :activities, only: [:new, :create]
+    get 'dashboard', to: 'tour_stores#dashboard', as: :dashboard
+    get 'tours', to: 'tour_stores#tours', as: :tours
+    get 'users', to: 'tour_stores#users', as: :users
+
+    resources :activities, only: [:new, :create, :edit, :update]
   end
-  resources :activities, only: [:update, :edit, :destroy, :show]
-  get 'tour_stores/:id/dashboard', to: 'tour_stores#dashboard', as: :dashboard
+  resources :activities, only: [:destroy, :show]
   get 'terms', to: 'pages#terms'
   get 'about', to: 'pages#about'
 end

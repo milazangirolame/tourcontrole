@@ -3,13 +3,13 @@
     <%= simple_form_for([tour_store, activity], html: {multipart: true, class: 'form-activity'}) do |f| %>
       <div class="form-row">
         <div class="col-xs-12">
-          <h4>Criar Novo Tour</h4>
+          <h4>Insira os detalhes do tour</h4>
         </div>
       </div>
       <div class="form-row">
         <div class="col-xs-12 col-sm-6">
-          <%= f.input :name, label: false, placeholder: 'Nome do Tour ou Passeio'%>
-          <%= f.input :description, label: false, placeholder: 'Descrição do Tour ou Passeio'%>
+          <%= f.input :name, label: false, placeholder: 'Nome do Tour'%>
+          <%= f.input :description, label: false, placeholder: 'Descrição do Tour '%>
           <%= f.input :departure_location, label: false, placeholder: 'endereço de partida' %>
         </div>
         <div class="col-xs-12 col-sm-6">
@@ -24,7 +24,7 @@
             <%= f.input :price, label: false, placeholder: 'Preço R$' %>
           </div>
           <div class="col-xs-12">
-            <%= f.input :photos, as: :file, :input_html => {:multiple => true}, name: "activity[activity_attributes][photos]", label: false, label: 'Agregar fotos do Tour ou passeio' %>
+            <%= f.input :photos, as: :file, :input_html => {:multiple => true}, name: "activity[activity_attributes][photos]", label: false, label: 'Adicionar fotos do Tour' %>
           </div>
         </div>
       </div>

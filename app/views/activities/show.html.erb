@@ -1,5 +1,4 @@
 <div class="container">
-  <h1>Activities#show</h1>
-  <%= link_to 'Edit Activity', edit_activity_path(@activity), class: 'btn btn-primary btn-lg'  %>
-  <%= link_to 'Back to tour_store', tour_store_path(@activity.tour_store), class: 'btn btn-success btn-lg'  %>
+  <h1><%= @activity.name %></h1>
+  <%= render 'shared/components/activity_admin_buttons', activity: @activity  %>
 </div>

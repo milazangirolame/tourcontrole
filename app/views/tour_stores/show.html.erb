@@ -1,7 +1,8 @@
 <div class="container">
-  <h1>TourStores#show</h1>
-  <h2>Store: <%= @tour_store.name  %></h2>
-  <%= link_to "new activity", new_tour_store_activity_path(@tour_store), class: 'btn btn-primary btn-lg' %>
+  <h1><%= @tour_store.name  %></h1>
+  <% if is_admin? %>
+    <%= link_to "Criar novo tour", new_tour_store_activity_path(@tour_store), class: 'btn btn-primary btn-md' %>
+  <% end %>
   <div class="activity-container">
     <div class="row">
       <% @activities.each do |activity|%>

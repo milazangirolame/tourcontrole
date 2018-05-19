@@ -1,7 +1,7 @@
 class ActivityPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all.order(created_at: :desc)
+      scope.all.order(start_date: :desc)
     end
   end
 

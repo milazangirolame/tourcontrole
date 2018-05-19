@@ -13,8 +13,13 @@ class TourStorePolicy < ApplicationPolicy
     true
   end
 
-  def update?
+  def store_admin?
     record.users.include?(user)
+  end
+
+
+  def update?
+    store_admin?
   end
 
   def destroy?
@@ -22,7 +27,15 @@ class TourStorePolicy < ApplicationPolicy
   end
 
   def dashboard?
-    record.users.include?(user)
+    store_admin?
+  end
+
+  def tours?
+    store_admin?
+  end
+
+  def users?
+    store_admin?
   end
 
 

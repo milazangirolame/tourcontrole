@@ -1,7 +1,7 @@
 class TourStoresController < ApplicationController
-  before_action :set_tour_store, only: [:edit, :update, :show, :destroy, :dashboard]
+  before_action :set_tour_store, only: [:edit, :update, :show, :destroy]
   before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
-
+  before_action :set_tour_store_data_sources, only: [:dashboard, :tours, :users]
   def index
     @tour_stores = policy_scope(TourStore)
   end
@@ -38,7 +38,7 @@ class TourStoresController < ApplicationController
   end
 
   def show
-    @activities = @tour_store.activities.order(created_at: :desc)
+    @activities = @tour_store.activities.order(start_date: :desc)
   end
 
   def destroy
@@ -46,8 +46,13 @@ class TourStoresController < ApplicationController
   end
 
   def dashboard
-    @activities = @tour_store.activities.order(created_at: :desc)
-    @activity = Activity.new
+  end
+
+
+  def tours
+  end
+
+  def users
   end
 
 
@@ -67,4 +72,11 @@ class TourStoresController < ApplicationController
     @user = current_user
   end
 
+
+  def set_tour_store_data_sources
+    @tour_store = TourStore.find(params[:tour_store_id])
+    authorize @tour_store
+    @activities = @tour_store.activities.order(start_date: :desc)
+    @activity = Activity.new
+  end
 end

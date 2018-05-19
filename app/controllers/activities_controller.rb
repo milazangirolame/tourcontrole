@@ -14,6 +14,7 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = Activity.new(set_params)
+
     @activity.tour_store = @tour_store
     if @activity.save
       unless params[:activity][:photos].nil?
@@ -21,25 +22,26 @@ class ActivitiesController < ApplicationController
           @photo = @activity.photos.create!(image: photo)
         end
       end
-      redirect_to activity_path(@activity)
+      redirect_to tour_store_tours_path(@tour_store)
     else
       render :new
     end
   end
 
   def edit
+    @tour_store = @activity.tour_store
   end
 
   def update
+    @tour_store = @activity.tour_store
+
     @activity.update(set_params)
     if @activity.save
-      redirect_to activity_path(@activity)
-    else
+      redirect_to tour_store_tours_path(@tour_store)
+          else
       render :edit
     end
   end
-
-
 
   def show
   end

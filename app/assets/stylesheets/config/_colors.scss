@@ -11,11 +11,29 @@ $light-gray: #F2F2F2;
 $dark-gray: #919190;
 $mid-gray:  #98A789;
 
-$tour-store-navbar: #98A789;
-$tour-store-footer: #98A789;
-
-
+// main palette
 $deep: #090089;
 $mid: #0060CA;
 $light: #91CEFF;
 $contrast: #FCDC74;
+
+//second palette
+$dark-heavy: #232931;
+$dark-marine: #062743;
+$dark-mid: #393E46;
+
+$marine-mid: #113A5D;
+
+//third palette
+$clear-egg: #F2F2F0;
+
+//items
+$public-navbar: $deep;
+$public-footer: $contrast;
+
+$pro-navbar: $dark-heavy;
+$pro-sidebar: $dark-mid;
+$pro-footer: $marine-mid;
+
+$tour-store-navbar: $clear-egg;
+$tour-store-footer: $light;
