@@ -1,4 +1,7 @@
 <div class="container">
   <h1><%= @activity.name %></h1>
   <%= render 'shared/components/activity_admin_buttons', activity: @activity  %>
+  <div class="activity-content">
+    <h2> Recorrente: <%= @activity.recurring  %> </h2>
+  </div>
 </div>
