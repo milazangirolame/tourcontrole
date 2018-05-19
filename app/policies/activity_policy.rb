@@ -10,16 +10,23 @@ class ActivityPolicy < ApplicationPolicy
     true
   end
 
+
+
+
   def create?
-    record.tour_store.users.include?(user)
+    store_admin?
   end
 
   def update?
-    record.tour_store.users.include?(user)
+    store_admin?
   end
 
   def destroy?
-    record.tour_store.users.include?(user)
+    store_admin?
+  end
+
+  def audit?
+    store_admin?
   end
 
 

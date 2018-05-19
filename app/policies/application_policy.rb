@@ -6,6 +6,16 @@ class ApplicationPolicy
     @record = record
   end
 
+  def store_admin?
+    if record.class == Activity
+      record.tour_store.users.include?(user)
+    elsif record.class == TourStore
+      record.users.include?(user)
+    else
+      false
+    end
+  end
+
   def index?
     false
   end

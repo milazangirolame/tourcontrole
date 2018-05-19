@@ -1,6 +1,7 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
   before_action :set_tour_store, only: [:new, :create]
+  before_action :set_activity_data_source, only: [:audit]
 
   def index
     @activites = policy_scope(Activity)
@@ -51,11 +52,14 @@ class ActivitiesController < ApplicationController
     redirect_to tour_stores_path
   end
 
+  def audit
+  end
+
   private
 
   def set_params
-    params.require(:activity).permit(:name, :description, :max_spots, :departure_location,
-                              :date, :price, :tour_store_id)
+    params.require(:activity).permit(:name, :description, :price, :max_spots, :departure_location,
+                              :start_date, :end_date, :tour_store_id, photos:[])
   end
 
   def set_activity
@@ -67,5 +71,13 @@ class ActivitiesController < ApplicationController
     @tour_store = TourStore.find(params[:tour_store_id])
     authorize @tour_store
   end
+
+  def set_activity_data_source
+    @tour_store = TourStore.find(params[:tour_store_id])
+    @activity = Activity.find(params[:activity_id])
+    authorize @activity
+  end
+
+
 
 end

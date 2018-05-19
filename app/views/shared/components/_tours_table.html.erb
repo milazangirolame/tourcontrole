@@ -11,7 +11,7 @@
           Vagas
         </th>
         <th>
-          Editar
+          Ações
         </th>
       </tr>
 
@@ -27,7 +27,11 @@
             <%= activity.max_spots %>
           </td>
           <td>
+            <%= link_to '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>'.html_safe, activity_path(activity), method: :delete, data: {confirm: "Esta ação é definitiva \n Tem certeza que quer excluir o tour? \n #{activity.name}  "}  %>
             <%= link_to '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>'.html_safe, edit_tour_store_activity_path(activity.tour_store, activity) %>
+            <%= link_to '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'.html_safe, tour_store_activity_audit_path(activity.tour_store, activity) %>
+
+            <%= link_to '<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>'.html_safe, activity_path(activity) %>
           </td>
         </tr>
       <% end %>

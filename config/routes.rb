@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     get 'tours', to: 'tour_stores#tours', as: :tours
     get 'users', to: 'tour_stores#users', as: :users
 
-    resources :activities, only: [:new, :create, :edit, :update]
+    resources :activities, only: [:new, :create, :edit, :update] do
+      get 'audit', to: 'activities#audit', as: :audit
+    end
   end
   resources :activities, only: [:destroy, :show]
   get 'terms', to: 'pages#terms'
