@@ -1,4 +1,3 @@
-
 <div class="navbar-pro" >
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-pro-brand" do %>
@@ -11,9 +10,7 @@
     <% if user_signed_in? %>
 
       <!-- Links when logged in -->
-      <%= link_to "Host", "#", class: "navbar-pro-item navbar-pro-link" %>
-      <%= link_to "Trips", "#", class: "navbar-pro-item navbar-pro-link" %>
-      <%= link_to "Messages", "#", class: "navbar-pro-item navbar-pro-link" %>
+      <%= render 'shared/components/navbars/actions/pro_signed_options'  %>
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-pro-item">

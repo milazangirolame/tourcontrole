@@ -11,9 +11,30 @@
     <% if user_signed_in? %>
 
       <!-- Links when logged in -->
-      <%= link_to "Host", "#", class: "navbar-tour-store-item navbar-tour-store-link" %>
-      <%= link_to "Trips", "#", class: "navbar-tour-store-item navbar-tour-store-link" %>
-      <%= link_to "Messages", "#", class: "navbar-tour-store-item navbar-tour-store-link" %>
+      <div class="navbar-tour-store-item">
+        <% if current_user.tour_store_admins.any? %>
+          <div class="dropdown">
+            <div class="navbar-tour-store-link"
+           dropdown-toggle " id='navbar-tour-store-dashboard-menu' data-toggle='dropdown'>
+              <i class="fas fa-tachometer-alt"></i> Painel Empresa
+            </div>
+            <ul class= 'dropdown-menu dropdown-menu-right navbar-tour-store-dropdown-menu'>
+              <% current_user.tour_store_admins.each do |store_admin|%>
+                <% store = store_admin.tour_store%>
+                <li>
+                  <%= link_to store_admin.tour_store.name, tour_store_dashboard_path(store_admin.tour_store)  %>
+                </li>
+                 <% end  %>
+                 <li>
+                   <%= link_to '<i class="fas fa-plus"></i> Adicionar Empresa'.html_safe, new_tour_store_path, class: 'navbar-tour-store-link'  %>
+                 </li>
+               </ul>
+            </div>
+          <% else %>
+          <%= link_to '<i class="fas fa-plus"></i> Adicionar Empresa'.html_safe, new_tour_store_path, class: 'navbar-tour-store-link'  %>
+        <% end %>
+      </div>
+
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-tour-store-item">

@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   resources :activities, only: [:destroy, :show]
   get 'terms', to: 'pages#terms'
   get 'about', to: 'pages#about'
+  get 'cadastro', to: 'pages#cadastro'
 end
