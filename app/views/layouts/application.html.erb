@@ -11,13 +11,7 @@
   </head>
   <body>
     <%= render 'shared/components/navbars/navbar' %>
-
     <div class="outside-wrapper">
-      <%= render 'shared/components/navbars/sidebar' %>
-
-
-
-
       <%= render 'shared/components/flashes' %>
       <%= yield %>
       <%= javascript_include_tag 'application' %>
@@ -25,7 +19,5 @@
 
     </div>
     <%= render 'shared/components/footers/footer' %>
-
-
   </body>
 </html>
