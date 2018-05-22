@@ -1,47 +1,21 @@
-
-
 <div class=" navbar-tourcontrole navbar-tc" >
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-tc-brand" do %>
     <%= image_tag "logo.png", height: 50 %>
   <% end %>
-
   <!-- Right Navigation -->
   <div class="navbar-tc-right hidden-xs hidden-sm">
-
     <% if user_signed_in? %>
-
       <!-- Links when logged in -->
       <%= render 'shared/components/navbars/actions/signed_user_options' %>
-
-
-
       <!-- Avatar with dropdown menu -->
-      <div class="navbar-tc-item">
-        <div class="dropdown">
-          <%= image_tag "http://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbar-tc-menu", "data-toggle" => "dropdown" %>
-          <ul class="dropdown-menu dropdown-menu-right navbar-tc-dropdown-menu">
-            <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-cog"></i>  <%= t(".settings", default: "Settings") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <%= render 'shared/components/navbars/actions/avatar_drop_down_menu'  %>
+
     <% else %>
-      <!-- Login link (when logged out) -->
+      <!-- Public links -->
       <%= render 'shared/components/navbars/actions/public_options'  %>
+      <%= link_to '<i class="fas fa-plus-square"></i> Cadastre-se'.html_safe, cadastro_path, class: "navbar-tc-item navbar-tc-link" %>
+      <%= link_to t(".sign_in", default: "<span class='glyphicon glyphicon-log-in' aria-hidden='true'></span>  Entrar".html_safe), new_user_session_path, class: "navbar-tc-item navbar-tc-link" %>
     <% end %>
   </div>
 

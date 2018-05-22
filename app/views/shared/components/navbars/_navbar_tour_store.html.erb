@@ -4,45 +4,15 @@
   <%= link_to logo_link, class: "navbar-tc-brand" do %>
     <%= image_tag "customer_logo_placeholder.png", height: 50 %>
   <% end %>
-
   <!-- Right Navigation -->
   <div class="navbar-tc-right hidden-xs hidden-sm">
-
     <% if user_signed_in? %>
-
       <!-- Links when logged in -->
-
        <%= render 'shared/components/navbars/actions/dashboard_link'  %>
-
-
       <!-- Avatar with dropdown menu -->
-      <div class="navbar-tc-item">
-        <div class="dropdown">
-          <%= image_tag "http://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbar-tc-menu", "data-toggle" => "dropdown" %>
-          <ul class="dropdown-menu dropdown-menu-right navbar-tc-dropdown-menu">
-            <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-cog"></i>  <%= t(".settings", default: "Settings") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <%= render 'shared/components/navbars/actions/avatar_drop_down_menu'  %>
     <% else %>
-
-
-      <!-- Login link (when logged out) -->
-      <%= link_to t(".sign_in", default: "Login "), new_user_session_path, class: "navbar-tc-item navbar-tc-link" %>
+      <!-- Avoid displaying login button on public store navbar -->
     <% end %>
   </div>
 
