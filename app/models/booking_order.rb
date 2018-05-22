@@ -1,3 +1,4 @@
 class BookingOrder < ApplicationRecord
-  belongs_to :guest
+  has_many :guests
+  has_one :booking
 end
