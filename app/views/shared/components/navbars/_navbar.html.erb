@@ -1,5 +1,8 @@
-<% if customer_page? %>
-  <%= render 'shared/components/navbars/navbar_tour_store' %>
-  <% else %>
-  <%= render 'shared/components/navbars/navbar_tourcontrole' %>
+<% case  %>
+  <% when customer_page? %>
+    <%= render 'shared/components/navbars/navbar_tour_store' %>
+  <% when tourcontrole_page? %>
+    <%= render 'shared/components/navbars/navbar_tourcontrole' %>
+  <% when pro_page? %>
+    <%= render 'shared/components/navbars/navbar_pro' %>
 <% end %>

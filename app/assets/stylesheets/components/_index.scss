@@ -1,19 +1,19 @@
 // Import your components CSS files here.
+@import "navbars/index";
+@import "footers/index";
 @import "alert";
-@import "navbar_tour_store";
-@import "navbar_tourcontrole";
-@import "footer_tourcontrole";
-@import "footer_tour_store";
 @import "wrappers";
 @import "cards";
 @import "banners";
 @import "buttons";
 @import "forms";
 @import "containers";
-@import "sidebar";
+
+//General components variables
+
 *{
   --navbar-height: 70px;
   --footer-height: 80px;
-  --full-height: calc(100vh -  var(--navbar-height) - calc( var(--footer-height) / 4 ) - 0px);
+  --full-height: calc(100vh -  var(--navbar-height) - calc( var(--footer-height) / 1 ) - 0px);
 
 }
