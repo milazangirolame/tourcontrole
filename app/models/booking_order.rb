@@ -1,4 +1,6 @@
 class BookingOrder < ApplicationRecord
   has_many :guests
-  has_one :booking
+  belongs_to :activity
+  accepts_nested_attributes_for :guests
+
 end

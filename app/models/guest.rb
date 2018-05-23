@@ -1,3 +1,3 @@
 class Guest < ApplicationRecord
-  belongs_to :booking_orders
+  belongs_to :booking_order
 end

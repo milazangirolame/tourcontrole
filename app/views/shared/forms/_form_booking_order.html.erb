@@ -1,0 +1,8 @@
+<%= simple_form_for([activity,booking_order]) do |f| %>
+  <%= f.simple_fields_for :guest do |guests_form|  %>
+    <%= guests_form.input :first_name  %>
+    <%= guests_form.input :last_name  %>
+    <%= guests_form.input :email  %>
+    <%= guests_form.submit %>
+  <% end %>
+<% end %>
