@@ -1,6 +1,8 @@
 class BookingOrdersController < ApplicationController
-   before_action :set_booking_order, only:[:show, :edit, :update, :destroy]
-   before_action :set_activity, only:[:new, :create]
+  skip_before_action :authenticate_user!, except: [:edit, :update, :destroy]
+  before_action :set_booking_order, only:[:show, :edit, :update, :destroy]
+  before_action :set_activity, only:[:new, :create]
+
   def index
     @booking_orders = BookingOrder.all
   end
@@ -17,7 +19,7 @@ class BookingOrdersController < ApplicationController
     @booking_order = BookingOrder.new(activity: @activity)
     if @booking_order.save
       if params[:booking_order][:guest].present?
-        @guest = Guest.new(params[:booking_order][:guest])
+        @guest = Guest.new(set_params[:guest])
         @guest.booking_order = @booking_order
         @guest.save
       end
@@ -44,7 +46,7 @@ class BookingOrdersController < ApplicationController
   private
 
   def set_booking_order
-    @booking_order = BookingOrder.find(params[:booking_order_id])
+    @booking_order = BookingOrder.find(params[:id])
   end
 
   def set_activity
@@ -53,7 +55,7 @@ class BookingOrdersController < ApplicationController
   end
 
   def set_params
-    params.require(:booking_order).permit(:activity_id,:booking_order ,guest:[])
+    params.require(:booking_order).permit( {guest: [:first_name, :last_name, :email]})
   end
 
 end
