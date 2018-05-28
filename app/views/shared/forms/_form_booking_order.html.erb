@@ -1,16 +1,14 @@
 <%= simple_form_for([activity,booking_order]) do |f| %>
   <h4>Convidados</h4>
+
   <div id="guests">
+
     <%= f.simple_fields_for :guest do |guests_form|  %>
 
-
-      <div class="links">
-        <%= link_to_add_association 'Adicionar pessoa', f, :guests,  partial: 'shared/forms/nested/guests_fields', f: guests_form, class: 'btn btn-primary btn-md' %>
-
-      </div>
+      <%= link_to_add_association 'Adicionar pessoa', f, :guests, partial: 'shared/forms/nested/guests_fields', f: guests_form, class: 'btn btn-primary btn-md links' %>
 
     <% end %>
   </div>
-
   <%= f.submit class: 'btn btn-success btn-md' %>
+
 <% end %>
