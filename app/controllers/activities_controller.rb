@@ -77,7 +77,4 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find(params[:activity_id])
     authorize @activity
   end
-
-
-
 end

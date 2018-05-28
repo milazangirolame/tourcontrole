@@ -1,0 +1,9 @@
+hunting:
+  name: 'hunting'
+  description: 'good will hunting'
+  max_spots: 20
+  departure_location: 'home'
+  start_date: '25/05/2018'
+  end_date: '26/05/2018'
+  price: 300
+  tour_store: Fixtures.identify(:store)

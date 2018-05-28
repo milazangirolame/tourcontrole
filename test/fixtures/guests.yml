@@ -1,0 +1,7 @@
+juan:
+  first_name: 'juan'
+  last_name: 'perez'
+  email: 'juan_perez@safemail.com'
+  buyer: false
+  booking_order: booking_orders[:order]
+
