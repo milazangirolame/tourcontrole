@@ -1,0 +1,9 @@
+store:
+  address: 'rua 123 teste'
+  phone: '12 12 12 12'
+  website: 'tourcontrole.com'
+  name: 'tete tours ltda'
+  description: 'os melhores teste do momento'
+  business_tax_id: '012200-00014-0151'
+  user: Fixtures.identify(:oscar)
+
