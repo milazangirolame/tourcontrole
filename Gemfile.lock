@@ -72,6 +72,7 @@ GEM
     cloudinary (1.9.1)
       aws_cf_signer
       rest-client
+    cocoon (1.2.11)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
@@ -249,6 +250,7 @@ DEPENDENCIES
   carrierwave (~> 1.2)
   chromedriver-helper
   cloudinary
+  cocoon
   devise
   figaro
   flatpickr_rails
