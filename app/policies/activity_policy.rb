@@ -5,13 +5,9 @@ class ActivityPolicy < ApplicationPolicy
     end
   end
 
-
   def show?
     true
   end
-
-
-
 
   def create?
     store_admin?

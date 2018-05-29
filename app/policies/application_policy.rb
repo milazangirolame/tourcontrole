@@ -12,7 +12,7 @@ class ApplicationPolicy
     elsif record.class == TourStore
       record.users.include?(user)
     else
-      false
+      raise Error
     end
   end
 

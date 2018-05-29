@@ -1,5 +1,5 @@
 class BookingOrdersController < ApplicationController
-  skip_before_action :authenticate_user!, except: [:edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:new, :create]
   before_action :set_booking_order, only:[:show, :edit, :update, :destroy]
   before_action :set_activity, only:[:new, :create]
 
@@ -12,6 +12,7 @@ class BookingOrdersController < ApplicationController
 
   def new
     @booking_order = BookingOrder.new
+    authorize @booking_order
     @booking_order.guests.build
   end
 
@@ -43,6 +44,7 @@ class BookingOrdersController < ApplicationController
 
   def set_booking_order
     @booking_order = BookingOrder.find(params[:id])
+    authorize @booking_order
   end
 
   def set_activity
