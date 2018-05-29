@@ -1,5 +1,8 @@
-<% if customer_page? %>
-  <%= render 'shared/components/footers/footer_tour_store' %>
-  <% else %>
-  <%= render 'shared/components/footers/footer_tourcontrole' %>
+<% case  %>
+  <% when customer_page? %>
+    <%= render 'shared/components/footers/footer_tour_store' %>
+  <% when tourcontrole_page? %>
+    <%= render 'shared/components/footers/footer_tourcontrole' %>
+  <% when pro_page? %>
+    <%= render 'shared/components/footers/footer_pro' %>
 <% end %>

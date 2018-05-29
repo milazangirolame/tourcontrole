@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   devise_for :users
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -12,7 +11,11 @@ Rails.application.routes.draw do
       get 'audit', to: 'activities#audit', as: :audit
     end
   end
-  resources :activities, only: [:destroy, :show]
+  resources :activities, only: [:destroy, :show] do
+    resources :booking_orders, only: [:create, :new]
+  end
+  resources :booking_orders, only:[:show, :update, :edit, :destroy, :index]
   get 'terms', to: 'pages#terms'
   get 'about', to: 'pages#about'
+  get 'cadastro', to: 'pages#cadastro'
 end

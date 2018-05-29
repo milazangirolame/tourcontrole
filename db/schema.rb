@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180519161105) do
+
+ActiveRecord::Schema.define(version: 20180522193021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +31,34 @@ ActiveRecord::Schema.define(version: 20180519161105) do
     t.time "ends_at"
     t.text "recurring"
     t.index ["tour_store_id"], name: "index_activities_on_tour_store_id"
+  end
+
+  create_table "booking_orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "activity_id"
+    t.index ["activity_id"], name: "index_booking_orders_on_activity_id"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "booking_order_id"
+    t.bigint "activity_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_bookings_on_activity_id"
+    t.index ["booking_order_id"], name: "index_bookings_on_booking_order_id"
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "buyer", default: false, null: false
+    t.bigint "booking_order_id"
+    t.index ["booking_order_id"], name: "index_guests_on_booking_order_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -85,5 +114,9 @@ ActiveRecord::Schema.define(version: 20180519161105) do
   end
 
   add_foreign_key "activities", "tour_stores"
+  add_foreign_key "booking_orders", "activities"
+  add_foreign_key "bookings", "activities"
+  add_foreign_key "bookings", "booking_orders"
+  add_foreign_key "guests", "booking_orders"
   add_foreign_key "tour_stores", "users"
 end

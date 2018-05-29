@@ -21,6 +21,8 @@ gem 'carrierwave', '~> 1.2'
 gem 'cloudinary'
 gem "pundit"
 gem 'flatpickr_rails'
+gem 'cocoon'
+
 
 gem 'simple_calendar'
 gem 'recurring_select', github: "RundownApp/recurring_select"
@@ -39,4 +41,8 @@ group :development, :test do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+  gem 'launchy'
 end

@@ -1,0 +1,31 @@
+<div class=" navbar-pro navbar-tc" >
+  <!-- Logo -->
+  <%= link_to root_path, class: "navbar-tc-brand" do %>
+    <%= image_tag "logo.png", height: 50 %>
+  <% end %>
+  <!-- Right Navigation -->
+  <div class="navbar-tc-right hidden-xs hidden-sm">
+    <% if user_signed_in? %>
+      <!-- Links when logged in -->
+      <%= render 'shared/components/navbars/actions/pro_signed_options'  %>
+
+      <!-- Avatar with dropdown menu -->
+      <%= render 'shared/components/navbars/actions/avatar_drop_down_menu'  %>
+    <% else %>
+      <!-- Login link (when logged out) -->
+      <%= link_to t(".sign_in", default: "<span class='glyphicon glyphicon-log-in' aria-hidden='true'></span>  Entrar".html_safe), new_user_session_path, class: "navbar-tc-item navbar-tc-link" %>
+    <% end %>
+  </div>
+  <!-- Dropdown list appearing on mobile only -->
+  <div class="navbar-tc-item hidden-md hidden-lg">
+    <div class="dropdown">
+      <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+      <ul class="dropdown-menu dropdown-menu-right navbar-tc-dropdown-menu">
+        <li><a href="#">Some mobile link</a></li>
+        <li><a href="#">Other one</a></li>
+        <li><a href="#">Other one</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
