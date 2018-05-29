@@ -24,7 +24,4 @@ class ActivityPolicy < ApplicationPolicy
   def audit?
     store_admin?
   end
-
-
-
 end
