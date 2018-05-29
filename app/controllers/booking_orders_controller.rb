@@ -26,7 +26,6 @@ class BookingOrdersController < ApplicationController
     end
   end
 
-
   def edit
     @booking_order.update(set_params)
     if @booking_oder.save
@@ -49,7 +48,7 @@ class BookingOrdersController < ApplicationController
 
   def set_activity
     @activity = Activity.find(params[:activity_id])
-    authorize @activity
+    skip_authorization
   end
 
   def set_params
