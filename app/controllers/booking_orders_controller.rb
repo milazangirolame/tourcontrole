@@ -50,7 +50,7 @@ class BookingOrdersController < ApplicationController
   end
 
   def set_params
-    params.require(:booking_order).permit( guests_attributes: [:first_name, :last_name, :email])
+    params.require(:booking_order).permit(  guests_attributes: [:id, :_destroy, :first_name, :last_name, :email])
   end
 
 end
