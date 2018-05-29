@@ -12,17 +12,13 @@ class BookingOrdersController < ApplicationController
 
   def new
     @booking_order = BookingOrder.new
-    @guest = Guest.new(booking_order: @booking_order)
+    @booking_order.guests.build
   end
 
   def create
-    @booking_order = BookingOrder.new(activity: @activity)
+    @booking_order = BookingOrder.new(set_params)
+    @booking_order.activity = @activity
     if @booking_order.save
-      if params[:booking_order][:guest].present?
-        @guest = Guest.new(set_params[:guest])
-        @guest.booking_order = @booking_order
-        @guest.save
-      end
       redirect_to booking_order_path(@booking_order)
     else
       render :new
@@ -55,7 +51,7 @@ class BookingOrdersController < ApplicationController
   end
 
   def set_params
-    params.require(:booking_order).permit( {guest: [:first_name, :last_name, :email]})
+    params.require(:booking_order).permit(  guests_attributes: [:id, :_destroy, :first_name, :last_name, :email])
   end
 
 end
