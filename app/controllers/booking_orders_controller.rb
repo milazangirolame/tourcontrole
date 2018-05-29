@@ -12,6 +12,7 @@ class BookingOrdersController < ApplicationController
 
   def new
     @booking_order = BookingOrder.new
+    @booking_order.guests.build
   end
 
   def create
