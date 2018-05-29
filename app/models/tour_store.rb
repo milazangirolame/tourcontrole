@@ -7,5 +7,4 @@ class TourStore < ApplicationRecord
   accepts_nested_attributes_for :photos
   mount_uploader :logo, PhotoUploader
   mount_uploader :image_banner, PhotoUploader
-
 end

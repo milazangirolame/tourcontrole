@@ -5,13 +5,9 @@ class ActivityPolicy < ApplicationPolicy
     end
   end
 
-
   def show?
     true
   end
-
-
-
 
   def create?
     store_admin?
@@ -28,7 +24,4 @@ class ActivityPolicy < ApplicationPolicy
   def audit?
     store_admin?
   end
-
-
-
 end

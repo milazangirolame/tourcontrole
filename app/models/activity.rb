@@ -4,5 +4,4 @@ class Activity < ApplicationRecord
   has_many :booking_orders
   has_many :guests, through: :booking_orders
   accepts_nested_attributes_for :photos
-
 end

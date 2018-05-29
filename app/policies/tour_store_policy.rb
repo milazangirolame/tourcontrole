@@ -13,9 +13,6 @@ class TourStorePolicy < ApplicationPolicy
     true
   end
 
-
-
-
   def update?
     store_admin?
   end
@@ -35,6 +32,4 @@ class TourStorePolicy < ApplicationPolicy
   def users?
     store_admin?
   end
-
-
 end
