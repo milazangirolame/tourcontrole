@@ -1,8 +1,3 @@
-<% case  %>
-  <% when customer_page? %>
-    <%= render 'shared/components/navbars/navbar_tour_store' %>
-  <% when tourcontrole_page? %>
-    <%= render 'shared/components/navbars/navbar_tourcontrole' %>
-  <% when pro_page? %>
-    <%= render 'shared/components/navbars/navbar_pro' %>
-<% end %>
+<%= render "shared/components/navbars/#{show_navbar}" %>
+
+

@@ -28,4 +28,17 @@ module ApplicationHelper
       activities#new, activities#edit, activities#audit')
   end
 
+  def show_navbar
+    case
+     when customer_page?
+      'navbar_tour_store'
+     when tourcontrole_page?
+      'navbar_tourcontrole'
+     when pro_page?
+      'navbar_pro'
+    end
+  end
+
+
+
 end
