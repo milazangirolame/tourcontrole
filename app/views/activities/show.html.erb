@@ -2,5 +2,5 @@
   <h1><%= @activity.name %></h1>
   <%= render 'shared/components/activity_admin_buttons', activity: @activity  %>
 
-  <%= link_to 'Book Now', new_activity_booking_order_path(@activity), class: 'btn btn-success btn-lg' %>
+  <%= link_to 'Book Now', new_activity_order_path(@activity), class: 'btn btn-success btn-lg' %>
 </div>
