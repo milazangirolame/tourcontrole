@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180531185103) do
+ActiveRecord::Schema.define(version: 20180531185904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 20180531185103) do
     t.bigint "tour_store_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "recurring"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
     t.index ["tour_store_id"], name: "index_activities_on_tour_store_id"
   end
 
