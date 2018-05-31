@@ -39,6 +39,18 @@ module ApplicationHelper
     end
   end
 
-
+  def show_footer
+    case
+      when customer_page?
+        'footer_tour_store'
+      when tourcontrole_page?
+        'footer_tourcontrole'
+      when pro_page?
+        'footer_pro'
+    end
+  end
 
 end
+
+
+

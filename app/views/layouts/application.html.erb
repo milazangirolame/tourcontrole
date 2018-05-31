@@ -10,7 +10,7 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
-    <%= render 'shared/components/navbars/navbar' %>
+    <%= render "shared/components/navbars/#{show_navbar}" %>
     <div class="outside-wrapper">
       <%= render 'shared/components/flashes' %>
       <%= yield %>
@@ -18,6 +18,6 @@
       <%= javascript_pack_tag 'application' %>
 
     </div>
-    <%= render 'shared/components/footers/footer' %>
+    <%= render "shared/components/footers/#{show_footer}" %>
   </body>
 </html>
