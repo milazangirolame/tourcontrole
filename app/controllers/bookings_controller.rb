@@ -1,33 +1,33 @@
-class BookingOrdersController < ApplicationController
+class BookingsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:new, :create]
   before_action :set_booking_order, only:[:show, :edit, :update, :destroy]
   before_action :set_activity, only:[:new, :create]
 
   def index
-    @booking_orders = BookingOrder.all
+    @bookings = Booking.all
   end
 
   def show
   end
 
   def new
-    @booking_order = BookingOrder.new
-    authorize @booking_order
-    @booking_order.guests.build
+    @booking = Booking.new
+    authorize @booking
+    @booking.guests.build
   end
 
   def create
-    @booking_order = BookingOrder.new(set_params)
-    @booking_order.activity = @activity
-    if @booking_order.save
-      redirect_to booking_order_path(@booking_order)
+    @booking = Booking.new(set_params)
+    @booking.activity = @activity
+    if @booking.save
+      redirect_to booking_order_path(@booking)
     else
       render :new
     end
   end
 
   def edit
-    @booking_order.update(set_params)
+    @booking.update(set_params)
     if @booking_oder.save
       redirect_to activity_path(@activity)
     else
@@ -36,14 +36,14 @@ class BookingOrdersController < ApplicationController
   end
 
   def destroy
-    @booking_order.destroy
+    @booking.destroy
   end
 
   private
 
   def set_booking_order
-    @booking_order = BookingOrder.find(params[:id])
-    authorize @booking_order
+    @booking = Booking.find(params[:id])
+    authorize @booking
   end
 
   def set_activity

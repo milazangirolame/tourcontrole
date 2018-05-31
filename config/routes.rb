@@ -12,9 +12,9 @@ Rails.application.routes.draw do
     end
   end
   resources :activities, only: [:destroy, :show] do
-    resources :booking_orders, only: [:create, :new]
+    resources :bookings, only: [:create, :new]
   end
-  resources :booking_orders, only:[:show, :update, :edit, :destroy, :index]
+  resources :bookings, only:[:show, :update, :edit, :destroy, :index]
   get 'terms', to: 'pages#terms'
   get 'about', to: 'pages#about'
   get 'cadastro', to: 'pages#cadastro'
