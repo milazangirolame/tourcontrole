@@ -14,16 +14,16 @@
         </div>
         <div class="col-xs-12 col-sm-6">
           <div class="col-xs-12 col-sm-6">
-            <%= f.input :start_date, input_html: { class: "flatpickr-input" }, as: :string, label: false, placeholder: 'Inicia as:'%>
+            <%= f.input :starts_at, input_html: { class: "flatpickr-input" }, as: :string, label: false, placeholder: 'Inicia as:'%>
             <%= f.input :max_spots, label: false, placeholder: 'Limite de vagas'%>
-
           </div>
-          <div class="col-xs-12 col-sm-6">
-            <%= f.input :end_date, input_html: { class: "flatpickr-input" }, as: :string, label: false, placeholder: 'Finaliza as:'%>
 
+          <div class="col-xs-12 col-sm-6">
+            <%= f.input :ends_at, input_html: { class: "flatpickr-input" }, as: :string, label: false, placeholder: 'Finaliza as:'%>
             <%= f.input :price, label: false, placeholder: 'Preço R$' %>
           </div>
           <div class="col-xs-12">
+            <%= f.select_recurring :recurring, nil, allow_blank: true  %>
             <%= f.input :photos, as: :file, :input_html => {:multiple => true}, name: "activity[activity_attributes][photos]", label: "<span class='glyphicon glyphicon-picture' aria-hidden='true'></span>
             Adicionar fotos do Tour".html_safe %>
           </div>

@@ -1,10 +1,10 @@
 class BookingsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:new, :create]
-  before_action :set_booking_order, only:[:show, :edit, :update, :destroy]
+  before_action :set_booking, only:[:show, :edit, :update, :destroy]
   before_action :set_activity, only:[:new, :create]
 
   def index
-    @bookings = Booking.all
+    @bookings = policy_scope(Booking.all)
   end
 
   def show
@@ -41,7 +41,7 @@ class BookingsController < ApplicationController
 
   private
 
-  def set_booking_order
+  def set_booking
     @booking = Booking.find(params[:id])
     authorize @booking
   end
@@ -52,7 +52,7 @@ class BookingsController < ApplicationController
   end
 
   def set_params
-    params.require(:booking_order).permit(  guests_attributes: [:id, :_destroy, :first_name, :last_name, :email])
+    params.require(:booking).permit(  guests_attributes: [:id, :_destroy, :first_name, :last_name, :email])
   end
 
 end
