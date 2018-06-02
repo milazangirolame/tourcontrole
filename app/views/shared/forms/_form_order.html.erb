@@ -4,8 +4,9 @@
       <%= render 'shared/forms/nested/bookings_fields', f: booking %>
     <% end %>
     <div class="links">
-      <%= link_to_add_association 'add guest', f, :bookings, partial: 'shared/forms/nested/bookings_fields', class: 'btn btn-md btn-success'%>
-
+      <%= link_to_add_association 'add guest', f, :bookings,
+      partial: 'shared/forms/nested/bookings_fields',
+      class: 'btn btn-md btn-success'%>
     </div>
   </div>
   <%= f.submit class: 'btn btn-primary btn-md align-right' %>

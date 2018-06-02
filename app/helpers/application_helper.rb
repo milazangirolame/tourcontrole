@@ -1,12 +1,11 @@
 require_relative 'path_helper'
 module ApplicationHelper
-
   def tourcontrole_page?
     !customer_page? && !pro_page?
   end
 
   def customer_page?
-    page?('tour_stores#show, activities#show, booking_orders#new')
+    page?('tour_stores#show, activities#show, orders#new')
   end
 
   def is_admin?
