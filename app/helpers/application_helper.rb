@@ -49,8 +49,4 @@ module ApplicationHelper
         'footer_pro'
     end
   end
-
 end
-
-
-

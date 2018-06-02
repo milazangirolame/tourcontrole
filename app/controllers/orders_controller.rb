@@ -6,12 +6,13 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     # @booking = Booking.new(order: @order)
-    # @order.bookings.first.guests.build
+    # @booking.build
+    @order.bookings.build
   end
 
   def create
     @order = Order.new(set_params)
-    @order.activity = @activity
+    # @order.activity = @activity
     if @order.save
       redirect_to activity_path(@activity)
     else
@@ -44,6 +45,6 @@ class OrdersController < ApplicationController
   end
 
   def set_params
-    params.require(:order).permit(  :order_total, guests_attributes: [:id, :_destroy, :first_name, :last_name, :email])
+    params.require(:order).permit( :order_total, bookings_attributes:[:id, :_destroy, guest_attributes: [:id, :_destroy, :first_name, :last_name, :email]])
   end
 end
