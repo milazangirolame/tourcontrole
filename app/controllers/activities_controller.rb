@@ -45,6 +45,7 @@ class ActivitiesController < ApplicationController
   end
 
   def show
+    @activity_dates = @activity.calendar_events(params.fetch(:start_date, Time.zone.now).to_date)
   end
 
   def destroy

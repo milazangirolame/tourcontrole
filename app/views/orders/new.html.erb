@@ -1,5 +1,20 @@
 <div class="container">
   <h1>Orders#new</h1>
+  <h2>Order all <%= Order.count %></h2>
+  
   <h3>Fazer reserva para: <%= @activity.name  %></h3>
+  <%= @order.bookings.first.event %>
+  <%= @event.bookings.first %>
+  <%= @event.bookings.first.class %>
+  <br>
+  <%= @order.bookings.first %>
+  <%= @order.bookings.first.class %>
+  <%= @event.bookings.first %>
+
+
+
+  <h2>Em: <%= params[:date] %> </h2>
+  <h3>event.bookings.first <%= @event.bookings.first %></h3>
+  <h3>order.bookings.first <%= @order.bookings.first %></h3>
   <%= render 'shared/forms/form_order', activity: @activity, order: @order %>
 </div>

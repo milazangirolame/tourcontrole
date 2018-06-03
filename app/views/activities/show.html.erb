@@ -1,9 +1,20 @@
 <div class="container">
   <h1><%= @activity.name %></h1>
+  <h2>Events: <%= @activity.events.count %></h2>
+  <h2>Bookings: <%= @activity.events.first.bookings.count unless @activity.events.empty? %></h2>
+  <h2>Guests <%= @activity.events.first.guests.count unless @activity.events.empty? %></h2>
+  <h2>Order all <%= Order.count %></h2>
+  <h2>Event All <%= Event.count %></h2>
+  <h2>Guests All <%= Guest.count %></h2>
+  <h2>Bookings All <%= Booking.count %></h2>
   <%= render 'shared/components/activity_admin_buttons', activity: @activity  %>
   <%= link_to 'Book Now', new_activity_order_path(@activity), class: 'btn btn-success btn-lg' %>
-
-  <%= month_calendar activity: @activity do |day| %>
+  <%= month_calendar events: @activity_dates do |day, activities| %>
     <%= day.to_s(:long) %>
+    <%  activities.each do |activity|%>
+    <div class="">
+      <%= link_to activity.name, new_activity_order_path(@activity, date:activity.starts_at) %>
+    </div>
+    <% end %>
   <% end %>
 </div>
