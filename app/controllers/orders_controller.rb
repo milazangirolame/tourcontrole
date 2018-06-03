@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
   end
 
   def set_params
-    params.require(:order).permit( :order_total, bookings_attributes:[:id, :_destroy, guest_attributes: [:id, :_destroy, :first_name, :last_name, :email]])
+    params.require(:order).permit( :order_total, guests_attributes: [:id, :_destroy, :first_name, :last_name, :email] , bookings_attributes:[:id, :_destroy, guests_attributes: [:id, :_destroy, :first_name, :last_name, :email]])
   end
 
 
