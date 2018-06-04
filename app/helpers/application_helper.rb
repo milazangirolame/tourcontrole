@@ -4,7 +4,7 @@ module ApplicationHelper
     !customer_page? && !pro_page?
   end
 
-  # good to merge
+  # good to merger
 
   def customer_page?
     page?('tour_stores#show, activities#show, orders#new')
