@@ -4,6 +4,8 @@ module ApplicationHelper
     !customer_page? && !pro_page?
   end
 
+  # good to merge
+
   def customer_page?
     page?('tour_stores#show, activities#show, orders#new')
   end
@@ -78,6 +80,6 @@ module ApplicationHelper
       'https://docs.google.com/drawings/d/e/2PACX-1vQgKlAgL8qrjpyIXVE3EzpK0aWu1WGnP0bK28FwlkpiPUUgUAsjMGR2fdtMnpJMWbz6sk8xIIeTyrDm/pub?w=927&amp;h=579'
     end
   end
-  
+
 
 end
