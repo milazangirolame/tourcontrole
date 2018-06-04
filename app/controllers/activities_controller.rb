@@ -35,7 +35,6 @@ class ActivitiesController < ApplicationController
 
   def update
     @tour_store = @activity.tour_store
-
     @activity.update(set_params)
     if @activity.save
       redirect_to tour_store_tours_path(@tour_store)
