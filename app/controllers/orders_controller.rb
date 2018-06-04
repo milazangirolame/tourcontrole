@@ -4,9 +4,8 @@ class OrdersController < ApplicationController
   before_action :set_event, only:[:new, :create]
   def new
     @order = Order.new
-    # @booking = Booking.new(order: @order)
-    # @booking.build
-    @order.bookings.build
+    booking = @order.bookings.build
+    booking.build_guest
   end
 
   def create
