@@ -1,19 +1,6 @@
 <div class="container">
-  <h1>Orders#new</h1>
-  <h2>Order all <%= Order.count %></h2>
-  <h2>Guest all <%= Guest.count %></h2>
-  <h2>Booking all <%= Booking.count %></h2>
-
-  <h3>Fazer reserva para: <%= @activity.name  %></h3>
-
-
-
-  <h2>Em: <%= params[:date] %> </h2>
-  <h3>event.bookings.first <%= @event.bookings.first %></h3>
-  <h3>order.bookings.first <%= @order.bookings.first %></h3>
+  <h2>Reserva</h2>
+  <h3> <%= @activity.name  %></h3>
+  <h3>Marcado para o: <%= params[:date] %> </h3>
   <%= render 'shared/forms/form_order', activity: @activity, order: @order %>
-</div>
-
-
-<div class="">
 </div>
