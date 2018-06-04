@@ -2,8 +2,6 @@ class OrdersController < ApplicationController
   before_action :set_activity, only: [:create, :new]
   before_action :set_order, only:[:show, :edit, :update, :destroy]
   before_action :set_event, only:[:new, :create]
-
-
   def new
     @order = Order.new
     # @booking = Booking.new(order: @order)
@@ -46,9 +44,10 @@ class OrdersController < ApplicationController
   end
 
   def set_params
-    params.require(:order).permit( :order_total, guests_attributes: [:id, :_destroy, :first_name, :last_name, :email] , bookings_attributes:[:id, :_destroy, guests_attributes: [:id, :_destroy, :first_name, :last_name, :email]])
+    params.require(:order).permit( :order_total,
+    bookings_attributes: [ :id, :_destroy, :guest_id,
+    guest_attributes: [ :id, :_destroy, :first_name, :last_name, :email ]])
   end
-
 
   def set_event
     selected_date = params[:date]
