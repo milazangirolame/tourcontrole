@@ -5,11 +5,13 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     booking = @order.bookings.build
+    booking.event = @event
     booking.build_guest
   end
 
   def create
     @order = Order.new(set_params)
+    @order.bookings.each {|booking| booking.event = @event}
     # @order.activity = @activity
     if @order.save
       redirect_to activity_path(@activity)
@@ -50,6 +52,6 @@ class OrdersController < ApplicationController
 
   def set_event
     selected_date = params[:date]
-    @event = @activity.events.find_by(starts_at: selected_date) || Event.new(starts_at: selected_date)
+    @event = @activity.events.find_by(starts_at: selected_date) || Event.create(starts_at: selected_date, activity: @activity)
   end
 end

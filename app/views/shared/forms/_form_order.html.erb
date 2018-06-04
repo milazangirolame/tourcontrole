@@ -10,5 +10,6 @@
        wrap_object: Proc.new { |booking| booking.build_guest; booking } %>
     </div>
   </div>
-  <%= f.submit class: 'btn btn-primary btn-md align-right' %>
+  <%= hidden_field_tag(:date, params[:date]) %>
+  <%= f.button :submit, class: 'btn btn-primary btn-md align-right' %>
 <% end %>
