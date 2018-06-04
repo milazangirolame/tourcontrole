@@ -1,0 +1,6 @@
+<div class="container">
+  <h2>Reserva</h2>
+  <h3> <%= @activity.name  %></h3>
+  <h3>Marcado para o: <%= params[:date] %> </h3>
+  <%= render 'shared/forms/form_order', activity: @activity, order: @order %>
+</div>

@@ -45,6 +45,7 @@ class ActivitiesController < ApplicationController
   end
 
   def show
+    @activity_dates = @activity.calendar_events(params.fetch(:start_date, Time.zone.now).to_date)
   end
 
   def destroy
@@ -59,7 +60,7 @@ class ActivitiesController < ApplicationController
 
   def set_params
     params.require(:activity).permit(:name, :description, :price, :max_spots, :departure_location,
-                              :start_date, :end_date, :tour_store_id, photos:[])
+                              :starts_at, :ends_at, :recurring, :tour_store_id, photos:[])
   end
 
   def set_activity

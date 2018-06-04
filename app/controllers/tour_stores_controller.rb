@@ -38,7 +38,7 @@ class TourStoresController < ApplicationController
   end
 
   def show
-    @activities = @tour_store.activities.order(start_date: :desc)
+    @activities = policy_scope(Activity).where(tour_store: @tour_store)
   end
 
   def destroy
@@ -76,7 +76,7 @@ class TourStoresController < ApplicationController
   def set_tour_store_data_sources
     @tour_store = TourStore.find(params[:tour_store_id])
     authorize @tour_store
-    @activities = @tour_store.activities.order(start_date: :desc)
+    @activities = policy_scope(Activity).where(tour_store: @tour_store)
     @activity = Activity.new
   end
 end

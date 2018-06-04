@@ -23,10 +23,10 @@ gem "pundit"
 gem 'flatpickr_rails'
 gem 'cocoon'
 
-
-
-
-
+# Ice-cub gem approach, recurring select includes the ice-cub gem by dependencie
+gem 'simple_calendar'
+gem 'ice_cube'
+gem 'recurring_select', github: "RundownApp/recurring_select"
 
 group :development do
   gem 'web-console', '>= 3.3.0'

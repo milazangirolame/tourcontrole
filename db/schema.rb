@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180522193021) do
+ActiveRecord::Schema.define(version: 20180531185904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,32 +20,35 @@ ActiveRecord::Schema.define(version: 20180522193021) do
     t.text "description"
     t.integer "max_spots"
     t.string "departure_location"
-    t.datetime "start_date"
     t.integer "price"
     t.bigint "tour_store_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.time "starts_at"
-    t.date "end_date"
-    t.time "ends_at"
     t.text "recurring"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
     t.index ["tour_store_id"], name: "index_activities_on_tour_store_id"
   end
 
-  create_table "booking_orders", force: :cascade do |t|
+  create_table "bookings", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "activity_id"
-    t.index ["activity_id"], name: "index_booking_orders_on_activity_id"
+    t.bigint "guest_id"
+    t.bigint "event_id"
+    t.bigint "order_id"
+    t.index ["event_id"], name: "index_bookings_on_event_id"
+    t.index ["guest_id"], name: "index_bookings_on_guest_id"
+    t.index ["order_id"], name: "index_bookings_on_order_id"
   end
 
-  create_table "bookings", force: :cascade do |t|
-    t.bigint "booking_order_id"
+  create_table "events", force: :cascade do |t|
+    t.integer "available_spots"
+    t.datetime "starts_at"
+    t.datetime "end_at"
     t.bigint "activity_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["activity_id"], name: "index_bookings_on_activity_id"
-    t.index ["booking_order_id"], name: "index_bookings_on_booking_order_id"
+    t.index ["activity_id"], name: "index_events_on_activity_id"
   end
 
   create_table "guests", force: :cascade do |t|
@@ -56,8 +59,12 @@ ActiveRecord::Schema.define(version: 20180522193021) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "buyer", default: false, null: false
-    t.bigint "booking_order_id"
-    t.index ["booking_order_id"], name: "index_guests_on_booking_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "order_total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "photos", force: :cascade do |t|
@@ -113,9 +120,9 @@ ActiveRecord::Schema.define(version: 20180522193021) do
   end
 
   add_foreign_key "activities", "tour_stores"
-  add_foreign_key "booking_orders", "activities"
-  add_foreign_key "bookings", "activities"
-  add_foreign_key "bookings", "booking_orders"
-  add_foreign_key "guests", "booking_orders"
+  add_foreign_key "bookings", "events"
+  add_foreign_key "bookings", "guests"
+  add_foreign_key "bookings", "orders"
+  add_foreign_key "events", "activities"
   add_foreign_key "tour_stores", "users"
 end

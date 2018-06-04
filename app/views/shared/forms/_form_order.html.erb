@@ -1,0 +1,15 @@
+<%= simple_form_for([activity,order]) do |f| %>
+  <div  id="guest">
+    <%= f.simple_fields_for(:bookings)do |booking| %>
+      <%= render 'shared/forms/nested/bookings_fields', f: booking %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Adicionar pessoa', f, :bookings,
+       partial: 'shared/forms/nested/bookings_fields',
+       class: 'btn btn-md btn-primary',
+       wrap_object: Proc.new { |booking| booking.build_guest; booking } %>
+    </div>
+  </div>
+  <%= hidden_field_tag(:date, params[:date]) %>
+  <%= f.button :submit, class: 'btn btn-primary btn-md align-right' %>
+<% end %>
