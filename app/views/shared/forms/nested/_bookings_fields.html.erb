@@ -1,7 +1,8 @@
 <div class="nested-fields bookings_fields">
-  <%= f.simple_fields_for :guests do |guest| %>
+  <%= f.simple_fields_for :guest do |guest| %>
     <%= render 'shared/forms/nested/guests_fields', f: guest %>
   <% end %>
-    <%= link_to_remove_association 'remove guest', f,
-    class: 'btn btn-md btn-warning'%>
+  <%= link_to_remove_association 'remove guest', f, class:'btn btn-md btn-danger' %>
+
+
 </div>
