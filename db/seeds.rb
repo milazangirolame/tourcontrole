@@ -1,4 +1,5 @@
 TourStore.destroy_all
+TourStoreAdmin.destroy_all
 
 if User.find_by(email: 'oscar@teste.com').nil?
   oscar_teste = User.new(email:'oscar@teste.com', password:'123123',first_name:'Oscar', last_name:'Teste')
@@ -67,5 +68,3 @@ counter = 0
     )
   act.save
 end
-
-
