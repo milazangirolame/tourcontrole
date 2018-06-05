@@ -9,11 +9,13 @@
           <i class="fas fa-tachometer-alt"></i> Painel Empresa
         </div>
         <ul class= 'dropdown-menu dropdown-menu-right navbar-tc-dropdown-menu'>
-          <% current_user.tour_store_admins.each do |store_admin|  %>
-            <% store = store_admin.tour_store%>
-            <li>
-              <%= link_to store_admin.tour_store.name, tour_store_dashboard_path(store_admin.tour_store)  %>
-            </li>
+          <% if user_signed_in? && current_user.tour_store_admins.any? %>
+            <% current_user.tour_store_admins.each do |store_admin|  %>
+              <% store = store_admin.tour_store%>
+              <li>
+                <%= link_to store_admin.tour_store.name, tour_store_dashboard_path(store_admin.tour_store)  %>
+              </li>
+            <% end %>
           <% end %>
            <li>
              <%= link_to '<i class="fas fa-plus"></i> Adicionar Empresa'.html_safe, new_tour_store_path, class: 'navbar-tc-link'  %>
