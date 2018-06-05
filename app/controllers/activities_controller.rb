@@ -58,8 +58,8 @@ class ActivitiesController < ApplicationController
   private
 
   def set_params
-    params.require(:activity).permit(:name, :description, :price, :max_spots, :departure_location,
-                              :starts_at, :ends_at, :recurring, :tour_store_id, photos:[])
+    params.require(:activity).permit(:name, :description, :price, :recurring, :max_spots, :departure_location,
+                              :starts_at, :ends_at, :tour_store_id, photos:[])
   end
 
   def set_activity

@@ -12,7 +12,7 @@ class Activity < ApplicationRecord
   end
 
   def recurring=(value)
-    if !recurring.empty?
+    if RecurringSelect.is_valid_rule?(value) && value != 'null'
         super(RecurringSelect.dirty_hash_to_rule(value).to_hash)
     else
         super(nil)
