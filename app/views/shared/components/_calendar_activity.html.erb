@@ -2,7 +2,7 @@
   <%= day.to_s(:long) %>
   <%  activities.each do |activity|%>
   <div class="with-tour">
-    <%= link_to activity.name, new_activity_order_path(@activity, date:activity.starts_at) %>
+    <%= link_to 'Reservar', new_activity_order_path(@activity, date:activity.starts_at),class: 'btn btn-xs btn-primary' %>
   </div>
   <% end %>
 <% end %>

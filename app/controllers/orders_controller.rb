@@ -14,8 +14,14 @@ class OrdersController < ApplicationController
     @order.bookings.each {|booking| booking.event = @event}
     # @order.activity = @activity
     if @order.save
+      flash[:notice] = "Resserva feita com sucesso"
       redirect_to activity_path(@activity)
     else
+      flash[:alert] = "Campos incompletos. Aceitou os termos de Serviço? Verifique e tente novamente"
+      @order = Order.new
+      booking = @order.bookings.build
+      booking.event = @event
+      booking.build_guest
       render :new
     end
   end

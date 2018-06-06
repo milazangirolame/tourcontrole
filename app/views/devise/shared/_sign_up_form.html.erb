@@ -11,10 +11,11 @@
       </div>
 
       <div class="form-actions">
+        <%=f.input :terms, as: :boolean, required: true,
+        label: (link_to 'Li e concordo com Política de Privacidade e Termos de Serviço', terms_path, class: 'terms-link') %>
         <%= f.button :submit, "Sign up" %>
       </div>
     <% end %>
-
     <%= render "devise/shared/links" %>
   </div>
 </div>

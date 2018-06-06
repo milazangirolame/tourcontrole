@@ -1,3 +1,4 @@
+require 'ice_cube'
 TourStore.destroy_all
 
 if User.find_by(email: 'oscar@teste.com').nil?
@@ -22,9 +23,10 @@ else
 end
 
 store_1 = TourStore.new(
-  name:'Tienda de "oscar teste"',
+  name:'Exploratour do Oscar',
   website:'url-oscar-teste.com',
   description: 'Os melhores tours do Oscar Teste',
+  address: Faker::Address.full_address,
   user: oscar_teste
   )
 user_store1 = TourStoreAdmin.new(user: store_1.user, tour_store: store_1)
@@ -34,9 +36,10 @@ store_1.save
 
 
 store_2 = TourStore.new(
-  name:'Tienda de "User User"',
+  name:'Excursões aventureiras',
   website:'url-user-user.com',
-  description: 'Os melhores tours do USer User',
+  description: 'Os melhores tours do User User',
+  address: Faker::Address.full_address,
   user: user
   )
 store_2.save
@@ -49,10 +52,20 @@ counter = 0
   counter += 1
   act = Activity.new(
     name:"Tour #{counter} da: #{store_1.name}",
-    description: 'muito bom tour',
+    description: "muito bom tour \n #{Faker::Lorem.paragraph(2)}",
     max_spots: rand(11.23),
-    tour_store: store_1
+    tour_store: store_1,
+    starts_at: Time.now,
+    ends_at: Time.now + 2,
+    price: rand(180..450),
+    recurring: {:validations=>{:day=>[1, 2, 4]},
+                 :rule_type=>"IceCube::WeeklyRule",
+                 :interval=>1,
+                 :week_start=>0
+               },
+
     )
+    act.departure_location = act.tour_store.address
   act.save
 end
 
@@ -61,9 +74,20 @@ counter = 0
   counter += 1
   act = Activity.new(
     name:"Tour #{counter} da: #{store_2.name}",
-    description: 'muito bom tour',
+    description: "muito bom tour \n #{Faker::Lorem.paragraph(2)}",
     max_spots: rand(11.23),
-    tour_store: store_2
+    tour_store: store_2,
+    starts_at: Time.now,
+    ends_at: Time.now + 1,
+    price: rand(180..450),
+    recurring: {:validations=>{:day=>[2, 3, 5]},
+                 :rule_type=>"IceCube::WeeklyRule",
+                 :interval=>1,
+                 :week_start=>0
+               },
     )
+    act.departure_location = act.tour_store.address
   act.save
 end
+
+puts 'All done'

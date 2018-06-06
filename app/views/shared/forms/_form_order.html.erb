@@ -4,12 +4,14 @@
       <%= render 'shared/forms/nested/bookings_fields', f: booking %>
     <% end %>
     <div class="links">
-      <%= link_to_add_association 'Adicionar pessoa', f, :bookings,
+      <%= link_to_add_association '<i class="fas fa-user-plus fa-lg"></i>'.html_safe, f, :bookings,
        partial: 'shared/forms/nested/bookings_fields',
        class: 'btn btn-md btn-primary',
        wrap_object: Proc.new { |booking| booking.build_guest; booking } %>
     </div>
   </div>
   <%= hidden_field_tag(:date, params[:date]) %>
+  <%=f.input :terms, as: :boolean, label: (link_to 'Li e concordo com Política de Privacidade e Termos de Serviço', terms_path, class: 'terms-link'),
+  required: true, error: 'Não esquece concordar com os termos de serviço'%>
   <%= f.button :submit, class: 'btn btn-primary btn-md align-right' %>
 <% end %>

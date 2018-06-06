@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def customer_page?
-    page?('tour_stores#show, activities#show, orders#new')
+    page?('tour_stores#show, activities#show, orders#new, orders')
   end
 
   def is_admin?
