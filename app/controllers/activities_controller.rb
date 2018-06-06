@@ -52,6 +52,7 @@ class ActivitiesController < ApplicationController
     redirect_to tour_stores_path
   end
 
+
   def audit
   end
 
@@ -59,7 +60,7 @@ class ActivitiesController < ApplicationController
 
   def set_params
     params.require(:activity).permit(:name, :description, :price, :recurring, :max_spots, :departure_location,
-                              :starts_at, :ends_at, :tour_store_id, photos:[])
+                              :starts_at, :ends_at, :tour_store_id)
   end
 
   def set_activity
