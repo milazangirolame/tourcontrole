@@ -1,7 +1,7 @@
 class TourStorePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all.order(created_at: :desc)
+      scope.where(dummy:false).order(created_at: :desc)
     end
   end
 
