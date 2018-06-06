@@ -23,6 +23,7 @@ gem 'cloudinary'
 gem "pundit"
 gem 'flatpickr_rails'
 gem 'cocoon'
+gem 'gibbon'
 
 # Ice-cub gem approach, recurring select includes the ice-cub gem by dependencie
 gem 'simple_calendar'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180606010319) do
+ActiveRecord::Schema.define(version: 20180606170409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20180606010319) do
     t.text "recurring"
     t.datetime "starts_at"
     t.datetime "ends_at"
+    t.boolean "enabled", default: true
     t.index ["tour_store_id"], name: "index_activities_on_tour_store_id"
   end
 
@@ -59,6 +60,12 @@ ActiveRecord::Schema.define(version: 20180606010319) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "buyer", default: false, null: false
+  end
+
+  create_table "leads", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "orders", force: :cascade do |t|
@@ -96,6 +103,7 @@ ActiveRecord::Schema.define(version: 20180606010319) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_banner"
+    t.boolean "dummy", default: false, null: false
     t.index ["user_id"], name: "index_tour_stores_on_user_id"
   end
 

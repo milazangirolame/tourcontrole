@@ -27,7 +27,8 @@ store_1 = TourStore.new(
   website:'url-oscar-teste.com',
   description: 'Os melhores tours do Oscar Teste',
   address: Faker::Address.full_address,
-  user: oscar_teste
+  user: oscar_teste,
+  dummy: true
   )
 user_store1 = TourStoreAdmin.new(user: store_1.user, tour_store: store_1)
 user_store1.save
@@ -40,7 +41,8 @@ store_2 = TourStore.new(
   website:'url-user-user.com',
   description: 'Os melhores tours do User User',
   address: Faker::Address.full_address,
-  user: user
+  user: user,
+  dummy: true
   )
 store_2.save
 

@@ -1,0 +1,5 @@
+<%= simple_form_for( @lead, method: :post, url: leads_path, html: { class: 'form-inline landing-form'} )do |f| %>
+<h4>Fique atento ao lançamento</h4>
+  <%= f.input :email, label:false, placeholder: 'insira o seu email' %>
+  <%= f.button :submit, value: 'Cadastrar', class: 'btn btn-md btn-primary' %>
+<% end %>

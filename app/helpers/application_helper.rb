@@ -4,6 +4,14 @@ module ApplicationHelper
     !customer_page? && !pro_page?
   end
 
+  def landing_page?
+    page?('pages') ? current_page?(landing_page_path) || current_page?(root_path) : false
+  end
+
+  def padding_bottom
+    'padding-bottom: 0px!important;' if landing_page?
+  end
+
   def customer_page?
     page?('tour_stores#show, activities#show, orders#new, orders')
   end
@@ -31,10 +39,12 @@ module ApplicationHelper
     case
      when customer_page?
       'navbar_tour_store'
-     when tourcontrole_page?
+    when tourcontrole_page? && !landing_page?
       'navbar_tourcontrole'
      when pro_page?
       'navbar_pro'
+    when landing_page?
+      'navbar_landing_page'
     end
   end
 
