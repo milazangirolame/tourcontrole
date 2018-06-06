@@ -104,6 +104,10 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.7.1)
     execjs (2.7.0)
+    faker (1.8.7)
+      i18n (>= 0.7)
+    faraday (0.15.2)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.23)
     figaro (1.1.1)
       thor (~> 0.14)
@@ -111,6 +115,9 @@ GEM
       railties (>= 3.0)
     font-awesome-sass (5.0.13)
       sassc (>= 1.11)
+    gibbon (3.2.0)
+      faraday (>= 0.9.1)
+      multi_json (>= 1.11.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     http-cookie (1.0.3)
@@ -144,6 +151,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
+    multipart-post (2.0.0)
     netrc (0.11.0)
     nio4r (2.3.1)
     nokogiri (1.8.2)
@@ -277,9 +285,11 @@ DEPENDENCIES
   cloudinary
   cocoon
   devise
+  faker
   figaro
   flatpickr_rails
   font-awesome-sass (~> 5.0.9)
+  gibbon
   ice_cube
   jbuilder (~> 2.0)
   launchy

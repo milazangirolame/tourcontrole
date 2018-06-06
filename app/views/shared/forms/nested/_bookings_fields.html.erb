@@ -3,5 +3,5 @@
     <h4>Dados pessoais</h4>
     <%= render 'shared/forms/nested/guest_fields', f: guest %>
   <% end %>
-  <%= link_to_remove_association 'Excluir pessoa', f, class:'btn btn-md btn-warning' %>
+  <%= link_to_remove_association '<i class="fas fa-user-minus fa-lg"></i>'.html_safe, f, class:'btn btn-md btn-warning' %>
 </div>

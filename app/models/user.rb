@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :activities, through: :tour_stores
   has_many :tour_store_admins, dependent: :destroy
   mount_uploader :user_photo, PhotoUploader
+  attr_accessor :terms
 
   def stores
     if self

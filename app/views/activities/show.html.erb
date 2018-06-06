@@ -1,7 +1,19 @@
 <div class="container">
   <%= render 'shared/components/activity_admin_buttons', activity: @activity  %>
   <h1><%= @activity.name %></h1>
-  <h2>Próximas saidas</h2>
+  <h2><%= @activity.description %></h2>
+  <table class='table'>
+    <tr>
+      <th>Local de saida</th>
+      <td><%= @activity.departure_location %></td>
+    </tr>
+    <tr>
+      <th>Horário de saída</th>
+      <td><%= @activity.starts_at.to_time.getlocal.strftime("%I:%M %p") %></td>
+    </tr>
+  </table>
+
+  <h3>Próximas saidas</h3>
   <% if @activity.recurring.empty? %>
     <h3><%= @activity.starts_at %></h3>
     <%= link_to 'Reservar agora', new_activity_order_path(@activity, date: @activity.starts_at),

@@ -9,6 +9,7 @@ gem 'pg', '~> 0.21'
 gem 'puma'
 gem 'rails', '5.1.5'
 gem 'redis'
+gem 'faker'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'
@@ -22,6 +23,7 @@ gem 'cloudinary'
 gem "pundit"
 gem 'flatpickr_rails'
 gem 'cocoon'
+gem 'gibbon'
 
 # Ice-cub gem approach, recurring select includes the ice-cub gem by dependencie
 gem 'simple_calendar'

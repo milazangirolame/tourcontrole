@@ -13,4 +13,12 @@ class PagesController < ApplicationController
   def cadastro
   end
 
+  def landing_page
+    @lead = Lead.new
+  end
+
+  def dummy_stores
+    @stores = TourStore.where(dummy: true)
+  end
+
 end

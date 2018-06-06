@@ -1,0 +1,8 @@
+<div class="container">
+    <h1>Tour operators examples</h1>
+    <div class="row">
+      <% @stores.each do |tour_store| %>
+        <%= render 'shared/components/card_tour_store', tour_store: tour_store %>
+      <% end %>
+    </div>
+</div>
