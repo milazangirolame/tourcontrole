@@ -19,7 +19,9 @@ class OrdersController < ApplicationController
       flash[:notice] = "Resserva feita com sucesso"
       redirect_to activity_path(@activity)
     else
-      flash[:alert] = "Campos incompletos. Aceitou os termos de Serviço? Verifique e tente novamente"
+      if @order.errors.any?
+        flash[:alert] = @order.errors.messages.first.second.first 
+      end
       @order = Order.new
       booking = @order.bookings.build
       booking.event = @event
@@ -60,6 +62,6 @@ class OrdersController < ApplicationController
 
   def set_event
     selected_date = params[:date]
-    @event = @activity.events.find_by(starts_at: selected_date) || Event.create(starts_at: selected_date, activity: @activity)
+    @event = @activity.events.find_by(start_day: selected_date.to_date) || Event.create(start_day: selected_date.to_date, activity: @activity)
   end
 end

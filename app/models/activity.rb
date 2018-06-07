@@ -1,11 +1,17 @@
 class Activity < ApplicationRecord
   serialize :recurring, Hash
+  after_create :set_start_day
+
   belongs_to :tour_store
   has_many :photos, dependent: :destroy
   has_many :events, dependent: :destroy, inverse_of: :activity
   has_many :bookings, through: :events
+  has_many :guests, through: :events
   accepts_nested_attributes_for :photos
-  accepts_nested_attributes_for :photos
+
+  def duration
+    ends_at - starts_at
+  end
 
   def start_time
     self.starts_at
@@ -39,6 +45,12 @@ class Activity < ApplicationRecord
         Activity.new(id: id, name: name, starts_at: date)
       end
     end
+  end
+
+  private
+
+  def set_start_day
+    self.update(start_day: starts_at.to_date)
   end
 
 end
