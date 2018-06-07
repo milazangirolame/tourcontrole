@@ -1,6 +1,5 @@
 require 'ice_cube'
 TourStore.destroy_all
-Guest.destroy_all
 Order.destroy_all
 
 if User.find_by(email: 'oscar@teste.com').nil?
