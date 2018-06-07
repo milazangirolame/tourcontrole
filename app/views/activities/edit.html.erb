@@ -1,4 +1,26 @@
 <%= render 'shared/components/navbars/sidebar' %>
 <div class="col-xs-10">
   <%= render 'shared/forms/form_activity', activity: @activity, tour_store: @tour_store  %>
+  <% if @activity.photos.any? %>
+    <h3>Editar imagéns</h3>
+    <div class="row">
+      <% @activity.photos.each do |photo|  %>
+        <div class="col-xs-12 col-sm-2">
+          <div class="pair-image-button-container">
+            <%= cl_image_tag photo.image, width: 242, height: 200, class: 'img-responsive' %>
+            <%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, photo_path(photo),
+            method: :delete, data: {confirm: 'Tem certeza que quer apagar esta imagem?'},
+            class: 'btn btn-md btn-danger'  %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <% else %>
+    <h2>Adicione boas imagéns para lotar este tour</h2>
+    <%= simple_form_for(@activity,  html: { multipart: true },  method: :patch, url: tour_store_activity_path(@tour_store, @activity)) do |f| %>
+      <%= f.input :photos, as: :file, :input_html => {:multiple => true}, name: "activity[activity_attributes][][photos]", label: "<span class='glyphicon glyphicon-picture' aria-hidden='true'></span>
+      Adicionar fotos do Tour".html_safe %>
+      <%= f.button :submit, class: 'btn btn-primary btn-md', value: 'Adicionar Imagéns' %>
+    <% end %>
+  <% end %>
 </div>

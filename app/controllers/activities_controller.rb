@@ -41,6 +41,7 @@ class ActivitiesController < ApplicationController
           @photo = @activity.photos.create!(image: photo)
         end
       end
+      flash[:notice] = "O Tour: #{@activity.name} foi editado com sucesso"
       redirect_to tour_store_tours_path(@tour_store)
       else
       render :edit

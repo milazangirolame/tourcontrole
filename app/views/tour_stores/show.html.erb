@@ -1,6 +1,6 @@
 <%= render 'shared/components/banners/tour_store_banner' %>
 <%= render 'shared/components/tour_store_admin_buttons', tour_store: @tour_store %>
-<div class="activity-container">
+<div class="activities-container">
   <div class="row">
     <% @activities.each do |activity|%>
       <%= render 'shared/components/card_activity', activity: activity  %>

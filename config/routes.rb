@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   get 'examples', to: 'pages#dummy_stores'
   get 'home', to: 'pages#home'
   resources :leads, only: [:create]
+  resources :photos, only: [:show, :destroy]
 end

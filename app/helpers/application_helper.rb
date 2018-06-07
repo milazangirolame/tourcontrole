@@ -88,4 +88,30 @@ module ApplicationHelper
       'https://docs.google.com/drawings/d/e/2PACX-1vQgKlAgL8qrjpyIXVE3EzpK0aWu1WGnP0bK28FwlkpiPUUgUAsjMGR2fdtMnpJMWbz6sk8xIIeTyrDm/pub?w=927&amp;h=579'
     end
   end
+
+  def get_tour_store
+    @tour_store.nil? ? @activity.tour_store : @tour_store
+  end
+
+
+  def logo_link
+    tour_store_path(get_tour_store)
+  end
+
+  def logo_image
+    get_tour_store.logo.present? ?  get_tour_store.logo : "customer_logo_placeholder.png"
+  end
+
+  def tour_store_banner_image
+    @tour_store.image_banner.present? ? (cl_image_path @tour_store.image_banner) : 'https://kitt.lewagon.com/placeholder/cities/berlin'
+  end
+
+  def activity_first_image(activity)
+    activity.photos.any? ? (cl_image_path activity.photos.order(created_at: :desc).first.image ) : 'https://kitt.lewagon.com/placeholder/cities/sao-paulo'
+  end
+
+  def activity_last_image(activity)
+    activity.photos.any? ? (cl_image_path activity.photos.order(created_at: :desc).last.image ) : 'https://kitt.lewagon.com/placeholder/cities/random'
+  end
+
 end
