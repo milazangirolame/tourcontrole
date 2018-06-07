@@ -21,6 +21,21 @@ $mid: #0060CA;
 $light: #91CEFF;
 $contrast: #FCDC74;
 
+
+//main palette variations
+$deep50: rgba($deep,0.5);
+$deep80: rgba($deep,0.8);
+$deep20: rgba($deep,0.2);
+$mid50: rgba($mid, 0.5);
+$mid80: rgba($mid, 0.8);
+$mid20: rgba($mid, 0.2);
+$light50: rgba($light,0.5);
+$light80: rgba($light,0.8);
+$light20: rgba($light,0.2);
+$contrast50: rgba($contrast, 0.5);
+$contrast80: rgba($contrast, 0.8);
+$contrast20: rgba($contrast, 0.2);
+
 //second palette
 $dark-heavy: #232931;
 $dark-marine: #062743;

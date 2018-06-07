@@ -1,8 +1,8 @@
 <div class=" navbar-tour-store navbar-tc">
+
   <!-- Logo -->
-  <% logo_link = @tour_store.nil? ? tour_store_path(@activity.tour_store) : tour_store_path(@tour_store) %>
   <%= link_to logo_link, class: "navbar-tc-brand" do %>
-    <%= image_tag "customer_logo_placeholder.png", height: 50 %>
+    <%= image_tag logo_image, height: 50 %>
   <% end %>
   <!-- Right Navigation -->
   <div class="navbar-tc-right hidden-xs hidden-sm">
@@ -28,4 +28,3 @@
     </div>
   </div>
 </div>
-

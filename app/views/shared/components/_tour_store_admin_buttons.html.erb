@@ -1,0 +1,5 @@
+<% if is_admin? %>
+  <div class="btn-group align-right admin-buttons tour-store-admin-buttons">
+    <%= link_to 'Editar', edit_tour_store_path(tour_store), class: 'btn btn-primary btn-md'  %>
+  </div>
+<% end %>

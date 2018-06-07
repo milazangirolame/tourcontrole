@@ -24,7 +24,7 @@
           </div>
           <div class="col-xs-12">
             <%= f.select_recurring :recurring, nil, allow_blank: true  %>
-            <%= f.input :photos, as: :file, :input_html => {:multiple => true}, name: "activity[activity_attributes][photos]", label: "<span class='glyphicon glyphicon-picture' aria-hidden='true'></span>
+            <%= f.input :photos, as: :file, :input_html => {:multiple => true}, name: "activity[activity_attributes][][photos]", label: "<span class='glyphicon glyphicon-picture' aria-hidden='true'></span>
             Adicionar fotos do Tour".html_safe %>
           </div>
         </div>

@@ -1,13 +1,9 @@
-<div class="container">
-  <h1><%= @tour_store.name  %></h1>
-  <% if is_admin? %>
-    <%= link_to "Criar novo tour", new_tour_store_activity_path(@tour_store), class: 'btn btn-primary btn-md' %>
-  <% end %>
-  <div class="activity-container">
-    <div class="row">
-      <% @activities.each do |activity|%>
-        <%= render 'shared/components/card_activity', activity: activity  %>
-      <% end %>
-    </div>
+<%= render 'shared/components/banners/tour_store_banner' %>
+<%= render 'shared/components/tour_store_admin_buttons', tour_store: @tour_store %>
+<div class="activities-container">
+  <div class="row">
+    <% @activities.each do |activity|%>
+      <%= render 'shared/components/card_activity', activity: activity  %>
+    <% end %>
   </div>
 </div>

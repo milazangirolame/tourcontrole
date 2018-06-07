@@ -1,8 +1,15 @@
-<%= month_calendar events: @activity_dates do |day, activities| %>
-  <%= day.to_s(:long) %>
-  <%  activities.each do |activity|%>
-  <div class="with-tour">
-    <%= link_to 'Reservar', new_activity_order_path(@activity, date:activity.starts_at),class: 'btn btn-xs btn-primary' %>
-  </div>
+<% if @activity.recurring.empty? %>
+  <h4><%= @activity.starts_at %></h4>
+  <%= link_to 'Reservar agora', new_activity_order_path(@activity, date: @activity.starts_at),
+  class: 'btn btn-md btn-success' %>
+<%end %>
+<div class="activity-calendar-container">
+  <%= month_calendar events: @activity_dates do |day, activities| %>
+    <%= day.to_s(:long) %>
+    <%  activities.each do |activity|%>
+    <div class="with-tour">
+      <%= link_to 'Reservar', new_activity_order_path(@activity, date:activity.starts_at),class: 'btn btn-xs btn-primary' %>
+    </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>

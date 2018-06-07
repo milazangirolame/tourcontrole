@@ -1,5 +1,5 @@
 <% if is_admin? %>
-  <div class="btn-group align-right">
+  <div class="btn-group align-right activity-admin-buttons admin-buttons">
     <%= link_to 'Editar', edit_tour_store_activity_path(activity.tour_store, activity), class: 'btn btn-primary btn-md'  %>
     <%= link_to 'Excluir', activity_path(activity), method: :delete, data: {confirm: "Esta ação é definitiva \n Tem certeza que quer excluir o tour? \n #{activity.name}  "}, class: 'btn btn-danger btn-md'  %>
   </div>

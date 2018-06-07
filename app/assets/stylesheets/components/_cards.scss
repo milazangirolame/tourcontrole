@@ -49,7 +49,6 @@
   opacity: 0.1;
 }
 
-
 .card-tour-store {
   height: 175px;
   text-shadow: 0 1px 3px rgba(0,0,0,0.6);
@@ -57,4 +56,8 @@
   background-position: center;
   color: white;
   position: relative;
+}
+
+.card-activity{
+  min-height: 300px;
 }

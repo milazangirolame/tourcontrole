@@ -1,5 +1,29 @@
-.activity-container {
-  margin:10px;
+.activities-container {
   .row {
+    margin:10px;
+    padding: 5px;
+  }
+}
+
+.gallery-container{
+  padding:20px;
+  img:hover{
+    opacity: 0.7;
+  }
+}
+.gallery-modal-container{
+  .modal-dialog { width:1200px; }
+  .thumbnail { margin-bottom:6px; }
+  .modal-content { background-color: $light50; }
+}
+
+.pair-image-button-container {
+  .btn, img{
+    display: inline-block;
+  }
+  .btn{
+    display: flex;
+    position: absolute;
+    bottom: 0px;
   }
 }

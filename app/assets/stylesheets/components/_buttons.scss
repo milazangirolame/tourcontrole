@@ -26,4 +26,13 @@
   color: white;
 }
 
+.admin-buttons {
+  display: flex;
+  position: absolute;
+  top:90px;
+  right: 20px;
+  // right:0px;
+  z-index: 2;
+}
+
 /* Build your own button classes ! */

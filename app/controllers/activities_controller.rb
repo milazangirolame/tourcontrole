@@ -15,7 +15,6 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = Activity.new(set_params)
-
     @activity.tour_store = @tour_store
     if @activity.save
       unless params[:activity][:photos].nil?
@@ -37,8 +36,14 @@ class ActivitiesController < ApplicationController
     @tour_store = @activity.tour_store
     @activity.update(set_params)
     if @activity.save
+      unless params[:activity][:photos].nil?
+        params[:activity][:photos].each do |photo|
+          @photo = @activity.photos.create!(image: photo)
+        end
+      end
+      flash[:notice] = "O Tour: #{@activity.name} foi editado com sucesso"
       redirect_to tour_store_tours_path(@tour_store)
-          else
+      else
       render :edit
     end
   end
