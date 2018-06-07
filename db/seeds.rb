@@ -1,5 +1,6 @@
 require 'ice_cube'
 TourStore.destroy_all
+Guest.destroy_all
 
 if User.find_by(email: 'oscar@teste.com').nil?
   oscar_teste = User.new(email:'oscar@teste.com', password:'123123',first_name:'Oscar', last_name:'Teste')
@@ -55,7 +56,7 @@ counter = 0
   act = Activity.new(
     name:"Tour #{counter} da: #{store_1.name}",
     description: "muito bom tour \n #{Faker::Lorem.paragraph(2)}",
-    max_spots: rand(11.23),
+    max_spots: rand(11..23),
     tour_store: store_1,
     starts_at: Time.now,
     ends_at: Time.now + 2,
@@ -77,7 +78,7 @@ counter = 0
   act = Activity.new(
     name:"Tour #{counter} da: #{store_2.name}",
     description: "muito bom tour \n #{Faker::Lorem.paragraph(2)}",
-    max_spots: rand(11.23),
+    max_spots: rand(11..23),
     tour_store: store_2,
     starts_at: Time.now,
     ends_at: Time.now + 1,

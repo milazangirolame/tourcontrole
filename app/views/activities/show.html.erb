@@ -13,11 +13,12 @@
     </tr>
   </table>
 
+
   <h3>Próximas saidas</h3>
   <% if @activity.recurring.empty? %>
     <h3><%= @activity.starts_at %></h3>
     <%= link_to 'Reservar agora', new_activity_order_path(@activity, date: @activity.starts_at),
     class: 'btn btn-md btn-success' %>
   <%end %>
-  <%= render 'shared/components/calendar_activity' %>
+  <%= render 'shared/components/calendar_activity'  %>
 </div>

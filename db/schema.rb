@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180606170409) do
+ActiveRecord::Schema.define(version: 20180607000825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20180606170409) do
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.boolean "enabled", default: true
+    t.date "start_day"
     t.index ["tour_store_id"], name: "index_activities_on_tour_store_id"
   end
 
@@ -43,12 +44,12 @@ ActiveRecord::Schema.define(version: 20180606170409) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.integer "available_spots"
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.bigint "activity_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "start_day"
     t.index ["activity_id"], name: "index_events_on_activity_id"
   end
 
