@@ -17,10 +17,6 @@ class TourStorePolicy < ApplicationPolicy
     store_admin?
   end
 
-  def destroy?
-    record.user == user && record.users.find(user).store_creator
-  end
-
   def dashboard?
     store_admin?
   end
