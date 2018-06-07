@@ -9,6 +9,10 @@ class User < ApplicationRecord
   mount_uploader :user_photo, PhotoUploader
   attr_accessor :terms
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def stores
     if self
       tour_store_admins.map do |tour_store_admins|
@@ -16,5 +20,4 @@ class User < ApplicationRecord
       end
     end
   end
-
 end

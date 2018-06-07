@@ -1,11 +1,10 @@
 class TourStoresController < ApplicationController
   before_action :set_tour_store, only: [:edit, :update, :show, :destroy]
   before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_tour_store_data_sources, only: [:dashboard, :tours, :users]
+  before_action :set_tour_store_data_sources, only: [:dashboard, :tours, :users, :events]
   def index
     @tour_stores = policy_scope(TourStore)
   end
-
 
   def new
     @tour_store = TourStore.new
@@ -48,11 +47,15 @@ class TourStoresController < ApplicationController
   def dashboard
   end
 
+  def events
+    @events = @tour_store.events
+  end
 
   def tours
   end
 
   def users
+    @tour_store_admin = TourStoreAdmin.new(tour_store:@tour_store)
   end
 
 

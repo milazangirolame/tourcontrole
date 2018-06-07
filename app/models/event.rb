@@ -4,10 +4,17 @@ class Event < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :guests, through: :bookings
 
+   def spots_taken
+     guests.count
+   end
+
   def available_spots
-    activity.max_spots - guests.count
+    activity.max_spots - spots_taken
   end
 
+  def fill_rate
+    (spots_taken / activity.max_spots).to_f
+  end
 
   private
 

@@ -28,4 +28,8 @@ class TourStorePolicy < ApplicationPolicy
   def users?
     store_admin?
   end
+
+  def events?
+    store_admin?
+  end
 end
