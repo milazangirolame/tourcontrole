@@ -1,6 +1,9 @@
 <%= render 'shared/components/navbars/sidebar' %>
-<div class="col-xs-10">
-  <%= link_to "Novo Tour", new_tour_store_activity_path(@tour_store), class: 'btn btn-primary btn-md align-right' %>
 
-  <%= render 'shared/components/tours_table'  %>
+<div class="col-xs-10">
+  <%= link_to '<i class="fas fa-plus"></i> Novo Tour'.html_safe,
+   new_tour_store_activity_path(@tour_store),
+   class: 'btn btn-primary btn-md align-right' %>
+  <h1>Tours Oferecidos </h1>
+  <%= render 'shared/components/tables/table_activities'  %>
 </div>

@@ -12,10 +12,22 @@
         Tours
       </a>
     </li>
+    <li role="presentation" class="<%= active(tour_store_events_path(@tour_store))  %>">
+      <a href="<%= tour_store_events_path(@tour_store)  %>">
+        <i class="fas fa-clipboard-list"></i>
+        Saídas
+      </a>
+    </li>
     <li role="presentation" class="<%= active(tour_store_users_path(@tour_store))  %>">
       <a href="<%= tour_store_users_path(@tour_store)  %>">
         <span class="glyphicon glyphicon-user" aria-hidden='true'></span>
         Usuarios
+      </a>
+    </li>
+    <li role="presentation" class="<%= active(edit_tour_store_path(@tour_store))  %>">
+      <a href="<%= edit_tour_store_path(@tour_store)  %>">
+        <i class="fas fa-edit"></i>
+        Empresa
       </a>
     </li>
   </ul>

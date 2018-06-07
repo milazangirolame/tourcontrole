@@ -31,7 +31,7 @@ module ApplicationHelper
   end
 
   def pro_page?
-    page?('tour_stores#dashboard, tour_stores#edit ,tour_stores#users, tour_stores#tours,
+    page?('tour_stores#dashboard, tour_stores#events, tour_stores#edit ,tour_stores#users, tour_stores#tours,
       activities#new, activities#edit, activities#audit')
   end
 
@@ -100,6 +100,10 @@ module ApplicationHelper
 
   def logo_image
     get_tour_store.logo.present? ?  get_tour_store.logo : "customer_logo_placeholder.png"
+  end
+
+  def tour_stor_card_image(tour_store)
+    tour_store.image_banner.present? ? (cl_image_path tour_store.image_banner) : 'https://kitt.lewagon.com/placeholder/cities/tokyo'
   end
 
   def tour_store_banner_image

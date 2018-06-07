@@ -1,13 +1,16 @@
 <%= simple_form_for([tour_store]) do |f| %>
-  <%= f.input :name  %>
-  <%= f.input :description %>
-  <%= f.input :website %>
-  <%= f.input :phone %>
-  <%= f.input :address %>
-  <%= f.input :website %>
-  <%= f.input :business_tax_id %>
-  <%= f.input :regulator_id %>
-  <%= f.input :logo %>
-  <%= f.input :image_banner %>
-  <%= f.submit %>
+  <div class="form-row">
+    <div class="col-xs-12 col-sm-8 col-md-6">
+      <%= f.input :name, label: 'Nome da empresa'  %>
+      <%= f.input :description, label:'Descrição', placeholder:'Esa descrição ajuda seus tours serem achados no Google outros motors de busca' %>
+      <%= f.input :website, label:'Site', placeholder: 'exemplo: www.seusite.com' %>
+      <%= f.input :phone, label: 'Telefone', placeholder: 'Algúns clientes vão querer ligar para você' %>
+      <%= f.input :address, as: :string, label: 'Endereço', placeholder: 'Coloque o endereço da sua agência/escritório/loja fisica' %>
+      <%= f.input :business_tax_id, label: 'CNPJ', placeholder: 'Importante para sua faturação' %>
+      <%= f.input :regulator_id, label: 'Código Cadastur', placeholder: 'Caso possua, coloque seu cadastro do Cadastur' %>
+      <%= f.input :logo, label:'Logotipo - Adicone a imagem que sera usada nos seus tours'%>
+      <%= f.input :image_banner, label:'Imagem de capa - Destaque sua empresa com a sua foto de capa'%>
+      <%= f.submit class:' btn btn-lg btn-primary'%>
+    </div>
+  </div>
 <% end %>

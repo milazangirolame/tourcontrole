@@ -5,13 +5,16 @@ Rails.application.routes.draw do
 
   resources :tour_stores do
     get 'dashboard', to: 'tour_stores#dashboard', as: :dashboard
-    get 'tours', to: 'tour_stores#tours', as: :tours
-    get 'users', to: 'tour_stores#users', as: :users
-
-    resources :activities, only: [:new, :create, :edit, :update] do
+    get 'tours', to: 'tour_stores#tours'
+    get 'users', to: 'tour_stores#users'
+    get 'events', to: 'tour_stores#events'
+    resources :orders, only:[:create, :new]
+    resources :tour_store_admins, only: [:create, :new, :destroy]
+    resources :activities, only: [:edit, :update, :new, :create] do
       get 'audit', to: 'activities#audit', as: :audit
     end
   end
+  resources :tour_store_admins, only: [:edit, :update, :destroy]
   resources :activities, only: [:destroy, :show] do
     resources :orders, only: [:create, :new]
   end

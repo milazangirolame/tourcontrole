@@ -1,0 +1,5 @@
+<%= simple_form_for(tour_store_admin, method: :post, url: tour_store_tour_store_admins_path(@tour_store), html: {class: 'form-inline'}) do |f| %>
+  <h5>Email do novo usuário</h5>
+  <%= f.input :email, label:false,  placeholder: 'Insira o email do novo usuario' %>
+  <%= f.submit class: 'btn btn-md btn-primary', value: 'Criar Admin' %>
+<% end %>

@@ -1,0 +1,19 @@
+<table class = 'table'>
+  <tr>
+    <th>Nome</th>
+    <th>Email</th>
+    <th>Ações</th>
+  </tr>
+  <% @tour_store.users.each do |user| %>
+    <tr>
+      <td><%= user.full_name %></td>
+      <td><%= user.email %></td>
+      <td>
+        <%= link_to '<i class="far fa-trash-alt"></i>'.html_safe,
+        tour_store_admin_path(user), method: :destroy,
+        data: {confirm: "Excluir o #{user.full_name} como administrador?"},
+        class: 'btn btn-xs btn-danger' %>
+      </td>
+    </tr>
+  <% end %>
+</table>
