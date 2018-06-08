@@ -115,6 +115,7 @@ GEM
       railties (>= 3.0)
     font-awesome-sass (5.0.13)
       sassc (>= 1.11)
+    geocoder (1.4.8)
     gibbon (3.2.0)
       faraday (>= 0.9.1)
       multi_json (>= 1.11.0)
@@ -289,6 +290,7 @@ DEPENDENCIES
   figaro
   flatpickr_rails
   font-awesome-sass (~> 5.0.9)
+  geocoder
   gibbon
   ice_cube
   jbuilder (~> 2.0)

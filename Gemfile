@@ -24,6 +24,8 @@ gem "pundit"
 gem 'flatpickr_rails'
 gem 'cocoon'
 gem 'gibbon'
+gem "geocoder"
+
 
 # Ice-cub gem approach, recurring select includes the ice-cub gem by dependencie
 gem 'simple_calendar'
