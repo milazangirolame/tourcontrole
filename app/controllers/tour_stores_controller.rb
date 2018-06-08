@@ -68,7 +68,7 @@ class TourStoresController < ApplicationController
   end
 
   def set_tour_store
-    @tour_store = TourStore.find(params[:id])
+    @tour_store = TourStore.find_by_slug(params[:slug])
     authorize @tour_store
   end
 
@@ -78,7 +78,7 @@ class TourStoresController < ApplicationController
 
 
   def set_tour_store_data_sources
-    @tour_store = TourStore.find(params[:tour_store_id])
+    @tour_store = TourStore.find_by_slug(params[:tour_store_slug])
     authorize @tour_store
     @activities = policy_scope(Activity).where(tour_store: @tour_store)
     @activity = Activity.new
