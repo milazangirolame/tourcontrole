@@ -1,6 +1,4 @@
 require 'ice_cube'
-TourStore.destroy_all
-Order.destroy_all
 
 if User.find_by(email: 'oscar@teste.com').nil?
   oscar_teste = User.new(email:'oscar@teste.com', password:'123123',first_name:'Oscar', last_name:'Teste')
