@@ -23,7 +23,7 @@ class TourStoreAdminsController < ApplicationController
   private
 
   def set_tour_store
-    @tour_store = TourStore.find(params[:tour_store_id])
+    @tour_store = TourStore.find_by_slug(params[:tour_store_slug])
     skip_authorization
   end
 

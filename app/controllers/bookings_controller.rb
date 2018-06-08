@@ -46,7 +46,7 @@ class BookingsController < ApplicationController
   end
 
   def set_activity
-    @activity = Activity.find(params[:activity_id])
+    @activity = Activity.find_by_slug(params[:slug_id])
     skip_authorization
   end
 

@@ -69,22 +69,22 @@ class ActivitiesController < ApplicationController
 
   def set_params
     params.require(:activity).permit(:name, :description, :price, :recurring, :max_spots, :departure_location,
-                              :starts_at, :ends_at, :tour_store_id)
+                              :starts_at, :ends_at, :tour_store_slug)
   end
 
   def set_activity
-    @activity = Activity.find(params[:id])
+    @activity = Activity.find_by_slug(params[:slug])
     authorize @activity
   end
 
   def set_tour_store
-    @tour_store = TourStore.find(params[:tour_store_id])
+    @tour_store = TourStore.find_by_slug(params[:tour_store_slug])
     authorize @tour_store
   end
 
   def set_activity_data_source
-    @tour_store = TourStore.find(params[:tour_store_id])
-    @activity = Activity.find(params[:activity_id])
+    @tour_store = TourStore.find_by_slug(params[:tour_store_slug])
+    @activity = Activity.find_by_slug(params[:activity_slug])
     authorize @activity
   end
 end

@@ -9,4 +9,20 @@ class TourStore < ApplicationRecord
   accepts_nested_attributes_for :photos
   mount_uploader :logo, PhotoUploader
   mount_uploader :image_banner, PhotoUploader
+  after_create :set_slug
+
+  def to_param
+    slug
+  end
+
+  def update_slug
+    set_slug
+  end
+
+  private
+
+  def set_slug
+    self.update(slug: to_slug)
+  end
+
 end

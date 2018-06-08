@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
       redirect_to activity_path(@activity)
     else
       if @order.errors.any?
-        flash[:alert] = @order.errors.messages.first.second.first 
+        flash[:alert] = @order.errors.messages.first.second.first
       end
       @order = Order.new
       booking = @order.bookings.build
@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
   end
 
   def set_activity
-    @activity = Activity.find(params[:activity_id])
+    @activity = Activity.find_by_slug(params[:activity_slug])
     skip_authorization
   end
 

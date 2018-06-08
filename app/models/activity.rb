@@ -2,6 +2,7 @@ class Activity < ApplicationRecord
   serialize :recurring, Hash
   validates :starts_at, :ends_at, :max_spots, :name, presence: true
   after_create :set_start_day
+  after_create :set_slug
 
   belongs_to :tour_store
   has_many :photos, dependent: :destroy
@@ -48,10 +49,23 @@ class Activity < ApplicationRecord
     end
   end
 
+  def to_param
+    slug
+  end
+
+  def update_slug
+    set_slug
+  end
+
+
   private
 
   def set_start_day
     self.update(start_day: starts_at.to_date)
+  end
+
+  def set_slug
+    self.update(slug: to_slug)
   end
 
 end
