@@ -24,7 +24,8 @@ class ActivitiesController < ApplicationController
       end
       redirect_to tour_store_tours_path(@tour_store)
     else
-      render :new
+      # flash[:alert] = @activity.errors
+      redirect_back fallback_location: tour_store_tours_path(@tour_store)
     end
   end
 
@@ -54,7 +55,10 @@ class ActivitiesController < ApplicationController
 
   def destroy
     @activity.destroy
-    redirect_to tour_stores_path
+    if @activity.destroy
+      flash[:notice] = "#{@activity.name} Tour excluido com sucesso"
+      redirect_back fallback_location: tour_store_tours_path(@activity.tour_store)
+    end
   end
 
 

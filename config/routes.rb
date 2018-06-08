@@ -14,8 +14,7 @@ Rails.application.routes.draw do
     end
   end
   resources :tour_store_admins, only: [:edit, :update, :destroy]
-  delete ':activity_name', to: 'activities#destroy'
-  get 'activities/:id', to: 'activities#show', as: 'activity' do
+  resources :activities, only: [:show, :destroy] do
     resources :orders, only: [:create, :new]
   end
 

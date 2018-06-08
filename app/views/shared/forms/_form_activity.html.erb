@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-xs-12 col-sm-10 col-md-8">
     <%= simple_form_for([tour_store, activity], html: {multipart: true, class: 'form-activity'}) do |f| %>
+      <%= f.error_notification %>
       <div class="form-row">
         <div class="col-xs-12">
           <h4>Insira os detalhes do tour</h4>
