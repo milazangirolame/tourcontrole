@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180608151324) do
+ActiveRecord::Schema.define(version: 20180609010238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20180608151324) do
     t.boolean "enabled", default: true
     t.date "start_day"
     t.string "slug"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["tour_store_id"], name: "index_activities_on_tour_store_id"
   end
 
@@ -107,6 +109,8 @@ ActiveRecord::Schema.define(version: 20180608151324) do
     t.string "image_banner"
     t.boolean "dummy", default: false, null: false
     t.string "slug"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["user_id"], name: "index_tour_stores_on_user_id"
   end
 

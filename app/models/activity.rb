@@ -3,13 +3,14 @@ class Activity < ApplicationRecord
   validates :starts_at, :ends_at, :max_spots, :name, presence: true
   after_create :set_start_day
   after_create :set_slug
-
   belongs_to :tour_store
   has_many :photos, dependent: :destroy
   has_many :events, dependent: :destroy, inverse_of: :activity
   has_many :bookings, through: :events
   has_many :guests, through: :events
   accepts_nested_attributes_for :photos
+  geocoded_by :departure_location
+  after_validation :geocode, if: :will_save_change_to_departure_location?
 
   def duration
     ends_at - starts_at

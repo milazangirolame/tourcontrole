@@ -24,8 +24,16 @@ puts 'Test users setted'
 
 puts 'Updating slugs'
 
-TourStore.all.each { |store| store.update_slug }
-Activity.all.each { |act| act.update_slug }
+counter = 0
+Activity.all.each do |act|
+  act.geocode
+  act.save
+  counter += 1
+  puts "#{counter} activities updated"
+end
+
+# TourStore.all.each { |store| store.update_slug }
+# Activity.all.each { |act| act.update_slug }
 
 puts 'Tasks completed'
 puts 'All done'
