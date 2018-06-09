@@ -51,6 +51,7 @@ class ActivitiesController < ApplicationController
 
   def show
     @activity_dates = @activity.calendar_events(params.fetch(:start_date, Time.zone.now).to_date)
+    @markers = [{ lat: @activity.latitude, lng: @activity.longitude }]
   end
 
   def destroy
