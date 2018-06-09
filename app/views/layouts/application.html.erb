@@ -27,7 +27,7 @@
   </head>
   <body>
     <%= render "shared/components/navbars/#{show_navbar}" %>
-    <div class="outside-wrapper" style="<%= padding_bottom %>">
+    <div class="outside-wrapper">
       <%= render 'shared/components/flashes' %>
       <%= yield %>
       <%= javascript_include_tag 'application' %>

@@ -28,14 +28,15 @@
   </div>
 </div>
 
-
-<div class="gallery-container">
-  <div class="row">
-    <% @activity.photos.each do |photo| %>
-      <%= render 'shared/components/thumbnail', image: photo.image %>
-    <% end %>
+<% if @activity.photos.any? %>
+  <div class="gallery-container">
+    <div class="row">
+      <% @activity.photos.each do |photo| %>
+        <%= render 'shared/components/thumbnail', image: photo.image %>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>
 
 <div class="gallery-modal-container">
   <div tabindex="-1" class="modal fade" id="myModal" role="dialog">
