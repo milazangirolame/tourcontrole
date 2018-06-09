@@ -6,15 +6,18 @@
 }
 
 .gallery-container{
-  padding:20px;
+  padding:30px 0px 30px 0px;
+  background-color: $mid80;
+  .row{
+    margin:0px;
+    .col{
+      margin:0px;
+    }
+
+  }
   img:hover{
     opacity: 0.7;
   }
-}
-.gallery-modal-container{
-  .modal-dialog { width:1200px; }
-  .thumbnail { margin-bottom:6px; }
-  .modal-content { background-color: $light50; }
 }
 
 .pair-image-button-container {
@@ -29,11 +32,8 @@
 }
 
 .activity-content-container {
-  padding-top: 20px;
-  padding-right: 10px;
-  padding-left: 10px;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin: 0px 10px 0px 10px;
+  padding: 40px 10px 40px 10px;
 }
 
 .activity-calendar-container{
