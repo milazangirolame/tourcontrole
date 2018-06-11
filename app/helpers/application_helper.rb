@@ -61,7 +61,7 @@ module ApplicationHelper
 
   def meta_title
     if customer_page?
-      @tour_store.nil? ? "#{@activity.tour_store.name.capitalize}" : "#{@tour_store.name.capitalize}"
+      @activity.nil? ? "#{@tour_store.name.capitalize}" : "#{@activity.name.capitalize}"
     else
       'Tourcontrole o motor de reservas online para prestadores de serviços turisticos'
     end
@@ -69,7 +69,7 @@ module ApplicationHelper
 
   def meta_site_name
     if customer_page?
-      @tour_store.nil? ? "#{@activity.tour_store.name.capitalize}" : "#{@tour_store.name.capitalize}"
+      @activity.nil? ? "#{@tour_store.name.capitalize}" : "#{@activity.name.capitalize}"
     else
       'Tourcontrole'
     end
@@ -77,14 +77,16 @@ module ApplicationHelper
 
   def meta_description
     if customer_page?
-      @tour_store.nil? ? "#{@activity.tour_store.description}" : "#{@tour_store.description}"
+      @activity.nil? ? "#{@tour_store.description}" : "#{@activity.description}"
     else
       'Com nossa plataforma  operadores turísticos conseguem oferecer  a seus clientes reservas online para seus passeios, eventos e excursões diretamente no seu próprio site. Gerencie suas vendas online e maneira rápida e simples, conquiste mais clientes já'
     end
   end
 
-  def og_image
-    unless customer_page?
+  def meta_image
+    if customer_page?
+      @activity.nil? ? tour_store_banner_image : activity_first_image(@activity)
+    else
       'https://docs.google.com/drawings/d/e/2PACX-1vQgKlAgL8qrjpyIXVE3EzpK0aWu1WGnP0bK28FwlkpiPUUgUAsjMGR2fdtMnpJMWbz6sk8xIIeTyrDm/pub?w=927&amp;h=579'
     end
   end
@@ -102,7 +104,7 @@ module ApplicationHelper
     get_tour_store.logo.present? ?  get_tour_store.logo : "customer_logo_placeholder.png"
   end
 
-  def tour_stor_card_image(tour_store)
+  def tour_store_card_image(tour_store)
     tour_store.image_banner.present? ? (cl_image_path tour_store.image_banner) : 'https://kitt.lewagon.com/placeholder/cities/tokyo'
   end
 

@@ -1,5 +1,7 @@
+<%= render 'shared/components/banners/activity_banner' %>
+
 <div class="container">
-  <h2>Faça a sua reserva</h2>
+  <h2>Confirme a sua resserva</h2>
   <h3> <%= @event.activity.name  %></h3>
   <h3>Dada: <%= @event.starts_at.to_date.to_formatted_s(:rfc822)  %> </h3>
   <h3>Horário: <%= @event.starts_at.to_time.getlocal.strftime("%I:%M %p")  %> </h3>
