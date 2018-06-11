@@ -34,6 +34,7 @@ gem 'recurring_select', github: "RundownApp/recurring_select"
 
 group :development do
   gem 'web-console', '>= 3.3.0'
+  gem 'spring-commands-rspec'
 end
 
 group :development, :test do
@@ -46,4 +47,6 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
   gem 'launchy'
+  gem 'rspec-rails'
+  gem "factory_bot_rails", "~> 4.0"
 end
