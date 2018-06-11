@@ -2,6 +2,6 @@ juan:
   first_name: 'juan'
   last_name: 'perez'
   email: 'juan_perez@safemail.com'
+  phone: '01800 123 123'
   buyer: false
-  booking_order: booking_orders[:order]
 

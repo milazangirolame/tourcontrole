@@ -1,4 +1,0 @@
-admin:
-  user: users[:oscar]
-  store_creator: true
-  tour_store: tour_stores[:store]

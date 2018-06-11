@@ -1,9 +1,9 @@
 store:
-  address: 'rua 123 teste'
+  address: 'Rua dos Pinheiros, 585 - Pinheiros, São Paulo - State of São Paulo'
   phone: '12 12 12 12'
   website: 'tourcontrole.com'
-  name: 'tete tours ltda'
-  description: 'os melhores teste do momento'
+  name: 'Teste tours LTDA'
+  description: 'os melhores tourrs teste do momento'
   business_tax_id: '012200-00014-0151'
-  user: Fixtures.identify(:oscar)
-
+  regulator_id: '012200-00014-0121'
+  user: oscar

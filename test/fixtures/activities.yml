@@ -3,7 +3,12 @@ hunting:
   description: 'good will hunting'
   max_spots: 20
   departure_location: 'home'
-  start_date: '25/05/2018'
-  end_date: '26/05/2018'
+  starts_at: '25/05/2018'
+  ends_at: '26/05/2018'
   price: 300
-  tour_store: Fixtures.identify(:store)
+  tour_store: store
+  recurring: '{:validations=>{:day=>[2, 3, 5]},
+ :rule_type=>"IceCube::WeeklyRule",
+ :interval=>1,
+ :week_start=>0}'
+

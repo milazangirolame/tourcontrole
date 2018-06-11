@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :tour_stores
+  has_many :tour_stores, dependent: :destroy
   has_many :activities, through: :tour_stores
   has_many :tour_store_admins, dependent: :destroy
   mount_uploader :user_photo, PhotoUploader
