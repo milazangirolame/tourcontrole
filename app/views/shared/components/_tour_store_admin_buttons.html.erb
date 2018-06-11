@@ -1,5 +1,6 @@
 <% if is_admin? %>
   <div class="btn-group align-right admin-buttons tour-store-admin-buttons">
-    <%= link_to 'Editar', edit_tour_store_path(tour_store), class: 'btn btn-primary btn-md'  %>
+    <%= link_to '<i class="fas fa-edit"></i> Editar'.html_safe, edit_tour_store_path(tour_store), class: 'btn btn-primary btn-md'  %>
+    <%= link_to '<i class="fas fa-plus"></i> Novo Tour'.html_safe, new_tour_store_activity_path(tour_store), class: 'btn btn-success btn-md' %>
   </div>
 <% end %>
