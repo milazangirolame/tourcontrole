@@ -11,7 +11,7 @@
     </div>
   </div>
   <%= hidden_field_tag(:date, params[:date]) %>
-  <%=f.input :terms, as: :boolean, label: (link_to 'Li e concordo com Política de Privacidade e Termos de Serviço', terms_path, class: 'terms-link'),
+  <%=f.input :terms, as: :boolean,input_html:{class:'big-checkbox terms-box'}, label: (link_to 'Li e concordo com Política de Privacidade e Termos de Serviço', terms_path, class: 'terms-link'),
   required: true, error: 'Não esquece concordar com os termos de serviço'%>
   <%= f.button :submit, class: 'btn btn-primary btn-md align-right' %>
 <% end %>

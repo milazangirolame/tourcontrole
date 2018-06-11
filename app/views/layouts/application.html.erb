@@ -16,9 +16,13 @@
     <title> <%= meta_title %></title>
     <meta name="description" content="<%= meta_description %>">
     <meta property="og:title" content="<%= meta_title %>">
-    <meta property="og:image" content="<%= og_image %>">
+    <meta property="og:image" content="<%= meta_image %>">
     <meta property="og:description" content="<%= meta_description %>">
     <meta property="og:site_name" content="<%= meta_site_name %>"/>
+    <meta name="twitter:image:src" content="<%= meta_image  %>">
+    <meta name="twitter:title" content="<%= meta_title  %>">
+    <meta name="twitter:description" content="<%= meta_description  %>">
+    <meta name="twitter:card" content="summary_large_image">
 
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
@@ -34,7 +38,6 @@
       <%= javascript_pack_tag 'application' %>
       <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
       <%= javascript_pack_tag "map" %>
-
     </div>
     <%= render "shared/components/footers/#{show_footer}" %>
   </body>
