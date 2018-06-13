@@ -26,6 +26,8 @@ gem 'cocoon'
 gem 'gibbon'
 gem "geocoder"
 
+gem 'percentage'
+
 
 # Ice-cub gem approach, recurring select includes the ice-cub gem by dependencie
 gem 'simple_calendar'

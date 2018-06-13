@@ -13,7 +13,7 @@ class Event < ApplicationRecord
   end
 
   def fill_rate
-    (spots_taken / activity.max_spots).to_f
+    Percentage.new(Rational(spots_taken, activity.max_spots)).truncate(4)
   end
 
   private
