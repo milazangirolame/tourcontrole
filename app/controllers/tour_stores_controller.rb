@@ -48,7 +48,7 @@ class TourStoresController < ApplicationController
   end
 
   def events
-    @events = @tour_store.events
+    @events = @tour_store.events.select{ |event| event.spots_taken > 0}
   end
 
   def tours
