@@ -26,6 +26,7 @@ gem 'cocoon'
 gem 'gibbon'
 gem "geocoder"
 gem 'money-rails'
+gem 'iugu'
 
 gem 'percentage'
 

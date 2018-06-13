@@ -27,5 +27,4 @@ Rails.application.routes.draw do
   get 'home', to: 'pages#home'
   resources :leads, only: [:create]
   resources :photos, only: [:show, :destroy]
-  get 'activities/:id/:activity_name', to: 'activities#show'
 end

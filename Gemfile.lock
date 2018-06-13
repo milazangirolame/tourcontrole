@@ -133,6 +133,8 @@ GEM
       concurrent-ruby (~> 1.0)
     ice_cube (0.16.2)
     io-like (0.3.0)
+    iugu (1.0.8)
+      rest-client
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -329,6 +331,7 @@ DEPENDENCIES
   geocoder
   gibbon
   ice_cube
+  iugu
   jbuilder (~> 2.0)
   launchy
   listen (~> 3.0.5)
