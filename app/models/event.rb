@@ -16,6 +16,10 @@ class Event < ApplicationRecord
     Percentage.new(Rational(spots_taken, activity.max_spots)).truncate(4)
   end
 
+  def price
+    activity.price
+  end
+
   private
 
   def set_times

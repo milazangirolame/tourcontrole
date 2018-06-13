@@ -11,6 +11,7 @@ class Activity < ApplicationRecord
   accepts_nested_attributes_for :photos
   geocoded_by :departure_location
   after_validation :geocode, if: :will_save_change_to_departure_location?
+  monetize :price_cents
 
   def duration
     ends_at - starts_at

@@ -48,7 +48,7 @@ class TourStoresController < ApplicationController
   end
 
   def events
-    @events = @tour_store.events.select{ |event| event.spots_taken > 0}
+    @upcoming_events = @tour_store.events.select{ |event| event.spots_taken > 0 && event.start_day >= Date.today}
   end
 
   def tours

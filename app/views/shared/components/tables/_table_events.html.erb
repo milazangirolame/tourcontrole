@@ -7,7 +7,7 @@
     <th>Vagas disponivéis</th>
     <th>Taixa de lotação</th>
   </tr>
-  <% @events.each do |event| %>
+  <% @upcoming_events.each do |event| %>
   <tr>
     <td><%= event.activity.name %></td>
     <td><%= event.starts_at.to_date.to_formatted_s(:rfc822) %></td>

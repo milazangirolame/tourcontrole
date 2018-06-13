@@ -13,6 +13,10 @@
         <th>Horário de saída</th>
         <td><%= @activity.starts_at.to_time.getlocal.strftime("%I:%M %p") %></td>
       </tr>
+      <tr>
+        <th>Preço</th>
+        <td><%= humanized_money_with_symbol(@activity.price)  %></td>
+      </tr>
     </table>
     <div
       id="map"
