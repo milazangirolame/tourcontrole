@@ -51,6 +51,21 @@ form{
   }
 }
 
+
+
+.usable-creditcard-form, .usable-creditcard-form * {
+    font-size: 13px;
+}
+/* Non Credit Card Form - Token Area */
+.token-area {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px dotted #CCC;
+    display: block;
+    padding: 20px;
+    background: #EFEFEF;
+}
+
 .terms-link {
   color: gray;
   font-style: italic;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180613175000) do
+ActiveRecord::Schema.define(version: 20180613184648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(version: 20180613175000) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.string "name"
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_payments_on_order_id"
+  end
+
   create_table "photos", force: :cascade do |t|
     t.string "image"
     t.integer "activity_id"
@@ -144,5 +153,6 @@ ActiveRecord::Schema.define(version: 20180613175000) do
   add_foreign_key "bookings", "guests"
   add_foreign_key "bookings", "orders"
   add_foreign_key "events", "activities"
+  add_foreign_key "payments", "orders"
   add_foreign_key "tour_stores", "users"
 end

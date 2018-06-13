@@ -27,4 +27,5 @@ Rails.application.routes.draw do
   get 'home', to: 'pages#home'
   resources :leads, only: [:create]
   resources :photos, only: [:show, :destroy]
+  resources :payments, only: [:create]
 end
