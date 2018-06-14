@@ -1,7 +1,7 @@
 class TourStoresController < ApplicationController
   before_action :set_tour_store, only: [:edit, :update, :show, :destroy]
   before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_tour_store_data_sources, only: [:dashboard, :tours, :users, :events]
+  before_action :set_tour_store_data_sources, only: [:dashboard, :tours, :users, :events, :bank]
   def index
     @tour_stores = policy_scope(TourStore)
   end
@@ -54,6 +54,9 @@ class TourStoresController < ApplicationController
   def tours
   end
 
+  def bank
+  end
+
   def users
     @tour_store_admin = TourStoreAdmin.new(tour_store:@tour_store)
   end
@@ -64,7 +67,9 @@ class TourStoresController < ApplicationController
   def set_params
     params.require(:tour_store).permit(:address, :phone, :website, :name, :description,
                                       :business_tax_id, :regulator_id, :logo, :user_id,
-                                       :photo, :photo_cache, :image_banner)
+                                       :photo, :photo_cache, :image_banner,
+                                       banking_information_attributes:[
+                                        :bank, :bank_ag, :bank_cc, :account_type])
   end
 
   def set_tour_store
@@ -82,5 +87,7 @@ class TourStoresController < ApplicationController
     authorize @tour_store
     @activities = policy_scope(Activity).where(tour_store: @tour_store)
     @activity = Activity.new
+    @banking_information = @tour_store.banking_information
+
   end
 end

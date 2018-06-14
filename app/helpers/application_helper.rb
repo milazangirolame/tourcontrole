@@ -32,7 +32,7 @@ module ApplicationHelper
 
   def pro_page?
     page?('tour_stores#dashboard, tour_stores#events, tour_stores#edit ,tour_stores#users, tour_stores#tours,
-      activities#new, activities#edit, activities#audit')
+      tour_stores#bank, activities#new, activities#edit, activities#audit, banking_informations#new, banking_informations#edit,')
   end
 
   def show_navbar

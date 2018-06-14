@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180614201628) do
+ActiveRecord::Schema.define(version: 20180614203125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 20180614201628) do
     t.float "longitude"
     t.integer "price_cents", default: 0, null: false
     t.index ["tour_store_id"], name: "index_activities_on_tour_store_id"
+  end
+
+  create_table "banking_informations", force: :cascade do |t|
+    t.string "bank"
+    t.string "bank_ag"
+    t.string "account_type"
+    t.string "bank_cc"
+    t.bigint "tour_store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tour_store_id"], name: "index_banking_informations_on_tour_store_id"
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -157,6 +168,7 @@ ActiveRecord::Schema.define(version: 20180614201628) do
   end
 
   add_foreign_key "activities", "tour_stores"
+  add_foreign_key "banking_informations", "tour_stores"
   add_foreign_key "bookings", "events"
   add_foreign_key "bookings", "guests"
   add_foreign_key "bookings", "orders"

@@ -24,7 +24,7 @@ class ActivitiesController < ApplicationController
       end
       redirect_to tour_store_tours_path(@tour_store)
     else
-      # flash[:alert] = @activity.errors
+      flash[:alert] = @activity.errors
       redirect_back fallback_location: tour_store_tours_path(@tour_store)
     end
   end

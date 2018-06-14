@@ -1,5 +1,6 @@
 class TourStore < ApplicationRecord
   belongs_to :user
+  has_one :banking_information
   has_many :activities, dependent: :destroy
   has_many :photos, dependent: :destroy
   has_many :tour_store_admins, dependent: :destroy
@@ -7,6 +8,7 @@ class TourStore < ApplicationRecord
   has_many :guests, through: :activities
   has_many :events, through: :activities
   accepts_nested_attributes_for :photos
+  accepts_nested_attributes_for :banking_information
   mount_uploader :logo, PhotoUploader
   mount_uploader :image_banner, PhotoUploader
   after_create :set_slug
@@ -62,6 +64,18 @@ class TourStore < ApplicationRecord
 
   def business_type
     description
+  end
+
+  def resp_name
+    "#{user.first_name} #{user.last_name}"
+  end
+
+  def resp_cpf
+    person_type == 'pj' ? legal_representant_id : business_tax_id
+  end
+
+  def telefone
+    phone
   end
 
 end

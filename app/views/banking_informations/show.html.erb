@@ -1,0 +1,12 @@
+<%= render 'shared/components/navbars/sidebar' %>
+<div class="col-xs-10">
+  <% if @tour_store.banking_information %>
+    <%= link_to '<i class="fas fa-edit"></i> Editar Conta Bancaria'.html_safe, edit_tour_store_banking_information_path(@tour_store,@banking_information),class: 'btn btn-primary btn-md align-right' %>
+    <h1>Detalhes da conta bancaria</h1>
+    <%= render 'shared/components/table/table_banking_information' %>
+    <% else %>
+    <h1>Adicione sua conta bancaria</h1>
+    <%= link_to '<i class="fas fa-plus"></i> Adicionar Conta Bancaria'.html_safe, edit_tour_store_banking_information_path(@tour_store,@banking_information),class: 'btn btn-success btn-md' %>
+  <% end %>
+</div>
+

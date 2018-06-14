@@ -32,4 +32,8 @@ class TourStorePolicy < ApplicationPolicy
   def events?
     store_admin?
   end
+
+  def bank?
+    store_admin?
+  end
 end

@@ -6,14 +6,20 @@ class ApplicationPolicy
     @record = record
   end
 
+  def creator?(store)
+    store.tour_store_admins.find_by(user: user).store_creator
+  end
+
+  def admin?(store)
+    store.users.include?(user)
+  end
+
   def store_admin?
-    if record.class == Activity
-      record.tour_store.users.include?(user)
-    elsif record.class == TourStore
-      record.users.include?(user)
-    else
-      false
-    end
+    record.kind_of?(TourStore) ? admin?(record) : admin?(record.tour_store)
+  end
+
+  def store_creator?
+    record.kind_of?(TourStore) ? creator?(record) : creator?(record.tour_store)
   end
 
   def index?
