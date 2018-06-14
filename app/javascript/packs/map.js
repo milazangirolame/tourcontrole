@@ -1,6 +1,7 @@
 // app/javascript/packs/map.js
 import GMaps from 'gmaps/gmaps.js';
-import { autocomplete } from '../components/autocomplete';
+import { autocompleteActivityDepartureLocation } from '../components/autocomplete';
+import { autocompleteTourStoreAddress } from '../components/autocomplete';
 import { batesGreen } from '../components/map_styles/bates_green';
 import { neonWorld } from '../components/map_styles/neon_world';
 import { holiday } from '../components/map_styles/holiday';
@@ -38,7 +39,8 @@ if (mapElement) { // don't try to build a map if there's no div#map to inject in
 
 
 // [...]
-autocomplete();
+autocompleteTourStoreAddress();
+autocompleteActivityDepartureLocation();
 
 // app/javascript/packs/map.js
 // [...]
