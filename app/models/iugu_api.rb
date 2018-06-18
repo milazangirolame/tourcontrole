@@ -35,7 +35,7 @@ class IuguApi < ApplicationRecord
   private
 
   def build_params(params)
-    params.merge({"api_token" => @api_token})
+    params.merge({"api_token" => api_token})
   end
 
   def build_url(path)

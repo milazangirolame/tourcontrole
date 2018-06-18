@@ -35,6 +35,10 @@ class TourStore < ApplicationRecord
     set_slug
   end
 
+  def comission_percent
+    5
+  end
+
   private
 
   def set_slug

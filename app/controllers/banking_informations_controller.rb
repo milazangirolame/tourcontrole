@@ -1,15 +1,16 @@
 class BankingInformationsController < ApplicationController
-  before_action :set_tour_store, only:[:new, :create, :edit, :update, :destroy, :show]
+  before_action :set_tour_store, only: [:new, :create, :edit, :update, :destroy, :show]
   before_action :set_banking_information, only: [:edit, :update, :destroy, :show]
   def new
-    @banking_information = BankingInformation.new
+    @banking_information = BankingInformation.new(tour_store: @tour_store)
     authorize @banking_information
   end
 
   def create
     @banking_information = BankingInformation.new(set_params)
-    authorize @banking_information
     @banking_information.tour_store = @tour_store
+
+    authorize @banking_information
     if @banking_information.save
       redirect_to tour_store_dashboard_path(@tour_store)
     else

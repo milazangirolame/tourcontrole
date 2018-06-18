@@ -1,7 +1,7 @@
 <%= simple_form_for([tour_store, banking_information]) do |f|  %>
   <div class="form-row">
     <div class="col-xs-12 col-sm-6">
-      <%= f.input :bank  %>
+      <%= f.input :bank, collection: banking_information.bancos %>
       <%= f.input :bank_ag  %>
       <%= f.input :bank_cc  %>
       <%= f.input :account_type  %>
