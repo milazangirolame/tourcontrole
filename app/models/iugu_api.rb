@@ -2,8 +2,8 @@ class IuguApi < ApplicationRecord
 
   BaseURL = 'https://api.iugu.com/v1/'
 
-  def initialize(api_token = ENV['IUGU_TEST_TOKEN'])
-    @api_token = api_token
+  def api_token
+    test ? ENV['IUGU_TEST_TOKEN'] : ENV['IUGU_LIVE_TOKEN']
   end
 
   def request(method, path, params)
