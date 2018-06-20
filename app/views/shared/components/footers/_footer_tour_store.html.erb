@@ -1,10 +1,14 @@
 <div class="footer-tour-store footer">
+  <% store = get_tour_store %>
   <div class="footer-links">
-    <a href="#"><i class="fab fa-github"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-twitter"></i></a>
-    <a href="#"><i class="fab fa-linkedin"></i></a>
+    <% if store.social_media_links.any? %>
+      <% store.social_media_links.each do |k,v|  %>
+        <a href="<%= v %>" target='_blank'><i class="fab fa-<%= k %>"></i></a>
+      <% end %>
+    <% end %>
+    <p><i></i><%=store.name %></p>
+    <p><i class="fas fa-phone-volume"></i><%=store.phone %></p>
+    <p><i class="fas fa-map-marker"></i><%=store.address %></p>
   </div>
   <div class="footer-copyright">
     Built at OO labs

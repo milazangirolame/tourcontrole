@@ -19,10 +19,23 @@ class TourStore < ApplicationRecord
     set_slug
   end
 
+  def social_media_links
+    get_social_media_links
+  end
+
   private
 
   def set_slug
     self.update(slug: to_slug)
+  end
+
+  def get_social_media_links
+    links = {}
+    links[:instagram] = instagram_link unless instagram_link.nil?
+    links[:facebook] = facebook_link unless facebook_link.nil?
+    links[:tripadvisor] = trip_advisor_link unless trip_advisor_link.nil?
+    links[:twitter] = twitter_link unless twitter_link.nil?
+    return links
   end
 
 end
