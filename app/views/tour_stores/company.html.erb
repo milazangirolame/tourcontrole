@@ -1,0 +1,64 @@
+
+
+<%= render 'shared/components/navbars/sidebar' %>
+<div class="col-xs-10">
+  <%= link_to '<i class="fas fa-edit"></i> Editar Informações'.html_safe, edit_tour_store_path(@tour_store), class: 'btn btn-primary btn-lg'   %>
+  <h1>Informações da Empresa</h1>
+  <div class="col-xs-12 col-sm-8 company-info">
+
+    <div class="row">
+      <h3>Imformações de Contato</h3>
+      <div class="col-xs-12 col-sm-6 ">
+        <h5 class='label'> Nome da Empresa</h5>
+        <p><%= @tour_store.name  %></p>
+        <h5 class='label'> Descrição</h5>
+        <p><%= @tour_store.description  %></p>
+      </div>
+      <div class="col-xs-12 col-sm-6 ">
+        <h5 class='label'> Website</h5>
+        <p><%= @tour_store.website  %></p>
+        <h5 class='label'> Telefone</h5>
+        <p><%= @tour_store.phone  %></p>
+        <h5 class='label'> Endereço</h5>
+        <p><%= @tour_store.address  %></p>
+      </div>
+    </div>
+    <div class="row">
+      <h3>Detalhes de Cadastro</h3>
+      <div class="col-xs-12 col-sm-6 ">
+        <h5 class='label'> CNPJ </h5>
+        <p><%= @tour_store.business_tax_id  %></p>
+      </div>
+      <div class="col-xs-12 col-sm-6 ">
+        <h5 class='label'> Código Cadastur </h5>
+        <p><%= @tour_store.regulator_id  %></p>
+      </div>
+    </div>
+    <div class="row">
+      <h3>Links de Redes Sociaís</h3>
+      <div class="col-xs-12 col-sm-6 ">
+        <h5 class='label'> <i class= 'fab fa-instagram'></i> Instagram </h5>
+        <p><%= @tour_store.instagram_link %></p>
+        <h5 class='label'> <i class= 'fab fa-facebook'></i>Facebook </h5>
+        <p><%= @tour_store.facebook_link %></p>
+      </div>
+      <div class="col-xs-12 col-sm-6 ">
+        <h5 class='label'> <i class= 'fab fa-tripadvisor'></i>Trip Advisor </h5>
+        <p><%= @tour_store.trip_advisor_link %></p>
+         <h5 class='label'> <i class= 'fab fa-twitter'></i>Twitter </h5>
+        <p><%= @tour_store.twitter_link %></p>
+      </div>
+    </div>
+    <div class="row">
+      <h3>Imagéns da Empresa</h3>
+      <div class="col-xs-12 col-sm-6 ">
+        <h5 class='label'> Logotipo </h5>
+        <%= cl_image_tag @tour_store.image_banner, widht:100, height: 100  %>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 ">
+        <h5 class='label'> Imagem de capa </h5>
+        <%= cl_image_tag @tour_store.image_banner, widht:400, height: 300  %>
+      </div>
+    </div>
+</div>

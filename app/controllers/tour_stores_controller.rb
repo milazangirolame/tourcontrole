@@ -1,7 +1,7 @@
 class TourStoresController < ApplicationController
   before_action :set_tour_store, only: [:edit, :update, :show, :destroy]
   before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_tour_store_data_sources, only: [:dashboard, :tours, :users, :events]
+  before_action :set_tour_store_data_sources, only: [:dashboard, :tours, :users, :events, :company]
   def index
     @tour_stores = policy_scope(TourStore)
   end
@@ -58,13 +58,17 @@ class TourStoresController < ApplicationController
     @tour_store_admin = TourStoreAdmin.new(tour_store:@tour_store)
   end
 
+  def company
+  end
+
 
   private
 
   def set_params
     params.require(:tour_store).permit(:address, :phone, :website, :name, :description,
                                       :business_tax_id, :regulator_id, :logo, :user_id,
-                                       :photo, :photo_cache, :image_banner)
+                                       :photo, :photo_cache, :image_banner, :instagram_link,
+                                       :trip_advisor_link, :facebook_link, :twitter_link)
   end
 
   def set_tour_store

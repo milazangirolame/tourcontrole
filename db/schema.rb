@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180613171516) do
+ActiveRecord::Schema.define(version: 20180620145151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 20180613171516) do
     t.float "longitude"
     t.integer "price_cents", default: 0, null: false
     t.index ["tour_store_id"], name: "index_activities_on_tour_store_id"
+  end
+
+  create_table "banking_informations", force: :cascade do |t|
+    t.string "bank"
+    t.string "bank_ag"
+    t.string "account_type"
+    t.string "bank_cc"
+    t.bigint "tour_store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tour_store_id"], name: "index_banking_informations_on_tour_store_id"
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -66,6 +77,12 @@ ActiveRecord::Schema.define(version: 20180613171516) do
     t.boolean "buyer", default: false, null: false
   end
 
+  create_table "iugu_apis", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "test", default: false, null: false
+  end
+
   create_table "leads", force: :cascade do |t|
     t.string "email"
     t.datetime "created_at", null: false
@@ -76,6 +93,15 @@ ActiveRecord::Schema.define(version: 20180613171516) do
     t.integer "order_total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string "name"
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -111,6 +137,22 @@ ActiveRecord::Schema.define(version: 20180613171516) do
     t.string "slug"
     t.float "latitude"
     t.float "longitude"
+    t.string "person_type"
+    t.string "legal_representant_id"
+    t.string "city"
+    t.string "postal_code"
+    t.string "country"
+    t.string "country_code"
+    t.string "state"
+    t.string "state_code"
+    t.string "iugu_account_id"
+    t.string "api_live_token"
+    t.string "api_test_token"
+    t.string "api_user_token"
+    t.string "instagram_link"
+    t.string "facebook_link"
+    t.string "trip_advisor_link"
+    t.string "twitter_link"
     t.index ["user_id"], name: "index_tour_stores_on_user_id"
   end
 
@@ -135,9 +177,11 @@ ActiveRecord::Schema.define(version: 20180613171516) do
   end
 
   add_foreign_key "activities", "tour_stores"
+  add_foreign_key "banking_informations", "tour_stores"
   add_foreign_key "bookings", "events"
   add_foreign_key "bookings", "guests"
   add_foreign_key "bookings", "orders"
   add_foreign_key "events", "activities"
+  add_foreign_key "payments", "orders"
   add_foreign_key "tour_stores", "users"
 end

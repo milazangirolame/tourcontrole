@@ -31,7 +31,8 @@ module ApplicationHelper
   end
 
   def pro_page?
-    page?('tour_stores#dashboard, tour_stores#events, tour_stores#edit ,tour_stores#users, tour_stores#tours,
+    page?('tour_stores#dashboard, tour_stores#events, tour_stores#edit ,
+      tour_stores#users, tour_stores#tours, tour_stores#company,
       activities#new, activities#edit, activities#audit')
   end
 

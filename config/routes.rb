@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get 'tours', to: 'tour_stores#tours'
     get 'users', to: 'tour_stores#users'
     get 'events', to: 'tour_stores#events'
+    get 'company', to: 'tour_stores#company'
     resources :tour_store_admins, only: [:create, :new, :destroy]
     resources :activities, param: :slug, only: [:edit, :update, :new, :create] do
       get 'audit', to: 'activities#audit', as: :audit
