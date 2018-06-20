@@ -30,6 +30,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 pt-BR:
+  simple_calendar:
+    previous: 'Anterior'
+    next: 'Próximo'
+
   recurring_select:
     not_recurring: 'não recorrente'
     change_schedule: 'editar recorrência'

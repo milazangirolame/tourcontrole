@@ -16,8 +16,20 @@ class Event < ApplicationRecord
     Percentage.new(Rational(spots_taken, activity.max_spots)).truncate(4)
   end
 
+  def time
+    starts_at.to_time.getlocal.strftime("%I:%M %p")
+  end
+
+  def date
+    starts_at.to_date.to_formatted_s(:rfc822)
+  end
+
   def price
-    activity.price
+    Money.new(activity.price)
+  end
+
+  def revenue
+    Money.new(spots_taken * price)
   end
 
   private

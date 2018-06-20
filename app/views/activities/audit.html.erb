@@ -1,5 +1,8 @@
 <%= render 'shared/components/navbars/sidebar' %>
 <div class="col-xs-10">
   <h1><%= @activity.name %></h1>
-  <h3>activities#audit</h3>
+
+  <% @events.each do |event|  %>
+    <%= render 'shared/components/tables/table_activity_events', event: event  %>
+  <% end %>
 </div>

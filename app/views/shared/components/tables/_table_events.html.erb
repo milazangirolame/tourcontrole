@@ -1,20 +1,22 @@
 <table class= 'table'>
   <tr>
     <th>Tour</th>
-    <th>Dada</th>
-    <th>Horario</th>
-    <th>Pessoas confirmadas</th>
+    <th>Dia</th>
+    <th>Horário</th>
     <th>Vagas disponivéis</th>
     <th>Taixa de lotação</th>
+    <th>Pessoas confirmadas</th>
+    <th>Valor das resservas</th>
   </tr>
   <% @upcoming_events.each do |event| %>
   <tr>
     <td><%= event.activity.name %></td>
-    <td><%= event.starts_at.to_date.to_formatted_s(:rfc822) %></td>
-    <td><%= event.starts_at.to_time.getlocal.strftime("%I:%M %p") %></td>
-    <td><%= event.spots_taken %></td>
+    <td><%= event.date %></td>
+    <td><%= event.time %></td>
     <td><%= event.available_spots %></td>
     <td><%= event.fill_rate %></td>
+    <td><%= event.spots_taken %></td>
+    <td><%= humanized_money_with_symbol(event.revenue)%></td>
   </tr>
   <% end %>
 </table>

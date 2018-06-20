@@ -87,5 +87,6 @@ class ActivitiesController < ApplicationController
     @tour_store = TourStore.find_by_slug(params[:tour_store_slug])
     @activity = Activity.find_by_slug(params[:activity_slug])
     authorize @activity
+    @events = @activity.events.order(start_day: :asc)
   end
 end
