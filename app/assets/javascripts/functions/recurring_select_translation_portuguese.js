@@ -1,0 +1,22 @@
+$.fn.recurring_select.texts = {
+  locale_iso_code: "pt-BR",
+  repeat: "Repetir evento",
+  frequency: "Periodicidade",
+  daily: "Diariamente",
+  weekly: "Semanalmente",
+  monthly: "Mensalmente",
+  yearly: "Anualmente",
+  every: "a cada",
+  days: "dia(s)",
+  weeks_on: "semana(s) em",
+  months: "mesês(s)",
+  years: "ano(s)",
+  first_day_of_week: 1,
+  day_of_month: "Dia do mês",
+  day_of_week: "Dia da semana",
+  cancel: "Cancelar",
+  ok: "Ok",
+  summary: "Recorrência",
+  days_first_letter: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+  order: ["1st", "2nd", "3rd", "4th", "5th", "Last"]
+}
