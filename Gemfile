@@ -35,6 +35,8 @@ gem 'simple_calendar'
 gem 'ice_cube'
 gem 'recurring_select', github: "RundownApp/recurring_select"
 
+gem "moip2"
+
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'spring-commands-rspec'

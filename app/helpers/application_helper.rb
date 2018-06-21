@@ -64,7 +64,7 @@ module ApplicationHelper
     if customer_page?
       @activity.nil? ? "#{@tour_store.name.capitalize}" : "#{@activity.name.capitalize}"
     else
-      'Tourcontrole o motor de reservas online para prestadores de serviços turisticos'
+      'Tourcontrole o motor de reservas online para prestadores de serviços turísticos'
     end
   end
 
