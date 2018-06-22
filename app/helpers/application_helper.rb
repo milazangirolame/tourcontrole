@@ -96,13 +96,12 @@ module ApplicationHelper
     @tour_store.nil? ? @activity.tour_store : @tour_store
   end
 
-
   def logo_link
     tour_store_path(get_tour_store)
   end
 
   def logo_image
-    get_tour_store.logo.present? ?  get_tour_store.logo : "customer_logo_placeholder.png"
+    get_tour_store.logo.present? ? get_tour_store.logo : "customer_logo_placeholder.png"
   end
 
   def tour_store_card_image(tour_store)

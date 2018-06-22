@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
     booking = @order.bookings.build
     booking.event = @event
     booking.build_guest
+    @order.build_payment
   end
 
   def create
@@ -57,7 +58,8 @@ class OrdersController < ApplicationController
   def set_params
     params.require(:order).permit( :order_total,
     bookings_attributes: [ :id, :_destroy, :guest_id,
-    guest_attributes: [ :id, :_destroy, :first_name, :last_name, :email ]])
+    guest_attributes: [ :id, :_destroy, :first_name, :last_name, :email ]],
+    payment_attributes: [:token, :name, :exp, :ccv, :number])
   end
 
   def set_event

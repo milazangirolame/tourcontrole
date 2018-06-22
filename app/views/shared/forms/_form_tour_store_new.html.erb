@@ -6,7 +6,10 @@
       <%= f.input :website, label:'Site', placeholder: 'exemplo: www.seusite.com' %>
       <%= f.input :phone, label: 'Telefone', placeholder: 'Algúns clientes vão querer ligar para você' %>
       <%= f.input :address, as: :string, label: 'Endereço', placeholder: 'Coloque o endereço da sua agência/escritório/loja fisica' %>
-      <%= f.input :business_tax_id, label: 'CNPJ', placeholder: 'Importante para sua faturação' %>
+      <label>Tipo de razão social</label><br>
+      <%= f.collection_radio_buttons :person_type, [['pj','Pessoa Jurídica'],['pf',"Pessoa Física"]], :first, :second  %>
+      <%= f.input :business_tax_id, label: 'Código fiscal', placeholder: 'Importante para sua faturação', hint: 'CNPJ se pessoa jurica ou CPF se pessoa fisica' %>
+      <%= f.input :legal_representant_id, label: 'CPF do reponsável da empresa', hint: 'Só se a empresa for Pessoa Jurídica ' %>
       <%= f.input :regulator_id, label: 'Código Cadastur', placeholder: 'Caso possua, coloque seu cadastro do Cadastur' %>
       <%= f.input :logo, label:'Logotipo - Adicone a imagem que sera usada nos seus tours'%>
       <%= f.input :image_banner, label:'Imagem de capa - Destaque sua empresa com a sua foto de capa'%>

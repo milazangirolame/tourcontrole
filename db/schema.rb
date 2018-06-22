@@ -1,4 +1,4 @@
-# This file is auto-generated from the current state of the database. Instead
+7# This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
@@ -149,10 +149,13 @@ ActiveRecord::Schema.define(version: 20180620145151) do
     t.string "api_live_token"
     t.string "api_test_token"
     t.string "api_user_token"
+<<<<<<< HEAD
     t.string "instagram_link"
     t.string "facebook_link"
     t.string "trip_advisor_link"
     t.string "twitter_link"
+=======
+>>>>>>> 0b02168eb9f28f31ae0220dab8f6f67cf56c6d1c
     t.index ["user_id"], name: "index_tour_stores_on_user_id"
   end
 

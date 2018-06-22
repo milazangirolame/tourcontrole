@@ -36,4 +36,8 @@ class TourStorePolicy < ApplicationPolicy
   def company?
     store_admin?
   end
+
+  def bank?
+    store_admin?
+  end
 end
