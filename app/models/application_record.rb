@@ -4,4 +4,8 @@ class ApplicationRecord < ActiveRecord::Base
   def to_slug
     "#{id.to_s}--".concat(name.parameterize.truncate(80, omission: ''))
   end
+
+  def api
+    Moip.new.call
+  end
 end

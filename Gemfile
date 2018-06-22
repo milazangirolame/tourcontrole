@@ -34,8 +34,7 @@ gem 'percentage'
 gem 'simple_calendar'
 gem 'ice_cube'
 gem 'recurring_select', github: "RundownApp/recurring_select"
-
-gem "moip2"
+gem 'moip2', github: 'moip/moip-sdk-ruby'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
