@@ -71,14 +71,10 @@ class TourStoresController < ApplicationController
   def set_params
     params.require(:tour_store).permit(:address, :phone, :website, :name, :description,
                                       :business_tax_id, :regulator_id, :logo, :user_id,
-<<<<<<< HEAD
                                        :photo, :photo_cache, :image_banner, :instagram_link,
-                                       :trip_advisor_link, :facebook_link, :twitter_link)
-=======
-                                       :photo, :photo_cache, :image_banner,
+                                       :trip_advisor_link, :facebook_link, :twitter_link,
                                        banking_information_attributes:[
                                         :bank, :bank_ag, :bank_cc, :account_type])
->>>>>>> 0b02168eb9f28f31ae0220dab8f6f67cf56c6d1c
   end
 
   def set_tour_store

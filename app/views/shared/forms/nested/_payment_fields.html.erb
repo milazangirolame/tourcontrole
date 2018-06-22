@@ -1,22 +1,64 @@
 
 
 <div class="nested-fields payment_fields">
-  <div class="form-row">
-    <div class="col-xs-6 nmb_a">
-      <%= f.input :number, label: false, placeholder: 'Número de cartão', input_html: {autocomplete:"off", class: "credit_card_number", 'data-iugu'=>"number"}  %>
+  <div class="payment-card">
+    <h4>Coloque os detalhes do seu cartão</h4>
+
+
+
+    <div class="form-row">
+      <div class="col-xs-6 nmb_a">
+        <%= f.input :number, label: false, placeholder: 'Número de cartão', input_html: {autocomplete:"off", class: "credit_card_number", 'data-iugu'=>"number"}  %>
+      </div>
+      <div class="col-xs-6">
+        <%= f.input :ccv, placeholder: 'CCV', label: false, input_html: {autocomplete:"off", class: "credit_card_cvv", 'data-iugu'=>"verification_value"}  %>
+      </div>
     </div>
-    <div class="col-xs-6">
-      <%= f.input :ccv, placeholder: 'CCV', label: false, input_html: {autocomplete:"off", class: "credit_card_cvv", 'data-iugu'=>"verification_value"}  %>
+    <div class="form-row">
+      <div class="col-xs-6 nmb_c">
+        <%= f.input :name, label: false, placeholder: 'Titular do cartão',
+        input_html:{class: 'credit_card_name', 'data-iugu'=> 'full_name'}  %>
+      </div>
+      <div class="col-xs-6 nmb_d">
+        <%= f.input :exp, label:false, as: :string, input_html: {class: 'credit_card_expiration', 'data-iugu'=>'expiration', autocomplete: 'off'}, placeholder:"MM/AA"   %>
+      </div>
+    </div>
+    <% f.input :token, label: false, hidde: true, input_html: { name: "token", id: "token", readonly:"true", size:"64", style: "text-align:center"}  %>
+  </div>
+  <div class="buyer-info">
+    <h4>Dados do comprador</h4>
+    <div class="form-row">
+      <div class="col-xs-4">
+       <%= f.input :cpf, label: 'CPF'  %>
+      </div>
+      <div class="col-xs-4">
+        <%= f.input :email, label: 'email'  %>
+      </div>
+      <div class="col-xs-4">
+        <div class="col-xs-3">
+            <%= f.input :phone_area_code, label:'(ddd)' %>
+        </div>
+        <div class="col-xs-9 " >
+          <%= f.input :phone_number,label: 'Telefone' %>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="form-row">
-    <div class="col-xs-6 nmb_c">
-      <%= f.input :name, label: false, placeholder: 'Titular do cartão',
-      input_html:{class: 'credit_card_name', 'data-iugu'=> 'full_name'}  %>
-    </div>
-    <div class="col-xs-6 nmb_d">
-      <%= f.input :exp, label:false, as: :string, input_html: {class: 'credit_card_expiration', 'data-iugu'=>'expiration', autocomplete: 'off'}, placeholder:"MM/AA"   %>
+  <div class="shipping-address">
+    <h4>Endereço do pagamento</h4>
+    <div class="form-row">
+      <div class="col-xs-4">
+        <%= f.input :street, label:'Logradouro' %>
+        <%= f.input :city, label:'Cidade' %>
+      </div>
+      <div class="col-xs-4">
+        <%= f.input :street, label:'Complemento' %>
+        <%= f.input :state, label:'Estado' %>
+      </div>
+      <div class="col-xs-4">
+        <%= f.input :district, label:'Bairro' %>
+        <%= f.input :postal_code, label:'CEP' %>
+      </div>
     </div>
   </div>
-  <% f.input :token, label: false, hidde: true, input_html: { name: "token", id: "token", readonly:"true", size:"64", style: "text-align:center"}  %>
 </div>

@@ -5,7 +5,4 @@ class ApplicationRecord < ActiveRecord::Base
     "#{id.to_s}--".concat(name.parameterize.truncate(80, omission: ''))
   end
 
-  def api
-    Moip.new.call
-  end
 end

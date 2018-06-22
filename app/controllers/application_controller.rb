@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!,  except: [:show, :index]
+  before_action :initiate_moip_api
   include Pundit
   # Pundit: white-list approach.
   after_action :verify_authorized, except: [:show, :index], unless: :skip_pundit?
@@ -17,4 +18,9 @@ class ApplicationController < ActionController::Base
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
+
+  def initiate_moip_api
+    @api = Moip.new.call
+  end
+
 end

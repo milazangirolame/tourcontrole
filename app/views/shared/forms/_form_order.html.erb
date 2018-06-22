@@ -1,4 +1,10 @@
 <%= simple_form_for([activity,order]) do |f| %>
+  <div id="payment">
+    <%= f.simple_fields_for(:payment, html: {class: 'usable-creditcard-form'}) do |payment|  %>
+      <%= render 'shared/forms/nested/payment_fields', f: payment  %>
+    <% end %>
+  </div>
+
   <div  id="guest">
     <%= f.simple_fields_for(:bookings)do |booking| %>
       <%= render 'shared/forms/nested/bookings_fields', f: booking %>
@@ -10,13 +16,9 @@
        wrap_object: Proc.new { |booking| booking.build_guest; booking } %>
     </div>
   </div>
-  <div id="payment">
-    <%= f.simple_fields_for(:payment, html: {class: 'usable-creditcard-form'}) do |payment|  %>
-      <%= render 'shared/forms/nested/payment_fields', f: payment  %>
-    <% end %>
-  </div>
+
   <%= hidden_field_tag(:date, params[:date]) %>
   <%=f.input :terms, as: :boolean,input_html:{class:'big-checkbox terms-box'}, label: (link_to 'Li e concordo com Política de Privacidade e Termos de Serviço', terms_path, class: 'terms-link'),
   required: true, error: 'Não esquece concordar com os termos de serviço'%>
-  <%= f.button :submit, class: 'btn btn-primary btn-md align-right' %>
+  <%= f.button :submit, class: 'btn btn-primary btn-md align-right',value: 'Comprar' %>
 <% end %>

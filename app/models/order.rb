@@ -8,4 +8,18 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :payment
   validates_associated :bookings, :guests
   attr_accessor :terms
+
+  def total
+    get_order_total
+  end
+
+  private
+
+  def get_order_total
+    total = Money.new(0)
+    events.each do |event|
+      total += event.price
+    end
+    return total
+  end
 end
