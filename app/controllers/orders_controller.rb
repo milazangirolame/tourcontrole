@@ -118,7 +118,6 @@ class OrdersController < ApplicationController
     sales_order.update(moip_id: moip_order[:id], status: moip_order[:status])
   end
 
-
   def set_buyer_guest
     guest = Guest.new(first_name: @order.payment.name.split(' ').first,
       last_name: @order.payment.name.split(' ').last, email: @order.payment.email,
