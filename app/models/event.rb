@@ -8,6 +8,10 @@ class Event < ApplicationRecord
      guests.count
    end
 
+   def spots_available
+    available_spots
+  end
+
   def available_spots
     activity.max_spots - spots_taken
   end
