@@ -7,4 +7,8 @@ class Guest < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def api_other_id
+    "#{id.to_s}-xxx*-teste"
+  end
 end

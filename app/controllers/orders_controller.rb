@@ -13,10 +13,10 @@ class OrdersController < ApplicationController
     @order.bookings.each {|booking| booking.event = @event}
     if @order.save
       set_buyer_guest
-      create_moip_customer(@order)
+      create_moip_customer
       create_moip_order
-      if create_moip_customer(@order)[:errors].present?
-        flash[:alert] = create_moip_customer(@order)[:errors].first[:description]
+      if create_moip_customer[:errors].present?
+        flash[:alert] = create_moip_customer[:errors].first[:description]
       elsif create_moip_order[:errors].present?
         flash[:alert] = create_moip_order[:errros].first[:description]
       else
@@ -28,9 +28,7 @@ class OrdersController < ApplicationController
         flash[:alert] = @order.errors.messages.first.second.first
       end
       @order = Order.new
-      booking = @order.bookings.build
-      booking.event = @event
-      booking.build_guest
+      @order.build_payment
       render :new
     end
   end
@@ -46,6 +44,10 @@ class OrdersController < ApplicationController
 
   def create_moip_order
     new_moip_order(@order)
+  end
+
+  def create_moip_customer
+    new_moip_customer(@order)
   end
 
   def index
@@ -77,9 +79,6 @@ class OrdersController < ApplicationController
     @event = @activity.events.find_by(start_day: selected_date.to_date) || Event.create(start_day: selected_date.to_date, activity: @activity)
   end
 
-  def buyer
-    @order.guests.find_by(buyer: true)
-  end
 
   def new_moip_order(sales_order)
     moip_order = @api.order.create(
@@ -100,7 +99,7 @@ class OrdersController < ApplicationController
         }
       ],
       customer: {
-        id: buyer.moip_id
+        id: sales_order.buyer.moip_id
       },
       receivers: [
         {
@@ -125,7 +124,7 @@ class OrdersController < ApplicationController
         }
       ]
     )
-    sales_order.update(moip_id: moip_order[:id], status: moip_order[:status])
+    sales_order.update(moip_id: moip_order[:id], status: moip_order[:status]) unless moip_order[:errors].present?
     moip_order
   end
 
@@ -136,12 +135,12 @@ class OrdersController < ApplicationController
     @order.bookings.create(guest: guest, event: @event)
   end
 
-  def create_moip_customer(sales_order)
+  def new_moip_customer(sales_order)
     payment = sales_order.payment
     customer = @api.customer.create(
-      ownId: buyer.id,
-      fullname: buyer.full_name,
-      email: buyer.email,
+      ownId: sales_order.buyer.api_other_id,
+      fullname: sales_order.buyer.full_name,
+      email: sales_order.buyer.email,
       phone: {
         areaCode: payment.phone_area_code,
         number: payment.phone_number,
@@ -162,7 +161,7 @@ class OrdersController < ApplicationController
         zipCode: payment.postal_code,
       },
     )
-    buyer.update(moip_id: customer[:id])
+    sales_order.buyer.update(moip_id: customer[:id]) unless customer[:errors].present?
     customer
   end
 end

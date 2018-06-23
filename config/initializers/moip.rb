@@ -1,5 +1,3 @@
-require 'net/http'
-
 class Moip
 
   attr_reader :token, :key
