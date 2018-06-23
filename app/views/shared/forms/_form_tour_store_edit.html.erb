@@ -9,7 +9,7 @@
       <div class="col-xs-12 col-sm-6 ">
         <%= f.input :website, label:'Site', placeholder: 'exemplo: www.seusite.com' %>
         <%= f.input :phone, label: 'Telefone', placeholder: 'Algúns clientes vão querer ligar para você' %>
-        <%= f.input :address, as: :string, label: 'Endereço', placeholder: 'Coloque o endereço da sua agência/escritório/loja fisica' %>
+        <%= f.input :form_address, as: :string, label: 'Endereço', placeholder: 'Coloque o endereço da sua agência/escritório/loja fisica', input_html: {autocomplete: 'off'} %>
       </div>
     </div>
     <div class="form-row">

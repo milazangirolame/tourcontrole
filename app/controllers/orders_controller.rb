@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
     @order.bookings.each {|booking| booking.event = @event}
     # @order.activity = @activity
     if @order.save
+      create_moip_order
       flash[:notice] = "Resserva feita com sucesso"
       redirect_to activity_path(@activity)
     else
@@ -37,6 +38,10 @@ class OrdersController < ApplicationController
   end
 
   def show
+  end
+
+  def create_moip_order
+    new_moip_order(@order)
   end
 
   def index
@@ -65,4 +70,52 @@ class OrdersController < ApplicationController
     selected_date = params[:date]
     @event = @activity.events.find_by(start_day: selected_date.to_date) || Event.create(start_day: selected_date.to_date, activity: @activity)
   end
+
+  def new_moip_order(sales_order)
+    moip_order = @api.order.create(
+      ownId: sales_order.id,
+      amount: {
+        currency: 'BRL',
+        subtotals: {
+          shipping: 0
+        }
+      },
+      items: [
+        {
+          product: sales_order.events.first.activity.name,
+          category: 'OTHER_CATEGORIES',
+          quantity: sales_order.bookings.count,
+          detail: sales_order.events.first.activity.description,
+          price: sales_order.events.first.price.to_i
+        }
+      ],
+      # customer: {
+      #   id: 'CUS-87HFA3QCEKO7'
+      # },
+      receivers: [
+        {
+          type: 'SECONDARY',
+          feePayor: false,
+          moipAccount: {
+            id: sales_order.events.first.activity.tour_store.moip_id
+          },
+          amount: {
+            percetual: 90
+          }
+        },
+        {
+          type: 'PRIMARY',
+          feePayor: true,
+          moipAccount: {
+            id: "APP-ECV6553RNHOR"
+          },
+          amount: {
+            percetual: 10
+          }
+        }
+      ]
+    )
+    sales_order.update(moip_id: moip_order[:id], stauts: moip_order[:status])
+  end
+
 end

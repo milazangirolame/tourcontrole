@@ -14,8 +14,10 @@ class TourStoresController < ApplicationController
 
   def create
     @tour_store = TourStore.new(set_params)
+    authorize @tour_store
     @tour_store.user = current_user
     if @tour_store.save
+      create_merchant_account
       tour_store_admin = TourStoreAdmin.new(user: current_user, tour_store: @tour_store)
       tour_store_admin.store_creator = true
       tour_store_admin.save
@@ -65,11 +67,14 @@ class TourStoresController < ApplicationController
   def company
   end
 
+  def create_merchant_account
+    new_tour_store_merchant_account(@tour_store)
+  end
 
   private
 
   def set_params
-    params.require(:tour_store).permit(:address, :phone, :website, :name, :description,
+    params.require(:tour_store).permit(:form_address, :phone, :website, :name, :description,
                                       :business_tax_id, :regulator_id, :logo, :user_id,
                                        :photo, :photo_cache, :image_banner, :instagram_link,
                                        :trip_advisor_link, :facebook_link, :twitter_link,
@@ -93,6 +98,48 @@ class TourStoresController < ApplicationController
     @activities = policy_scope(Activity).where(tour_store: @tour_store)
     @activity = Activity.new
     @banking_information = @tour_store.banking_information
+  end
 
+
+  def new_tour_store_merchant_account(store)
+    account = @api.accounts.create(
+      {
+        email: {
+          address: store.user.email,
+        },
+        person: {
+          name: store.user.first_name,
+          lastName: store.user.last_name,
+          taxDocument: {
+            type: "CPF",
+            number: "572.619.050-54",
+          },
+          identityDocument: {
+            type: "RG",
+            number: "35.868.057-8",
+            issuer: "SSP",
+            issueDate: "2000-12-12",
+          },
+          birthDate: "1990-01-01",
+          phone: {
+            countryCode: "55",
+            areaCode: "11",
+            number: '965213244',
+          },
+          address: {
+            street: store.street_name,
+            streetNumber: store.street_number,
+            district: store.neighborhood,
+            zipCode: store.postal_code,
+            city: store.city,
+            state: store.state_code,
+            country: 'BRA',
+          },
+        },
+        type: "MERCHANT",
+        transparentAccount: true
+      }
+    )
+    store.update(moip_id: account[:id], moip_access_token: account[:access_token], moip_channel_id: account[:channel_id])
   end
 end

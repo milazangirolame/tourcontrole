@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180622192947) do
+ActiveRecord::Schema.define(version: 20180623005855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,9 @@ ActiveRecord::Schema.define(version: 20180622192947) do
     t.integer "order_total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "moip_id"
+    t.string "status"
+    t.string "platform"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -133,7 +136,7 @@ ActiveRecord::Schema.define(version: 20180622192947) do
   end
 
   create_table "tour_stores", force: :cascade do |t|
-    t.text "address"
+    t.text "form_address"
     t.string "phone"
     t.string "website"
     t.string "name"
@@ -165,6 +168,13 @@ ActiveRecord::Schema.define(version: 20180622192947) do
     t.string "facebook_link"
     t.string "trip_advisor_link"
     t.string "twitter_link"
+    t.string "street_name"
+    t.string "street_number"
+    t.string "neighborhood"
+    t.string "full_address"
+    t.string "moip_id"
+    t.string "moip_access_token"
+    t.string "moip_channel_id"
     t.index ["user_id"], name: "index_tour_stores_on_user_id"
   end
 

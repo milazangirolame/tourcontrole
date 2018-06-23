@@ -18,7 +18,7 @@ export { autocompleteActivityDepartureLocation };
 
 function autocompleteTourStoreAddress() {
   document.addEventListener("DOMContentLoaded", function() {
-    var departureLocation = document.getElementById('tour_store_address');
+    var departureLocation = document.getElementById('tour_store_form_address');
 
     if (departureLocation) {
       var autocomplete = new google.maps.places.Autocomplete(departureLocation, { types: [ 'geocode' ] });

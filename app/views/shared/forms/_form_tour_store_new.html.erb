@@ -5,7 +5,7 @@
       <%= f.input :description, label:'Descrição', placeholder:'Esa descrição ajuda seus tours serem achados no Google outros motors de busca' %>
       <%= f.input :website, label:'Site', placeholder: 'exemplo: www.seusite.com' %>
       <%= f.input :phone, label: 'Telefone', placeholder: 'Algúns clientes vão querer ligar para você' %>
-      <%= f.input :address, as: :string, label: 'Endereço', placeholder: 'Coloque o endereço da sua agência/escritório/loja fisica' %>
+      <%= f.input :form_address, as: :string, label: 'Endereço', placeholder: 'Coloque o endereço da sua agência/escritório/loja fisica', input_html: {autocomplete: 'off'} %>
       <label>Tipo de razão social</label><br>
       <%= f.collection_radio_buttons :person_type, [['pj','Pessoa Jurídica'],['pf',"Pessoa Física"]], :first, :second  %>
       <%= f.input :business_tax_id, label: 'Código fiscal', placeholder: 'Importante para sua faturação', hint: 'CNPJ se pessoa jurica ou CPF se pessoa fisica' %>
