@@ -13,9 +13,15 @@ class OrdersController < ApplicationController
     @order.bookings.each {|booking| booking.event = @event}
     if @order.save
       set_buyer_guest
-      create_moip_buyer
+      create_moip_customer(@order)
       create_moip_order
+      if create_moip_customer(@order)[:errors].present?
+        flash[:alert] = create_moip_customer(@order)[:errors].first[:description]
+      elsif create_moip_order[:errors].present?
+        flash[:alert] = create_moip_order[:errros].first[:description]
+      else
       flash[:notice] = "Resserva feita com sucesso"
+      end
       redirect_to activity_path(@activity)
     else
       if @order.errors.any?
@@ -71,6 +77,10 @@ class OrdersController < ApplicationController
     @event = @activity.events.find_by(start_day: selected_date.to_date) || Event.create(start_day: selected_date.to_date, activity: @activity)
   end
 
+  def buyer
+    @order.guests.find_by(buyer: true)
+  end
+
   def new_moip_order(sales_order)
     moip_order = @api.order.create(
       ownId: sales_order.id,
@@ -90,7 +100,7 @@ class OrdersController < ApplicationController
         }
       ],
       customer: {
-        id: sales_order.buyer.moip_id
+        id: buyer.moip_id
       },
       receivers: [
         {
@@ -116,6 +126,7 @@ class OrdersController < ApplicationController
       ]
     )
     sales_order.update(moip_id: moip_order[:id], status: moip_order[:status])
+    moip_order
   end
 
   def set_buyer_guest
@@ -125,9 +136,8 @@ class OrdersController < ApplicationController
     @order.bookings.create(guest: guest, event: @event)
   end
 
-  def create_moip_buyer
-    buyer = @order.buyer
-    payment = @order.payment
+  def create_moip_customer(sales_order)
+    payment = sales_order.payment
     customer = @api.customer.create(
       ownId: buyer.id,
       fullname: buyer.full_name,
@@ -153,5 +163,6 @@ class OrdersController < ApplicationController
       },
     )
     buyer.update(moip_id: customer[:id])
+    customer
   end
 end

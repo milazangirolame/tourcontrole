@@ -14,10 +14,6 @@ class Order < ApplicationRecord
     get_order_total
   end
 
-  def buyer
-    guests.find_by(buyer: true)
-  end
-
   private
 
   def get_order_total

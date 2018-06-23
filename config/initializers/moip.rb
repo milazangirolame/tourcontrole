@@ -1,4 +1,7 @@
+require 'net/http'
+
 class Moip
+
   attr_reader :token, :key
 
   def initialize(token = nil, key = nil)
@@ -9,6 +12,11 @@ class Moip
   def call
     authentication
   end
+
+  def puts_hello
+    'hello world'
+  end
+
 
   private
 
