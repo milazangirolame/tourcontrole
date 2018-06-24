@@ -23,6 +23,10 @@ class TourStore < ApplicationRecord
     get_social_media_links
   end
 
+  def address
+    form_address
+  end
+
   private
 
   def set_slug

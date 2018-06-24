@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+lclass OrdersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create, :new]
 
   before_action :set_activity, only: [:create, :new]

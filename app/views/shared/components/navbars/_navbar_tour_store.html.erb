@@ -21,9 +21,12 @@
     <div class="dropdown">
       <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
       <ul class="dropdown-menu dropdown-menu-right navbar-tc-dropdown-menu">
-        <li><a href="#">Some mobile link</a></li>
-        <li><a href="#">Other one</a></li>
-        <li><a href="#">Other one</a></li>
+        <% if user_signed_in? %>
+          <li>
+            <%= render 'shared/components/navbars/actions/avatar_drop_down_menu'  %>
+          </li>
+          <%= render 'shared/components/navbars/actions/mobile_dashboard_link'  %>
+        <% end %>
       </ul>
     </div>
   </div>
