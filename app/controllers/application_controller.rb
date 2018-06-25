@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
 
   def set_moip_api
-    @api = Moip.new.call
+    @moip = MoipApi.new
   end
 
 end
