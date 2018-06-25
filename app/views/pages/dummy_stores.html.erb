@@ -1,8 +1,20 @@
-<div class="container">
+<div class="main-wrapper">
+  <div class="container">
     <h1>Tour operators examples</h1>
     <div class="row">
       <% @stores.each do |tour_store| %>
         <%= render 'shared/components/card_tour_store', tour_store: tour_store %>
       <% end %>
     </div>
+  </div>
+  <div class="data-container">
+  <ol>
+    <% moip_customers = MoipApi.new.get_customers %>
+    <% moip_customers['customers'].each do |customer| %>
+      <li>
+        <br> <%= customer['ownId'] %><br><%= customer['id']%> <br> <%= customer['fullname']  %> <br> <%= customer['email']  %>
+      </li>
+    <% end %>
+  </ol>
+  </div>
 </div>

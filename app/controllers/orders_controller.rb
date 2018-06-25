@@ -109,19 +109,19 @@ class OrdersController < ApplicationController
             id: sales_order.events.first.activity.tour_store.moip_id
           },
           amount: {
-            percetual: 90
+            percentual: 90
           }
         },
         {
           type: 'PRIMARY',
           feePayor: true,
           moipAccount: {
-            id: "APP-ECV6553RNHOR"
+            id: ENV['MOIP_SANDBOX_ACCOUNT_ID']
           },
           amount: {
-            percetual: 10
+            percentual: 10
           }
-        }
+        },
       ]
     )
     sales_order.update(moip_id: moip_order[:id], status: moip_order[:status]) unless moip_order[:errors].present?
