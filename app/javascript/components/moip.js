@@ -13,20 +13,70 @@ FYYMG7Ou2kPvqWSh5mKkl2hFvJ9nSxXVXkfA3LRLMVn/uPiuzafQf67Fqtw9w0dg
 TQIDAQAB
 -----END PUBLIC KEY-----`;
 
+const number = document.getElementById('number');
+const cvc = document.getElementById('cvc');
+const month = document.getElementById('month');
+const year = document.getElementById('year');
+
+function validateNumber(){
+  if (number){
+    number.addEventListener('keyup', function(){
+      let response = MoipValidator.isValidNumber(number.value);
+      if (response) {
+        number.classList.toggle('active');
+      }
+    });
+  }
+}
+
+function validateCardExpiration(){
+  if (number){
+    year.addEventListener('keyup', function(){
+      let response = MoipValidator.isExpiryDateValid(month.value, year.value);
+      if (response) {
+        month.classList.toggle('active');
+        year.classList.toggle('active');
+      }
+    });
+  }
+}
+
+function validateSecurityCode(){
+  if (cvc){
+    cvc.addEventListener('keyup', function(){
+      let response = MoipValidator.isSecurityCodeValid(number.value, cvc.value);
+      if (response) {
+        cvc.classList.toggle('active');
+      }
+    });
+  }
+}
+
+
+
+function validateCreditCard(){
+  validateNumber();
+  validateCardExpiration();
+  validateSecurityCode();
+}
+
+
+
+
+
+
+
 function setEncryptedData() {
   let input = document.getElementById('encrypt');
-  let number = document.getElementById('number');
-  let cvc = document.getElementById('cvc');
-  let month = document.getElementById('month');
-  let year = document.getElementById('year');
+
     MoipCreditCard
     .setEncrypter(jsencrypt, 'ionic')
     .setPubKey(pubKey)
     .setCreditCard({
-        number: number,
-        cvc: cvc,
-        expirationMonth: month,
-        expirationYear: year
+        number: number.value,
+        cvc: cvc.value,
+        expirationMonth: month.value,
+        expirationYear: year.value
     })
     .hash()
     .then(hash => input.value = (hash));
@@ -47,3 +97,4 @@ function encryptCard(){
 // export {update};
 
 export {encryptCard};
+export {validateCreditCard};

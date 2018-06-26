@@ -71,3 +71,18 @@ form{
   font-style: italic;
   font-size: 22px;
 }
+
+.new_order {
+  #payment{
+    .payment_fields{
+      .payment-card{
+        .active{
+          background-color: $active;
+          font-weight: bold;
+          color: $deep;
+        }
+
+      }
+    }
+  }
+}
