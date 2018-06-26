@@ -18,6 +18,11 @@ class Order < ApplicationRecord
     guests.find_by(buyer: true)
   end
 
+  def api_other_id
+    "#{id.to_s}-xy-xy*-teste"
+  end
+
+
   private
 
   def get_order_total

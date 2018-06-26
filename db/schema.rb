@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180623143149) do
+ActiveRecord::Schema.define(version: 20180625232209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20180623143149) do
     t.string "moip_id"
     t.string "status"
     t.string "platform"
+    t.string "encrypted_data"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -117,6 +118,9 @@ ActiveRecord::Schema.define(version: 20180623143149) do
     t.string "phone_area_code"
     t.string "phone_number"
     t.string "email"
+    t.string "status"
+    t.integer "installments"
+    t.string "moip_id"
     t.index ["order_id"], name: "index_payments_on_order_id"
   end
 

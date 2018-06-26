@@ -1,4 +1,7 @@
 import "bootstrap";
+import { encryptCard } from '../components/moip';
+import { update } from '../components/moip';
+
 
 $(document).ready(function() {
 $('.thumbnail').click(function(){
@@ -7,3 +10,5 @@ $('.thumbnail').click(function(){
   	$('#myModal').modal({show:true});
 });
 });
+
+encryptCard();

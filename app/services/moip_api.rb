@@ -35,6 +35,11 @@ class MoipApi
     customer
   end
 
+  def create_payment(order, hash)
+    payment = api.payment.create(order.moip_id, payment_post_data(order, hash))
+    order.payment.update(moip_id: payment[:id], status: payment[:status]) unless payment[:errors].present?
+    payment
+  end
 
   def get_customer_moip_data(guest)
     guest.moip_id ? api.customer.show(guest.moip_id) : 'Customer without moip_id'
@@ -58,7 +63,7 @@ class MoipApi
   def order_post_data(sales_order)
     (
     {
-      ownId: sales_order.id,
+      ownId: sales_order.api_other_id,
       amount: {
         currency: 'BRL',
         subtotals: {
@@ -85,7 +90,7 @@ class MoipApi
             id: sales_order.events.first.activity.tour_store.moip_id
           },
           amount: {
-            percetual: 90
+            percentual: 90
           }
         },
         {
@@ -95,7 +100,7 @@ class MoipApi
             id: ENV['MOIP_SANDBOX_ACCOUNT_ID']
           },
           amount: {
-            percetual: 10
+            percentual: 10
           }
         }
       ]
@@ -126,6 +131,45 @@ class MoipApi
         country: "BRA",
         zipCode: sales_order.payment.postal_code,
       },
+    })
+  end
+
+  def payment_post_data(sales_order, hash)
+    ({
+      installment_count: sales_order.payment.installments,
+      funding_instrument: {
+        method: "CREDIT_CARD",
+        credit_card: {
+          # You can generate the following hash using a Moip Javascript SDK
+          # where you use the customer credit_card data and your public key
+          # to create the hash.
+          # Read more about creating credit card hash here:
+          # https://dev.moip.com.br/v2.0/docs/criptografia-de-cartao
+          hash:  hash,
+          holder: {
+            fullname: sales_order.payment.name,
+            birthdate: "1988-12-30",
+            taxDocument: {
+              type: "CPF",
+              number: sales_order.payment.cpf,
+            },
+            phone: {
+              countryCode: "55",
+              areaCode: sales_order.payment.phone_area_code,
+              number: sales_order.payment.phone_number,
+            },
+            billingAddress: {
+                   city: sales_order.payment.city,
+                   district: sales_order.payment.district,
+                   street: sales_order.payment.street,
+                   streetNumber: sales_order.payment.street_number,
+                   zipCode: sales_order.payment.postal_code,
+                   state: sales_order.payment.state,
+                   country: "BRA"
+            },
+          },
+        },
+      }
     })
   end
 end

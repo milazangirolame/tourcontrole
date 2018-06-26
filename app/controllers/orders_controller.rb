@@ -9,12 +9,14 @@ class OrdersController < ApplicationController
   end
 
   def create
+    @hash = set_params[:encrypted_data]
     @order = Order.new(set_params)
     @order.bookings.each {|booking| booking.event = @event}
     if @order.save
       set_buyer_guest
       create_moip_customer
       create_moip_order
+      create_moip_payment
       flash[:notice] = "Resserva feita com sucesso"
       redirect_to activity_path(@activity)
     else
@@ -44,6 +46,10 @@ class OrdersController < ApplicationController
     @moip.create_customer(@order)
   end
 
+  def create_moip_payment
+    @moip.create_payment(@order, @hash)
+  end
+
   def index
   end
 
@@ -60,10 +66,10 @@ class OrdersController < ApplicationController
   end
 
   def set_params
-    params.require(:order).permit( :order_total,
+    params.require(:order).permit( :order_total, :encrypted_data,
     bookings_attributes: [ :id, :_destroy, :guest_id,
     guest_attributes: [ :id, :_destroy, :first_name, :last_name, :email ]],
-    payment_attributes: [:token, :name, :exp, :ccv, :number, :cpf, :email, :street,
+    payment_attributes: [:installments, :name, :exp, :ccv, :number, :cpf, :email, :street,
         :street_number, :city, :district, :state, :country, :postal_code,
         :phone_country_code, :phone_area_code, :phone_number])
   end

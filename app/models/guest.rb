@@ -9,6 +9,6 @@ class Guest < ApplicationRecord
   end
 
   def api_other_id
-    "#{id.to_s}-xxx*-teste"
+    "#{id.to_s}-xyxy*-teste"
   end
 end

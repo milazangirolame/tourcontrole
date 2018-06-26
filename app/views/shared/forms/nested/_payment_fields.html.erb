@@ -8,10 +8,10 @@
 
     <div class="form-row">
       <div class="col-xs-6 nmb_a">
-        <%= f.input :number, label: false, placeholder: 'Número de cartão', input_html: {autocomplete:"off", class: "credit_card_number", 'data-iugu'=>"number"}  %>
+        <%= f.input :number, label: false, placeholder: 'Número de cartão', input_html: {autocomplete:"off", class: "credit_card_number", id: 'number'}  %>
       </div>
       <div class="col-xs-6">
-        <%= f.input :ccv, placeholder: 'CCV', label: false, input_html: {autocomplete:"off", class: "credit_card_cvv", 'data-iugu'=>"verification_value"}  %>
+        <%= f.input :cvc, placeholder: 'CCV', label: false, input_html: {autocomplete:"off", class: "credit_card_cvv", id: 'cvc'}  %>
       </div>
     </div>
     <div class="form-row">
@@ -20,10 +20,22 @@
         input_html:{class: 'credit_card_name', 'data-iugu'=> 'full_name'}  %>
       </div>
       <div class="col-xs-6 nmb_d">
-        <%= f.input :exp, label:false, as: :string, input_html: {class: 'credit_card_expiration', 'data-iugu'=>'expiration', autocomplete: 'off'}, placeholder:"MM/AA"   %>
+        <div class="col-xs-3">
+          <%= f.input :month, label:false, as: :string, input_html: {class: 'credit_card_expiration', id: 'month', autocomplete: 'off'}, placeholder:"MM"   %>
+        </div>
+        <div class="col-xs-3">
+          <%= f.input :year, label:false, as: :string, input_html: {class: 'credit_card_expiration', id: 'year', autocomplete: 'off'}, placeholder:"AA" %>
+        </div>
       </div>
     </div>
-    <% f.input :token, label: false, hidde: true, input_html: { name: "token", id: "token", readonly:"true", size:"64", style: "text-align:center"}  %>
+    <div class="form-row">
+      <h5>Parcelas</h5>
+      <div class="col-xs-12">
+        <div class="col-xs-6">
+          <%= f.input :installments, selected: 1, collection: 1..10, label: false   %>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="buyer-info">
     <h4>Dados do comprador</h4>
@@ -52,7 +64,7 @@
         <%= f.input :city, label:'Cidade' %>
       </div>
       <div class="col-xs-4">
-        <%= f.input :street, label:'Complemento' %>
+        <%= f.input :street_number, label:'Complemento' %>
         <%= f.input :state, label:'Estado' %>
       </div>
       <div class="col-xs-4">
