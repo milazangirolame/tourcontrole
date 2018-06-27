@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180625232209) do
+ActiveRecord::Schema.define(version: 20180626212519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 20180625232209) do
     t.bigint "tour_store_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ag_digit"
+    t.string "cc_digit"
+    t.string "holder_name"
+    t.string "holder_id"
+    t.string "holder_id_type"
+    t.string "status"
+    t.string "moip_id"
     t.index ["tour_store_id"], name: "index_banking_informations_on_tour_store_id"
   end
 

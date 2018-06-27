@@ -41,6 +41,23 @@ class MoipApi
     payment
   end
 
+  def create_merchant_account(store)
+    account = api.accounts.create(tour_store_post_data(store))
+    store.update(moip_id: account[:id], moip_access_token: account[:access_token], moip_channel_id: account[:channel_id]) unless account[:errors].present?
+    account
+  end
+
+  def create_bank_info(bank_info)
+    bank_account = api.bank_accounts.create(bank_info.tour_store.moip_id, bank_post_data(bank_info))
+    bank_info.update(moip_id: bank_account[:id], status: bank_account[:status]) unless bank_account[:errors].present?
+    bank_account
+  end
+
+  def update_bank_info(bank_info)
+    api.bank_accounts.update(bank_info.moip_id, bank_post_data(bank_info))
+  end
+
+
   def get_customer_moip_data(guest)
     guest.moip_id ? api.customer.show(guest.moip_id) : 'Customer without moip_id'
   end
@@ -171,6 +188,82 @@ class MoipApi
         },
       }
     })
+  end
+
+  def tour_store_post_data(store)
+    {
+      email: {
+        address: store.user.email,
+      },
+      person: {
+        name: store.user.first_name,
+        lastName: store.user.last_name,
+        taxDocument: {
+          type: "CPF",
+          number: "572.619.050-54",
+        },
+        identityDocument: {
+          type: "RG",
+          number: "35.868.057-8",
+          issuer: "SSP",
+          issueDate: "2000-12-12",
+        },
+        birthDate: "1990-01-01",
+        phone: {
+          countryCode: "55",
+          areaCode: "11",
+          number: '965213244',
+        },
+        address: {
+          street: store.street_name,
+          streetNumber: store.street_number,
+          district: store.neighborhood,
+          zipCode: store.postal_code,
+          city: store.city,
+          state: store.state_code,
+          country: 'BRA',
+        },
+      },
+      type: "MERCHANT",
+      transparentAccount: true,
+      company: {
+        name: store.name,
+        taxDocument: {
+          type: 'CNPJ',
+          number: store.business_tax_id
+        },
+        mainActivity: {
+          description: store.description
+        },
+        address: {
+          street: store.street_name,
+          streetNumber: store.street_number,
+          district: store.neighborhood,
+          zipCode: store.postal_code,
+          city: store.city,
+          state: store.state_code,
+          country: 'BRA',
+        }
+      }
+    }
+  end
+
+  def bank_post_data(banking_information)
+    {
+      bankNumber: banking_information.bank_code,
+      agencyNumber: banking_information.bank_ag.to_i,
+      agencyCheckNumber: banking_information.ag_digit,
+      accountNumber: banking_information.bank_cc.to_i,
+      accountCheckNumber: banking_information.cc_digit.to_i,
+      type: banking_information.account_type,
+      holder: {
+        taxDocument: {
+          type: banking_information.holder_id_type,
+          number: banking_information.holder_id.to_i,
+        },
+        fullname: banking_information.holder_name,
+      }
+    }
   end
 end
 

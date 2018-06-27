@@ -9,9 +9,9 @@ class BankingInformationsController < ApplicationController
   def create
     @banking_information = BankingInformation.new(set_params)
     @banking_information.tour_store = @tour_store
-
     authorize @banking_information
     if @banking_information.save
+      create_moip_bank
       redirect_to tour_store_dashboard_path(@tour_store)
     else
       flash[:alert] = @banking_information.errors.first.second
@@ -25,6 +25,7 @@ class BankingInformationsController < ApplicationController
   def update
     @banking_information.update(set_params)
     if @banking_information.save
+      update_moip_bank
       redirect_to tour_store_bank_path(@tour_store)
     else
       flash[:alert] = @banking_information.errors.first.second
@@ -38,10 +39,19 @@ class BankingInformationsController < ApplicationController
   def destroy
   end
 
+  def create_moip_bank
+    @moip.create_bank_info(@banking_information)
+  end
+
+  def update_moip_bank
+    @moip.update_bank_info(@banking_information)
+  end
+
   private
 
   def set_params
-    params.require(:banking_information).permit(:account_type, :bank, :bank_ag, :bank_cc)
+    params.require(:banking_information).permit(:account_type, :bank, :bank_ag,
+        :bank_cc, :ag_digit, :cc_digit, :holder_name, :holder_id, :holder_id_type)
   end
 
   def set_tour_store

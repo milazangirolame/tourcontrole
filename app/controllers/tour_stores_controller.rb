@@ -17,7 +17,7 @@ class TourStoresController < ApplicationController
     authorize @tour_store
     @tour_store.user = current_user
     if @tour_store.save
-      create_merchant_account
+      create_moip_account
       tour_store_admin = TourStoreAdmin.new(user: current_user, tour_store: @tour_store)
       tour_store_admin.store_creator = true
       tour_store_admin.save
@@ -67,8 +67,8 @@ class TourStoresController < ApplicationController
   def company
   end
 
-  def create_merchant_account
-    new_tour_store_merchant_account(@tour_store)
+  def create_moip_account
+    @moip.create_merchant_account(@tour_store)
   end
 
   private
@@ -91,7 +91,6 @@ class TourStoresController < ApplicationController
     @user = current_user
   end
 
-
   def set_tour_store_data_sources
     @tour_store = TourStore.find_by_slug(params[:tour_store_slug])
     authorize @tour_store
@@ -101,45 +100,4 @@ class TourStoresController < ApplicationController
   end
 
 
-  def new_tour_store_merchant_account(store)
-    account = @api.accounts.create(
-      {
-        email: {
-          address: store.user.email,
-        },
-        person: {
-          name: store.user.first_name,
-          lastName: store.user.last_name,
-          taxDocument: {
-            type: "CPF",
-            number: "572.619.050-54",
-          },
-          identityDocument: {
-            type: "RG",
-            number: "35.868.057-8",
-            issuer: "SSP",
-            issueDate: "2000-12-12",
-          },
-          birthDate: "1990-01-01",
-          phone: {
-            countryCode: "55",
-            areaCode: "11",
-            number: '965213244',
-          },
-          address: {
-            street: store.street_name,
-            streetNumber: store.street_number,
-            district: store.neighborhood,
-            zipCode: store.postal_code,
-            city: store.city,
-            state: store.state_code,
-            country: 'BRA',
-          },
-        },
-        type: "MERCHANT",
-        transparentAccount: true
-      }
-    )
-    store.update(moip_id: account[:id], moip_access_token: account[:access_token], moip_channel_id: account[:channel_id])
-  end
 end
