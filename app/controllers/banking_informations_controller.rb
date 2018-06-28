@@ -40,11 +40,13 @@ class BankingInformationsController < ApplicationController
   end
 
   def create_moip_bank
-    @moip.create_bank_info(@banking_information)
+    moip = MoipApi.new; moip.set_token(@tour_store)
+    moip.create_bank(@banking_information)
   end
 
   def update_moip_bank
-    @moip.update_bank_info(@banking_information)
+    moip = MoipApi.new; moip.set_token(@tour_store)
+    moip.update_bank(@banking_information)
   end
 
   private

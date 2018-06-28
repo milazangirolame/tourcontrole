@@ -3,9 +3,10 @@ class MoipApi
   require 'json'
   require 'nokogiri'
   require 'base64'
-  attr_reader :api
+  attr_reader :api, :platform_token
   def initialize()
     @api = Moip.new.call
+    @platform_token = ENV['MOIP_SANDBOX_ACCESS_TOKEN']
   end
 
   def create_order(order)
@@ -32,13 +33,13 @@ class MoipApi
     account
   end
 
-  def create_bank_info(bank_info)
+  def create_bank(bank_info)
     bank_account = api.bank_accounts.create(bank_info.tour_store.moip_id, bank_post_data(bank_info))
     bank_info.update(moip_id: bank_account[:id], status: bank_account[:status]) unless bank_account[:errors].present?
     bank_account
   end
 
-  def update_bank_info(bank_info)
+  def update_bank(bank_info)
     api.bank_accounts.update(bank_info.moip_id, bank_post_data(bank_info))
   end
 
@@ -57,8 +58,8 @@ class MoipApi
     JSON.parse(response.body)
   end
 
-  def get_payment(payment)
-    payment.moip_id? ? api.payment.show(payment.moip_id) : 'No moip_id'
+  def get_payment(order)
+    order.payment.moip_id? ? api.payment.show(order.payment.moip_id) : 'No moip_id'
   end
 
   def get_order(order)
@@ -67,6 +68,22 @@ class MoipApi
 
   def get_orders
     api.order.find_all()
+  end
+
+  def get_bank(store)
+    set_token(store)
+    bank_id = store.banking_information.moip_id
+    bank_id ? result = api.bank_accounts.show(bank_id).to_hash : 'No moip_id'
+    restart_token
+    result
+  end
+
+  def get_banks(store)
+    set_token(store)
+    id = store.moip_id
+    id ? result = api.bank_accounts.find_all(id).to_hash : 'No moip_id'
+    restart_token
+    result
   end
 
   def  post_moip_order(order)
@@ -84,6 +101,10 @@ class MoipApi
 
   def set_token(store)
     api.client.auth.instance_variable_set(:'@oauth', store.moip_access_token) unless store.moip_access_token.nil?
+  end
+
+  def restart_token
+    api.client.auth.instance_variable_set(:'@oauth', platform_token)
   end
 
   def generate_self_token
