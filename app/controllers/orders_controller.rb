@@ -1,11 +1,12 @@
 class OrdersController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :create, :new]
-  before_action :set_activity, only: [ :create, :new]
+  before_action :set_activity, :set_tour_store, only: [ :create, :new]
   before_action :set_order, only: [ :show, :edit, :update, :destroy]
   before_action :set_event, only: [ :new, :create]
   def new
     @order = Order.new
     @order.build_payment
+    @public_key = @activity.tour_store.public_key
   end
 
   def create
@@ -39,15 +40,18 @@ class OrdersController < ApplicationController
   end
 
   def create_moip_order
-    @moip.create_order(@order)
+    moip = MoipApi.new; moip.set_token(@tour_store)
+    moip.create_order(@order)
   end
 
   def create_moip_customer
-    @moip.create_customer(@order)
+    moip = MoipApi.new; moip.set_token(@tour_store)
+    moip.create_customer(@order)
   end
 
   def create_moip_payment
-    @moip.create_payment(@order, @hash)
+    moip = MoipApi.new; moip.set_token(@tour_store)
+    moip.create_payment(@order, @hash)
   end
 
   def index
@@ -63,6 +67,10 @@ class OrdersController < ApplicationController
   def set_activity
     @activity = Activity.find_by_slug(params[:activity_slug])
     skip_authorization
+  end
+
+  def set_tour_store
+    @tour_store = @activity.tour_store
   end
 
   def set_params
@@ -85,4 +93,5 @@ class OrdersController < ApplicationController
       buyer: true)
     @order.bookings.create(guest: guest, event: @event)
   end
+
 end

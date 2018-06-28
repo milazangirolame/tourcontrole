@@ -1,34 +1,16 @@
 class Moip
 
-  attr_reader :token, :key
+  attr_reader :access_token
 
-  def initialize(token = nil, key = nil)
-    @token = token || get_token
-    @key = key || get_key
+  def initialize(access_token = nil)
+    @access_token = access_token || ENV['MOIP_SANDBOX_ACCESS_TOKEN']
   end
 
   def call
     authentication
   end
 
-  def puts_hello
-    'hello world'
-  end
-
-
   private
-
-  def get_token
-    ENV['MOIP_SANDBOX_TOKEN']
-  end
-
-  def get_key
-    ENV['MOIP_SANDBOX_KEY']
-  end
-
-  def credentials
-    Rails.application.credentials[Rails.env.to_sym][:moip]
-  end
 
   def authentication
     Moip2::Api.new(moip_client)
@@ -39,6 +21,6 @@ class Moip
   end
 
   def moip_auth
-    auth = Moip2::Auth::OAuth.new(ENV['MOIP_SANDBOX_ACCESS_TOKEN'])
+    Moip2::Auth::OAuth.new(access_token)
   end
 end

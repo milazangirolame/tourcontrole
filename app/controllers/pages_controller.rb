@@ -19,6 +19,8 @@ class PagesController < ApplicationController
 
   def dummy_stores
     @stores = TourStore.where(dummy: true)
+    @moip_customers = @moip.get_customers
+    @store_customers = @moip.get_customers(TourStore.find(55))
   end
 
 end

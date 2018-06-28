@@ -68,14 +68,14 @@ class TourStoresController < ApplicationController
   end
 
   def create_moip_account
-    @moip.create_merchant_account(@tour_store)
+    @moip.create_store(@tour_store)
   end
 
   private
 
   def set_params
     params.require(:tour_store).permit(:form_address, :phone, :website, :name, :description,
-                                      :business_tax_id, :regulator_id, :logo, :user_id,
+                                      :business_tax_id, :regulator_id, :logo, :legal_representant_id, :user_id,
                                        :photo, :photo_cache, :image_banner, :instagram_link,
                                        :trip_advisor_link, :facebook_link, :twitter_link,
                                        banking_information_attributes:[

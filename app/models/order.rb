@@ -22,6 +22,10 @@ class Order < ApplicationRecord
     "#{id.to_s}-xy-xy*-teste"
   end
 
+  def tour_store
+    events.first.activity.tour_store
+  end
+
 
   private
 

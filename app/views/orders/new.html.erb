@@ -5,5 +5,6 @@
   <h3> <%= @event.activity.name  %></h3>
   <h3>Dada: <%= @event.date  %> </h3>
   <h3>Horário: <%= @event.time %> </h3>
+
   <%= render 'shared/forms/form_order', activity: @activity, order: @order %>
 </div>

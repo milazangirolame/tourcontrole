@@ -8,21 +8,6 @@ class MoipApi
     @api = Moip.new.call
   end
 
-  def auth
-    Base64.encode64("#{ENV['MOIP_SANDBOX_TOKEN']}:#{ENV['MOIP_SANDBOX_KEY']}")
-  end
-
-  def get_customers
-    uri = URI.parse('https://sandbox.moip.com.br/v2/customers/')
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.start
-    request = Net::HTTP::Get.new(uri.request_uri, { authorization: "OAuth #{ENV['MOIP_SANDBOX_ACCESS_TOKEN']}" })
-    response = http.request(request)
-    # Nokogiri::HTML(response.body).inner_text
-    JSON.parse(response.body)
-  end
-
   def create_order(order)
     moip_order = api.order.create(order_post_data(order))
     order.update(moip_id: moip_order[:id], status: moip_order[:status]) unless moip_order[:errors].present?
@@ -41,7 +26,7 @@ class MoipApi
     payment
   end
 
-  def create_merchant_account(store)
+  def create_store(store)
     account = api.accounts.create(tour_store_post_data(store))
     store.update(moip_id: account[:id], moip_access_token: account[:access_token], moip_channel_id: account[:channel_id]) unless account[:errors].present?
     account
@@ -57,9 +42,31 @@ class MoipApi
     api.bank_accounts.update(bank_info.moip_id, bank_post_data(bank_info))
   end
 
-
-  def get_customer_moip_data(guest)
+  def get_customer(guest)
     guest.moip_id ? api.customer.show(guest.moip_id) : 'Customer without moip_id'
+  end
+
+  def get_customers(store = nil)
+    auth = (store && store.moip_access_token) ? store.moip_access_token : ENV['MOIP_SANDBOX_ACCESS_TOKEN']
+    uri = URI.parse('https://sandbox.moip.com.br/v2/customers/')
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.start
+    request = Net::HTTP::Get.new(uri.request_uri, { authorization: "OAuth #{auth}" })
+    response = http.request(request)
+    JSON.parse(response.body)
+  end
+
+  def get_payment(payment)
+    payment.moip_id? ? api.payment.show(payment.moip_id) : 'No moip_id'
+  end
+
+  def get_order(order)
+    order.moip_id? ? api.order.show(order.moip_id) : 'No moip_id'
+  end
+
+  def get_orders
+    api.order.find_all()
   end
 
   def  post_moip_order(order)
@@ -73,6 +80,20 @@ class MoipApi
     http.start
     response = http.request(request)
     JSON.parse(response.body)
+  end
+
+  def set_token(store)
+    api.client.auth.instance_variable_set(:'@oauth', store.moip_access_token) unless store.moip_access_token.nil?
+  end
+
+  def generate_self_token
+    api.connect.authorize(
+      client_id: ENV['MOIP_SANDBOX_ID'],
+      client_secret: ENV['MOIP_SANDBOX_SECRET'],
+      code: ENV['MOIP_SANDBOX_CODE'],
+      redirect_uri: ENV['MOIP_REDIRECT_URI'],
+      grant_type: "authorization_code"
+      )
   end
 
   private
@@ -101,7 +122,7 @@ class MoipApi
       },
       receivers: [
         {
-          type: 'SECONDARY',
+          type: 'PRIMARY',
           feePayor: false,
           moipAccount: {
             id: sales_order.events.first.activity.tour_store.moip_id
@@ -111,10 +132,10 @@ class MoipApi
           }
         },
         {
-          type: 'PRIMARY',
+          type: 'SECONDARY',
           feePayor: true,
           moipAccount: {
-            id: ENV['MOIP_SANDBOX_ACCOUNT_ID']
+            id: ENV['MOIP_SANDBOX_ACCOUNT_ID'],
           },
           amount: {
             percentual: 10
@@ -136,7 +157,7 @@ class MoipApi
       birthDate: "1990-10-22",
       taxDocument: {
         type: "CPF",
-        number: sales_order.payment.cpf,
+        number: "57261905054",
       },
       shippingAddress: {
         street: sales_order.payment.street,
@@ -200,19 +221,13 @@ class MoipApi
         lastName: store.user.last_name,
         taxDocument: {
           type: "CPF",
-          number: "572.619.050-54",
-        },
-        identityDocument: {
-          type: "RG",
-          number: "35.868.057-8",
-          issuer: "SSP",
-          issueDate: "2000-12-12",
+          number: store.legal_representant_id,
         },
         birthDate: "1990-01-01",
         phone: {
           countryCode: "55",
           areaCode: "11",
-          number: '965213244',
+          number: store.phone,
         },
         address: {
           street: store.street_name,
@@ -228,9 +243,15 @@ class MoipApi
       transparentAccount: true,
       company: {
         name: store.name,
+        businessName: store.name,
         taxDocument: {
           type: 'CNPJ',
           number: store.business_tax_id
+        },
+        phone: {
+          countryCode: "55",
+          areaCode: "11",
+          number: store.phone,
         },
         mainActivity: {
           description: store.description

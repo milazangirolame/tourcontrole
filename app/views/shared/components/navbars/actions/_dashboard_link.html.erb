@@ -3,6 +3,8 @@
     <% if user_signed_in? && current_user.tour_store_admins.length == 1 %>
       <% store = current_user.tour_store_admins.first.tour_store %>
       <%= link_to  '<i class="fas fa-tachometer-alt"></i> Painel Empresa'.html_safe, tour_store_dashboard_path(store) ,class: 'navbar-tc-link' %>
+      <%= link_to '<i class="fas fa-plus"></i> Adicionar Empresa'.html_safe, new_tour_store_path, class: 'navbar-tc-link'  %>
+
     <% else %>
       <div class="dropdown">
         <div class="navbar-tc-link dropdown-toggle" id='navbar-tc-dashboard-menu' data-toggle='dropdown'>
@@ -15,6 +17,7 @@
                 <%= link_to store_admin.tour_store.name, tour_store_dashboard_path(store_admin.tour_store)  %>
               </li>
             <% end %>
+            <%= link_to '<i class="fas fa-plus"></i> Adicionar Empresa'.html_safe, new_tour_store_path, class: 'navbar-tc-link'  %>
           <% end %>
            <li>
              <%= link_to '<i class="fas fa-plus"></i> Adicionar Empresa'.html_safe, new_tour_store_path, class: 'navbar-tc-link'  %>

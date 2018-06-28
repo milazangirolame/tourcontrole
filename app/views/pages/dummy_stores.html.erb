@@ -9,8 +9,7 @@
   </div>
   <div class="data-container">
   <ol>
-    <% moip_customers = MoipApi.new.get_customers %>
-    <% moip_customers['customers'].each do |customer| %>
+    <% @store_customers['customers'].each do |customer| %>
       <li>
         <br> <%= customer['ownId'] %><br><%= customer['id']%> <br> <%= customer['fullname']  %> <br> <%= customer['email']  %>
       </li>

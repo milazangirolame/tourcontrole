@@ -1,4 +1,6 @@
 <%= simple_form_for([activity,order]) do |f| %>
+  <input type="hidden" value='<%= @public_key  %>' id='public-key'>
+
   <div id="payment">
     <%= f.simple_fields_for(:payment, html: {class: 'usable-creditcard-form'}) do |payment|  %>
       <%= render 'shared/forms/nested/payment_fields', f: payment  %>

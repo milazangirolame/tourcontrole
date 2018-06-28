@@ -3,7 +3,7 @@ import { MoipCreditCard } from 'moip-sdk-js';
 import { MoipValidator } from 'moip-sdk-js';
 
 
-const pubKey = `-----BEGIN PUBLIC KEY-----
+const MyPubKey = `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjF7RrjbmrknTuVE17hdG
 GevMWGQKoUjLxFLJUNZcMNE5QWL5b7bm4gDEoQGhGUqoime3IHnKEwktLIxTRZRL
 24BK2TpZngRQYgAcUAEysHvvd097HmK+kzDQKEOb9/UblNRDvrguDrKzaZM3FGYR
@@ -13,6 +13,7 @@ FYYMG7Ou2kPvqWSh5mKkl2hFvJ9nSxXVXkfA3LRLMVn/uPiuzafQf67Fqtw9w0dg
 TQIDAQAB
 -----END PUBLIC KEY-----`;
 
+const pubKey = document.getElementById('public-key').value;
 const number = document.getElementById('number');
 const cvc = document.getElementById('cvc');
 const month = document.getElementById('month');
@@ -59,11 +60,6 @@ function validateCreditCard(){
   validateCardExpiration();
   validateSecurityCode();
 }
-
-
-
-
-
 
 
 function setEncryptedData() {

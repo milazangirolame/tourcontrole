@@ -1,6 +1,6 @@
 class TourStore < ApplicationRecord
   belongs_to :user
-  has_one :banking_information
+  has_one :banking_information, dependent: :destroy
   has_many :activities, dependent: :destroy
   has_many :photos, dependent: :destroy
   has_many :tour_store_admins, dependent: :destroy
@@ -85,6 +85,12 @@ class TourStore < ApplicationRecord
 
   def address
     form_address
+  end
+
+  def public_key
+    moip = MoipApi.new
+    moip.set_token(self) unless moip_access_token.nil?
+    moip.api.keys.show.to_hash[:keys][:encryption]
   end
 
   private
