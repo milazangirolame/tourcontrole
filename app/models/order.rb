@@ -38,7 +38,6 @@ class Order < ApplicationRecord
     guests.count
   end
 
-
   def moip_payment
     MoipApi.new(self.tour_store).get_payment(self).to_hash
   end

@@ -40,6 +40,14 @@ class Event < ApplicationRecord
     bookings.find_by(guest: guest).order
   end
 
+  def tour_store
+    activity.tour_store
+  end
+
+  def name
+    activity.name
+  end
+
   private
 
   def set_times

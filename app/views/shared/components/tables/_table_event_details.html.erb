@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th>Dia</th>
+    <td><%= event.date %></td>
+  </tr>
+  <tr>
+    <th>Horário</th>
+    <td><%= event.time %></td>
+  </tr>
+  <tr>
+    <th>Reservas confirmadas </th>
+    <td> <%= event.spots_taken  %>  (<%= event.fill_rate %>)</td>
+  </tr>
+  <tr>
+    <th>Vendas</th>
+    <td><%= humanized_money_with_symbol event.revenue %></td>
+  </tr>
+</table>

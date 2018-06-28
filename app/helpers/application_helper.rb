@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def customer_page?
-    page?('tour_stores#show, activities#show, orders#new, orders')
+    page?('tour_stores#show, activities#show, orders#new')
   end
 
   def is_admin?
@@ -33,7 +33,8 @@ module ApplicationHelper
   def pro_page?
     page?('tour_stores#dashboard, tour_stores#events, tour_stores#edit,
       tour_stores#users, tour_stores#tours, tour_stores#company, tour_stores#bank,
-      banking_informations#new, banking_informations#edit, activities#new, activities#edit, activities#audit')
+      banking_informations#new, banking_informations#edit, activities#new,
+      activities#edit, activities#audit, orders#show, events#show')
   end
 
   def show_navbar

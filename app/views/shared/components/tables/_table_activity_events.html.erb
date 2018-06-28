@@ -3,24 +3,5 @@
   <h4>Horário: <%= event.time  %></h4>
   <h4>Pessoas confirmadas: <%= event.spots_taken  %> (<%= event.fill_rate %>)</h4>
   <h4>Vendas: <%= humanized_money_with_symbol(event.revenue) %></h4>
-  <table class= 'table'>
-    <tr>
-      <th>Nome</th>
-      <th>Sobrenome</th>
-      <th>Email</th>
-      <th>Telefone</th>
-      <th></th>
-      <th></th>
-    </tr>
-    <% event.guests.each do |guest|  %>
-    <tr>
-      <td><%= guest.first_name %></td>
-      <td><%= guest.last_name %></td>
-      <td><%= guest.email %></td>
-      <td><%= guest.phone %></td>
-      <td><%= event.order_guest(guest).id %></td>
-      <td><%= buyer_icon(guest)%></td>
-    </tr>
-    <% end %>
-  </table>
+
 </div>

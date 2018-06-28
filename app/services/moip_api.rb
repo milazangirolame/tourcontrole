@@ -148,7 +148,7 @@ class MoipApi
           category: 'OTHER_CATEGORIES',
           quantity: sales_order.bookings.count,
           detail: sales_order.events.first.activity.description,
-          price: sales_order.events.first.price.to_i
+          price: sales_order.activity.price.fractional
         }
       ],
       customer: {

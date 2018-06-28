@@ -1,0 +1,19 @@
+<table class= 'table'>
+  <tr>
+    <th>Nome</th>
+    <th>Email</th>
+    <th>Telefone</th>
+    <th>Pedido #</th>
+    <th></th>
+  </tr>
+  <% event.guests.order(created_at: :desc).each do |guest|  %>
+    <% order = event.order_guest(guest) %>
+    <tr>
+      <td><%= guest.full_name %></td>
+      <td><%= guest.email %></td>
+      <td><%= guest.phone %></td>
+      <td><%= link_to "<i class='fas fa-receipt'></i> #{order.id}".html_safe, tour_store_order_path(order.tour_store, order),class: 'table-link'  %></td>
+      <td><%= buyer_icon(guest)%></td>
+    </tr>
+  <% end %>
+</table>

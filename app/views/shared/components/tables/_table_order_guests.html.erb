@@ -6,13 +6,13 @@
     <th>Telefone</th>
     <th></th>
   </tr>
-  <% @order.guests.each |guest| do %>
+  <% @order.guests.each do |guest|  %>
     <tr>
       <td> <%= guest.first_name  %></td>
       <td> <%= guest.last_name  %></td>
       <td> <%= guest.email  %></td>
       <td> <%= guest.phone  %></td>
-      <td> <%= buyer(guest) %></td>
+      <td> <%= buyer_icon(guest) %></td>
     </tr>
   <% end %>
 

@@ -1,0 +1,12 @@
+<%= render 'shared/components/navbars/sidebar' %>
+<div class="col-xs-10">
+  <h1><%= @event.name %></h1>
+  <div class="col-xs-12 col-sm-10">
+    <div class="row">
+      <%= render 'shared/components/tables/table_event_details', event: @event  %>
+    </div>
+    <div class="row">
+      <%= render 'shared/components/tables/table_event_guests_details', event: @event  %>
+    </div>
+  </div>
+</div>

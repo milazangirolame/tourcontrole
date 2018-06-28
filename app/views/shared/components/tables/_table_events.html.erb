@@ -3,20 +3,22 @@
     <th>Tour</th>
     <th>Dia</th>
     <th>Horário</th>
-    <th>Vagas disponivéis</th>
-    <th>Taixa de lotação</th>
     <th>Pessoas confirmadas</th>
+    <th>Taixa de lotação</th>
+    <th>Vagas disponivéis</th>
     <th>Valor das resservas</th>
+    <th></th>
   </tr>
   <% @upcoming_events.each do |event| %>
   <tr>
     <td><%= event.activity.name %></td>
     <td><%= event.date %></td>
     <td><%= event.time %></td>
-    <td><%= event.available_spots %></td>
-    <td><%= event.fill_rate %></td>
     <td><%= event.spots_taken %></td>
+    <td><%= event.fill_rate %></td>
+    <td><%= event.available_spots %></td>
     <td><%= humanized_money_with_symbol(event.revenue)%></td>
+    <td><%= link_to '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'.html_safe, tour_store_event_path(event.activity.tour_store, event) %></td>
   </tr>
   <% end %>
 </table>

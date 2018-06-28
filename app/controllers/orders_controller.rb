@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :create, :new]
-  before_action :set_activity, :set_tour_store, only: [ :create, :new]
+  before_action :set_activity, :set_tour_store_via_activity, only: [ :create, :new]
+  before_action :set_tour_store, only: [ :show, :edit, :update, :destroy]
   before_action :set_order, only: [ :show, :edit, :update, :destroy]
   before_action :set_event, only: [ :new, :create]
   def new
@@ -69,8 +70,12 @@ class OrdersController < ApplicationController
     skip_authorization
   end
 
-  def set_tour_store
+  def set_tour_store_via_activity
     @tour_store = @activity.tour_store
+  end
+
+  def set_tour_store
+    @tour_store = TourStore.find_by_slug(params[:tour_store_slug])
   end
 
   def set_params
@@ -85,12 +90,13 @@ class OrdersController < ApplicationController
   def set_event
     selected_date = params[:date]
     @event = @activity.events.find_by(start_day: selected_date.to_date) || Event.create(start_day: selected_date.to_date, activity: @activity)
+    authorize @event
   end
 
   def set_buyer_guest
     guest = Guest.new(first_name: @order.payment.name.split(' ').first,
       last_name: @order.payment.name.split(' ').last, email: @order.payment.email,
-      buyer: true, phone: payment.phone)
+      buyer: true, phone: @order.payment.phone)
     @order.bookings.create(guest: guest, event: @event)
   end
 

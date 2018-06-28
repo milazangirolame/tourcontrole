@@ -1,0 +1,9 @@
+table {
+  .table-link {
+    text-decoration: none;
+    color: $black80;
+    &:hover{
+      color: $mid;
+    }
+  }
+}

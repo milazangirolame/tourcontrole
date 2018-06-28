@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :tour_stores, param: :slug do
+    resources :events, only: [:show]
+    resources :orders, only:[:show, :update, :edit, :destroy]
     resources :banking_informations, only: [:new, :edit, :create, :update]
     get 'dashboard', to: 'tour_stores#dashboard', as: :dashboard
     get 'tours', to: 'tour_stores#tours'
@@ -21,7 +23,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:create, :new]
   end
 
-  resources :orders, only:[:show, :update, :edit, :destroy, :index]
+
   get 'terms', to: 'pages#terms'
   get 'about', to: 'pages#about'
   get 'cadastro', to: 'pages#cadastro'

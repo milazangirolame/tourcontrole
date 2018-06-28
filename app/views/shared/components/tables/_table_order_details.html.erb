@@ -17,7 +17,11 @@
   </tr>
   <tr>
     <th>Comprador</th>
-    <td><%= @order.buyer.fullname%>   <%= @order.buyer.email %></td>
+    <td><%= @order.buyer.full_name%>   <%= @order.buyer.email %></td>
+  </tr>
+  <tr>
+    <th>Status do Pagamento</th>
+    <td><%= @order.payment_status %></td>
   </tr>
   <tr>
     <th>Total</th>
