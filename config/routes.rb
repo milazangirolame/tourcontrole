@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get 'events', to: 'tour_stores#events'
     get 'company', to: 'tour_stores#company'
     get 'bank', to: 'tour_stores#bank'
-    resources :tour_store_admins, only: [:create, :new, :destroy]
+    resources :tour_store_admins, only: [:create, :new]
     resources :activities, param: :slug, only: [:edit, :update, :new, :create] do
       get 'audit', to: 'activities#audit', as: :audit
     end

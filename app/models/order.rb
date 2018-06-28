@@ -22,8 +22,34 @@ class Order < ApplicationRecord
     "#{id.to_s}-xy-xy*-teste"
   end
 
+  def event
+    events.first
+  end
+
+  def activity
+    event.activity
+  end
+
   def tour_store
-    events.first.activity.tour_store
+    activity.tour_store
+  end
+
+  def spots
+    guests.count
+  end
+
+
+  def moip_payment
+    MoipApi.new(self.tour_store).get_payment(self).to_hash
+  end
+
+  def payment_status
+    moip_payment[:status]
+  end
+
+  def net_payment
+    a = moip_payment[:amount]
+    Money.new(a[:liquid], a[:currency])
   end
 
 

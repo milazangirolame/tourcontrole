@@ -4,8 +4,8 @@ class MoipApi
   require 'nokogiri'
   require 'base64'
   attr_reader :api, :platform_token
-  def initialize()
-    @api = Moip.new.call
+  def initialize(store = nil)
+    @api = Moip.new(init_token(store)).call
     @platform_token = ENV['MOIP_SANDBOX_ACCESS_TOKEN']
   end
 
@@ -86,6 +86,11 @@ class MoipApi
     result
   end
 
+  def get_balance
+    api.balances.show().to_hash
+  end
+
+
   def  post_moip_order(order)
     uri = URI.parse('https://sandbox.moip.com.br/v2/orders')
     request = Net::HTTP::Post.new(uri.path)
@@ -118,6 +123,14 @@ class MoipApi
   end
 
   private
+
+  def token_present?(store)
+    store && store.moip_access_token
+  end
+
+  def init_token(store)
+    token_present?(store) ? store.moip_access_token : nil
+  end
 
   def order_post_data(sales_order)
     (

@@ -7,6 +7,7 @@ class TourStore < ApplicationRecord
   has_many :users, through: :tour_store_admins
   has_many :guests, through: :activities
   has_many :events, through: :activities
+  has_many :orders, through: :activities
   accepts_nested_attributes_for :photos
   accepts_nested_attributes_for :banking_information
   mount_uploader :logo, PhotoUploader
@@ -91,6 +92,24 @@ class TourStore < ApplicationRecord
     moip = MoipApi.new
     moip.set_token(self) unless moip_access_token.nil?
     moip.api.keys.show.to_hash[:keys][:encryption]
+  end
+
+  def balance
+    MoipApi.new(self).get_balance
+  end
+
+  def future_balance
+    b = balance[:future].first
+    Money.new(b[:amount],b[:currency])
+  end
+
+  def current_balance
+    b = balance[:current].first
+    Money.new(b[:amount],b[:currency])
+  end
+
+  def moip_orders
+    MoipApi.new(self).get_orders.to_hash[:orders]
   end
 
   private

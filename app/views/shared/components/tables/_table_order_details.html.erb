@@ -1,0 +1,26 @@
+<table class='table'>
+  <tr>
+    <th>Tour</th>
+    <td><%= @order.activity.name%></td>
+  </tr>
+  <tr>
+    <th>Dada</th>
+    <td><%= @order.event.date %></td>
+  </tr>
+  <tr>
+    <th>Horário</th>
+    <td><%= @order.event.time %></td>
+  </tr>
+  <tr>
+    <th>Pessoas</th>
+    <td><%= @order.spots %></td>
+  </tr>
+  <tr>
+    <th>Comprador</th>
+    <td><%= @order.buyer.fullname%>   <%= @order.buyer.email %></td>
+  </tr>
+  <tr>
+    <th>Total</th>
+    <td><%= humanized_money_with_symbol @order.net_payment  %></td>
+  </tr>
+</table>

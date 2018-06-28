@@ -120,4 +120,8 @@ module ApplicationHelper
     activity.photos.any? ? (cl_image_path activity.photos.order(created_at: :desc).last.image ) : 'https://kitt.lewagon.com/placeholder/cities/random'
   end
 
+  def buyer_icon(guest)
+    guest.buyer ? '<i class="fas fa-money-bill-alt"></i>'.html_safe : ''
+  end
+
 end

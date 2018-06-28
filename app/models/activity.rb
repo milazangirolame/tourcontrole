@@ -8,6 +8,7 @@ class Activity < ApplicationRecord
   has_many :events, dependent: :destroy, inverse_of: :activity
   has_many :bookings, through: :events
   has_many :guests, through: :events
+  has_many :orders, through: :bookings
   accepts_nested_attributes_for :photos
   geocoded_by :departure_location
   after_validation :geocode, if: :will_save_change_to_departure_location?

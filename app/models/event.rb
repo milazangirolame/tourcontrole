@@ -36,6 +36,10 @@ class Event < ApplicationRecord
     Money.new(spots_taken * price)
   end
 
+  def order_guest(guest)
+    bookings.find_by(guest: guest).order
+  end
+
   private
 
   def set_times

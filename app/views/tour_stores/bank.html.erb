@@ -1,5 +1,23 @@
 <%= render 'shared/components/navbars/sidebar' %>
 <div class="col-xs-10">
+  <div class= 'row'>
+    <div class='balance-container col-xs-6'>
+      <table class='table '>
+        <tr>
+          <th colspan='2'>Saldo</th>
+        </tr>
+        <tr>
+          <th>A receber</th>
+          <td><%= humanized_money_with_symbol @tour_store.future_balance  %></td>
+        </tr>
+        <tr>
+          <th>Disponível</th>
+          <td><%= humanized_money_with_symbol @tour_store.current_balance  %></td>
+        </tr>
+
+      </table>
+    </div>
+   </div>
   <% if @tour_store.banking_information %>
     <%= link_to '<i class="fas fa-edit"></i> Editar Conta Bancaria'.html_safe, edit_tour_store_banking_information_path(@tour_store,@banking_information),class: 'btn btn-primary btn-md align-right' %>
     <h1>Detalhes da conta bancaria</h1>

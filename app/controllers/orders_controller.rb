@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   before_action :set_event, only: [ :new, :create]
   def new
     @order = Order.new
+    authorize @order
     @order.build_payment
     @public_key = @activity.tour_store.public_key
   end
@@ -12,6 +13,7 @@ class OrdersController < ApplicationController
   def create
     @hash = set_params[:encrypted_data]
     @order = Order.new(set_params)
+    authorize @order
     @order.bookings.each {|booking| booking.event = @event}
     if @order.save
       set_buyer_guest
@@ -40,18 +42,16 @@ class OrdersController < ApplicationController
   end
 
   def create_moip_order
-    moip = MoipApi.new; moip.set_token(@tour_store)
-    moip.create_order(@order)
+    MoipApi.new(@tour_store).create_order(@order)
   end
 
+
   def create_moip_customer
-    moip = MoipApi.new; moip.set_token(@tour_store)
-    moip.create_customer(@order)
+    MoipApi.new(@tour_store).create_customer(@order)
   end
 
   def create_moip_payment
-    moip = MoipApi.new; moip.set_token(@tour_store)
-    moip.create_payment(@order, @hash)
+    MoipApi.new(@tour_store).create_payment(@order, @hash)
   end
 
   def index
@@ -61,7 +61,7 @@ class OrdersController < ApplicationController
 
   def set_order
     @order = Order.find(params[:id])
-    # authorize @order
+    authorize @order
   end
 
   def set_activity
@@ -90,7 +90,7 @@ class OrdersController < ApplicationController
   def set_buyer_guest
     guest = Guest.new(first_name: @order.payment.name.split(' ').first,
       last_name: @order.payment.name.split(' ').last, email: @order.payment.email,
-      buyer: true)
+      buyer: true, phone: payment.phone)
     @order.bookings.create(guest: guest, event: @event)
   end
 

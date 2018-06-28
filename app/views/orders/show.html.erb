@@ -1,2 +1,16 @@
-<h1>Orders#show</h1>
-<p>Find me in app/views/orders/show.html.erb</p>
+<%= render 'shared/components/navbars/sidebar' %>
+
+<div class="col-xs-10">
+  <h1>Detalhes do pedido: <%= @order.id %></h1>
+  <div class= 'row'>
+    <div class="col-xs-8">
+      <%= render 'shared/components/tables/table_order_details' %>
+    </div>
+  </div>
+  <h2>Visitantes</h2>
+  <div class='row'>
+    <div class="col-xs-8">
+      <%= render 'shared/components/tables/table_order_guests' %>
+    </div>
+  </div>
+</div>

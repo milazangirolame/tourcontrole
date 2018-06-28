@@ -9,13 +9,17 @@
       <th>Sobrenome</th>
       <th>Email</th>
       <th>Telefone</th>
+      <th></th>
+      <th></th>
     </tr>
     <% event.guests.each do |guest|  %>
     <tr>
-      <td><% guest.first_name %></td>
-      <td><% guest.last_name %></td>
-      <td><% guest.email %></td>
-      <td><% guest.phone %></td>
+      <td><%= guest.first_name %></td>
+      <td><%= guest.last_name %></td>
+      <td><%= guest.email %></td>
+      <td><%= guest.phone %></td>
+      <td><%= event.order_guest(guest).id %></td>
+      <td><%= buyer_icon(guest)%></td>
     </tr>
     <% end %>
   </table>

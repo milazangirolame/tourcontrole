@@ -1,0 +1,19 @@
+<table class='table'>
+  <tr>
+    <th>Nome</th>
+    <th>Sobrenome</th>
+    <th>Email</th>
+    <th>Telefone</th>
+    <th></th>
+  </tr>
+  <% @order.guests.each |guest| do %>
+    <tr>
+      <td> <%= guest.first_name  %></td>
+      <td> <%= guest.last_name  %></td>
+      <td> <%= guest.email  %></td>
+      <td> <%= guest.phone  %></td>
+      <td> <%= buyer(guest) %></td>
+    </tr>
+  <% end %>
+
+</table>
