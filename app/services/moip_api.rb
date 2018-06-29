@@ -143,6 +143,10 @@ class MoipApi
     response = http.request(request)
   end
 
+  def public_key
+    api.keys.show.to_hash[:keys][:encryption]
+  end
+
   private
 
   def token_present?(store)

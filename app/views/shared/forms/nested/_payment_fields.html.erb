@@ -32,7 +32,7 @@
       <h5>Parcelas</h5>
       <div class="col-xs-12">
         <div class="col-xs-6">
-          <%= f.input :installments, selected: 1, collection: (1..@tour_store.installments_limit), label: false   %>
+          <%= f.input :installments, selected: 1, collection: (1..@activity.max_installments), label: false   %>
         </div>
       </div>
     </div>
@@ -57,7 +57,7 @@
     </div>
     <div class="form-row">
       <div class="col-xs-12 form-inline">
-        <%= f.input :date_of_birth, label: 'Data de nascimento'  %>
+        <%= f.input :date_of_birth, start_year: Time.now.year - 99,end_year: Time.now.year - 10, label: 'Data de nascimento', hint: 'informação necessaria para processar o pagamento com segurança'  %>
       </div>
     </div>
   </div>

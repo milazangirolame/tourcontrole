@@ -62,7 +62,6 @@ class ActivitiesController < ApplicationController
     end
   end
 
-
   def audit
   end
 
@@ -70,7 +69,7 @@ class ActivitiesController < ApplicationController
 
   def set_params
     params.require(:activity).permit(:name, :description, :price, :recurring, :max_spots, :departure_location,
-                              :starts_at, :ends_at, :tour_store_slug)
+                              :starts_at, :ends_at, :custom_installments, :installments_limit, :tour_store_slug)
   end
 
   def set_activity

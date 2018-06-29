@@ -2,6 +2,7 @@ import "bootstrap";
 import { encryptCard } from '../components/moip';
 import { update } from '../components/moip';
 import { validateCreditCard } from '../components/moip';
+import { installCheck } from '../components/form_check';
 
 
 $(document).ready(function() {
@@ -14,3 +15,4 @@ $('.thumbnail').click(function(){
 
 encryptCard();
 validateCreditCard();
+// installCheck();

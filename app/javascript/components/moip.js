@@ -13,7 +13,6 @@ FYYMG7Ou2kPvqWSh5mKkl2hFvJ9nSxXVXkfA3LRLMVn/uPiuzafQf67Fqtw9w0dg
 TQIDAQAB
 -----END PUBLIC KEY-----`;
 
-const pubKey = document.getElementById('public-key').value;
 const number = document.getElementById('number');
 const cvc = document.getElementById('cvc');
 const month = document.getElementById('month');
@@ -64,6 +63,8 @@ function validateCreditCard(){
 
 function setEncryptedData() {
   let input = document.getElementById('encrypt');
+  let pubKey =  document.getElementById('public-key').value;
+
 
     MoipCreditCard
     .setEncrypter(jsencrypt, 'ionic')
@@ -79,7 +80,9 @@ function setEncryptedData() {
 }
 function encryptCard(){
   let button = document.getElementById('submit-button');
+
   if (button) {
+
     button.addEventListener('click', function(){
       setEncryptedData()
     });

@@ -2,6 +2,7 @@ class Activity < ApplicationRecord
   serialize :recurring, Hash
   validates :starts_at, :ends_at, :max_spots, :name, presence: true
   after_create :set_start_day
+  after_update :set_start_day
   after_create :set_slug
   belongs_to :tour_store
   has_many :photos, dependent: :destroy
@@ -60,6 +61,13 @@ class Activity < ApplicationRecord
     set_slug
   end
 
+  def max_installments
+    if custom_installments && installments_limit
+      installments_limit
+    else
+      tour_store.installments_limit
+    end
+  end
 
   private
 

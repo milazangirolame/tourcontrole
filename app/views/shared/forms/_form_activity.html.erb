@@ -31,6 +31,21 @@
         </div>
       </div>
       <div class="form-row">
+        <div class="col-xs-6">
+          <div class="col-xs-12">
+            <%= f.input :custom_installments, checked_value: true, input_html: {class: 'big-checkbox terms-box', id: 'installment_check'} , label:'Limitar parcelas' %>
+          </div>
+          <div class="col-xs-12" id='to_reload'>
+          <%= f.input :installments_limit , collection: 1..12, label: 'Escolha o máximo de parcelas', selected: 1, input_html: {id: 'installments_options'} %>
+
+          </div>
+
+        </div>
+        <div class="col-xs-6">
+
+        </div>
+      </div>
+      <div class="form-row">
         <div class="col-xs-12">
           <%= f.submit class: 'btn btn-primary btn-sm' %>
         </div>

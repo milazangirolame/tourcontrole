@@ -13,7 +13,7 @@ class TourStore < ApplicationRecord
   accepts_nested_attributes_for :banking_information
   mount_uploader :logo, PhotoUploader
   mount_uploader :image_banner, PhotoUploader
-  after_create :set_slug
+  after_update :set_slug
   geocoded_by :form_address
   after_validation :geocode, if: :will_save_change_to_form_address?
   reverse_geocoded_by :latitude, :longitude do |obj,results|
@@ -52,9 +52,7 @@ class TourStore < ApplicationRecord
   end
 
   def public_key
-    moip = MoipApi.new
-    moip.set_token(self) unless moip_access_token.nil?
-    moip.api.keys.show.to_hash[:keys][:encryption]
+    MoipApi.new(self).public_key
   end
 
   def balance
