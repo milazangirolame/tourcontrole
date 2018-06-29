@@ -6,15 +6,15 @@ class TransferPolicy < ApplicationPolicy
   end
 
   def create?
-    creator?(record.tour_store)
+    manager?(record.tour_store)
   end
 
   def show?
-    creator?(record.tour_store)
+    manager?(record.tour_store)
   end
 
   def index?
-    creator?(record.tour_store)
+    manager?(record.tour_store)
   end
 
 end

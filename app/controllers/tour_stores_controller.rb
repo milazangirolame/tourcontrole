@@ -19,7 +19,7 @@ class TourStoresController < ApplicationController
     if @tour_store.save
       create_moip_account
       tour_store_admin = TourStoreAdmin.new(user: current_user, tour_store: @tour_store)
-      tour_store_admin.store_creator = true
+      tour_store_admin.manager = true
       tour_store_admin.save
       redirect_to tour_store_path(@tour_store)
     else

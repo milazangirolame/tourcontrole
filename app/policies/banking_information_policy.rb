@@ -6,10 +6,10 @@ class BankingInformationPolicy < ApplicationPolicy
   end
 
   def create?
-    store_creator?
+    store_manager?
   end
 
   def update?
-    store_creator?
+    store_manager?
   end
 end

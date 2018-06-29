@@ -6,8 +6,8 @@ class ApplicationPolicy
     @record = record
   end
 
-  def creator?(store)
-    store.tour_store_admins.find_by(user: user).store_creator
+  def manager?(store)
+    store.tour_store_admins.find_by(user: user).manager
   end
 
   def admin?(store)
@@ -18,8 +18,8 @@ class ApplicationPolicy
     record.kind_of?(TourStore) ? admin?(record) : admin?(record.tour_store)
   end
 
-  def store_creator?
-    record.kind_of?(TourStore) ? creator?(record) : creator?(record.tour_store)
+  def store_manager?
+    record.kind_of?(TourStore) ? manager?(record) : manager?(record.tour_store)
   end
 
   def index?
