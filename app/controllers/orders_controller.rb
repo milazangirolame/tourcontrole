@@ -82,7 +82,7 @@ class OrdersController < ApplicationController
     params.require(:order).permit( :order_total, :encrypted_data,
     bookings_attributes: [ :id, :_destroy, :guest_id,
     guest_attributes: [ :id, :_destroy, :first_name, :last_name, :email ]],
-    payment_attributes: [:installments, :name, :exp, :ccv, :number, :cpf, :email, :street,
+    payment_attributes: [:installments, :date_of_birth, :name, :exp, :ccv, :number, :cpf, :email, :street,
         :street_number, :city, :district, :state, :country, :postal_code,
         :phone_country_code, :phone_area_code, :phone_number])
   end

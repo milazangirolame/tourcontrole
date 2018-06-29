@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180629173238) do
+ActiveRecord::Schema.define(version: 20180629174446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 20180629173238) do
     t.string "status"
     t.integer "installments"
     t.string "moip_id"
+    t.date "date_of_birth"
     t.index ["order_id"], name: "index_payments_on_order_id"
   end
 

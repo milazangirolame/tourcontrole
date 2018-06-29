@@ -274,7 +274,7 @@ class MoipApi
           hash:  hash,
           holder: {
             fullname: sales_order.payment.name,
-            birthdate: "1988-12-30",
+            birthdate: sales_order.payment.date_of_birth,
             taxDocument: {
               type: "CPF",
               number: sales_order.payment.cpf,
