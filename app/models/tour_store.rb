@@ -43,10 +43,6 @@ class TourStore < ApplicationRecord
     get_social_media_links
   end
 
-  def comission_percent
-    5
-  end
-
   def address
     form_address
   end

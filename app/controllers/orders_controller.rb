@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   before_action :set_tour_store, only: [ :show, :edit, :update, :destroy]
   before_action :set_order, only: [ :show, :edit, :update, :destroy]
   before_action :set_event, only: [ :new, :create]
+
   def new
     @order = Order.new
     authorize @order

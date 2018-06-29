@@ -3,14 +3,14 @@
   <%= link_to root_path, class: "navbar-tc-brand" do %>
     <%= image_tag "logo.png", height: 50 %>
   <% end %>
+
   <!-- Right Navigation -->
   <div class="navbar-tc-right hidden-xs hidden-sm">
     <% if user_signed_in? %>
       <!-- Links when logged in -->
       <%= render 'shared/components/navbars/actions/signed_user_options' %>
       <!-- Avatar with dropdown menu -->
-      <%= render 'shared/components/navbars/actions/avatar_drop_down_menu'  %>
-
+      <%= render 'shared/components/navbars/actions/avatar_drop_down_menu' if user_signed_in? %>
     <% else %>
       <!-- Public links -->
       <%= render 'shared/components/navbars/actions/public_options'  %>
@@ -22,11 +22,42 @@
   <!-- Dropdown list appearing on mobile only -->
   <div class="navbar-tc-item hidden-md hidden-lg">
     <div class="dropdown">
+
       <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
       <ul class="dropdown-menu dropdown-menu-right navbar-tc-dropdown-menu">
-        <li><a href="#">Some mobile link</a></li>
-        <li><a href="#">Other one</a></li>
-        <li><a href="#">Other one</a></li>
+        <% if user_signed_in? %>
+          <li>
+            <%= render 'shared/components/navbars/actions/avatar_drop_down_menu' if user_signed_in? %>
+          </li>
+          <% if user_signed_in? && current_user.tour_store_admins.any? %>
+            <% if user_signed_in? && current_user.tour_store_admins.length == 1 %>
+              <% store = current_user.tour_store_admins.first.tour_store %>
+              <li>
+                <%= link_to  '<i class="fas fa-tachometer-alt"></i> Painel Empresa'.html_safe, tour_store_dashboard_path(store) ,class: 'navbar-tc-link' %>
+              </li>
+            <% else %>
+              <% current_user.tour_store_admins.each do |store_admin|  %>
+                <li>
+                  <%= link_to store_admin.tour_store.name, tour_store_dashboard_path(store_admin.tour_store), class: 'navbar-tc-link'  %>
+                </li>
+               <% end %>
+              <li>
+                <%= link_to '<i class="fas fa-plus"></i> Adicionar Empresa'.html_safe, new_tour_store_path, class: 'navbar-tc-link'  %>
+              </li>
+            <% end %>
+          <% else %>
+            <li>
+               <%= link_to '<i class="fas fa-plus"></i> Adicionar Empresa'.html_safe, new_tour_store_path, class: 'navbar-tc-link'  %>
+             </li>
+          <% end %>
+        <% else %>
+          <li>
+            <%= link_to '<i class="fas fa-plus-square"></i> Cadastre-se'.html_safe, cadastro_path, class: "navbar-tc-item navbar-tc-link" %>
+          </li>
+          <li>
+            <%= link_to t(".sign_in", default: "<span class='glyphicon glyphicon-log-in' aria-hidden='true'></span>  Entrar".html_safe), new_user_session_path, class: "navbar-tc-item navbar-tc-link" %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
