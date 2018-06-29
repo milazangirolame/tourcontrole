@@ -1,5 +1,5 @@
-<div class="nested-fields bookings_fields">
-  <%= f.simple_fields_for :guest do |guest| %>
+<div class="nested-fields bookings_fields form-inline">
+  <%= f.simple_fields_for  :guest do |guest| %>
     <h4>Dados pessoais</h4>
     <%= render 'shared/forms/nested/guest_fields', f: guest %>
   <% end %>

@@ -183,7 +183,7 @@ class MoipApi
             id: sales_order.events.first.activity.tour_store.moip_id
           },
           amount: {
-            percentual: 90
+            percentual: 100 - sales_order.commission,
           }
         },
         {
@@ -193,7 +193,7 @@ class MoipApi
             id: ENV['MOIP_SANDBOX_ACCOUNT_ID'],
           },
           amount: {
-            percentual: 10
+            percentual: sales_order.commission
           }
         }
       ]

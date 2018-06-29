@@ -52,6 +52,12 @@ class Order < ApplicationRecord
   end
 
 
+
+  def commission
+    fees[payment.installments]
+  end
+
+
   private
 
   def get_order_total
@@ -61,4 +67,22 @@ class Order < ApplicationRecord
     end
     return total
   end
+
+
+  def fees
+    {
+      1 => 8,
+      2 => 10,
+      3 => 12,
+      4 => 15,
+      5 => 15,
+      6 => 20,
+      7 => 20,
+      8 => 20,
+      9 => 20,
+      10 => 25,
+      11 => 25,
+      12 => 25
+    }
+   end
 end
