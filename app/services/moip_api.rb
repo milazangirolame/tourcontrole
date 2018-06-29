@@ -4,6 +4,9 @@ class MoipApi
   require 'nokogiri'
   require 'base64'
   attr_reader :api, :platform_token
+
+  BaseURL = 'https://sandbox.moip.com.br/v2/'
+
   def initialize(store = nil)
     @api = Moip.new(init_token(store)).call
     @platform_token = ENV['MOIP_SANDBOX_ACCESS_TOKEN']
@@ -39,6 +42,12 @@ class MoipApi
     bank_account
   end
 
+  def create_transfer(transfer)
+    response = api.transfer.create(transfer_post_data(transfer))
+    transfer.update(moip_id: response[:moip_id], status: response[:status]) unless response[:errors].present?
+    response
+  end
+
   def update_bank(bank_info)
     api.bank_accounts.update(bank_info.moip_id, bank_post_data(bank_info))
   end
@@ -63,7 +72,7 @@ class MoipApi
   end
 
   def get_order(order)
-    order.moip_id? ? api.order.show(order.moip_id) : 'No moip_id'
+    order.moip_id? ? api.order.show(order.moip_id).to_hash : 'No moip_id'
   end
 
   def get_orders
@@ -71,27 +80,20 @@ class MoipApi
   end
 
   def get_bank(store)
-    set_token(store)
     bank_id = store.banking_information.moip_id
-    bank_id ? result = api.bank_accounts.show(bank_id).to_hash : 'No moip_id'
-    restart_token
-    result
+    bank_id ? api.bank_accounts.show(bank_id).to_hash : 'No moip_id'
   end
 
   def get_banks(store)
-    set_token(store)
     id = store.moip_id
-    id ? result = api.bank_accounts.find_all(id).to_hash : 'No moip_id'
-    restart_token
-    result
+    id ? api.bank_accounts.find_all(id).to_hash : 'No moip_id'
   end
 
   def get_balance
     api.balances.show().to_hash
   end
 
-
-  def  post_moip_order(order)
+  def post_moip_order(order)
     uri = URI.parse('https://sandbox.moip.com.br/v2/orders')
     request = Net::HTTP::Post.new(uri.path)
     request.content_type = 'application/json'
@@ -104,6 +106,22 @@ class MoipApi
     JSON.parse(response.body)
   end
 
+
+
+  def get_transfer(transfer)
+    transfer.moip_id ? api.transfer.show(transfer.moip_id).to_hash : 'No moip_id'
+  end
+
+  def get_transfers
+    uri = URI.parse("#{BaseURL}transfers")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.start
+    request = Net::HTTP::Get.new(uri.request_uri, { authorization: "OAuth #{token}" })
+    response = http.request(request)
+    JSON.parse(response.body)[:transfers]
+  end
+
   def set_token(store)
     api.client.auth.instance_variable_set(:'@oauth', store.moip_access_token) unless store.moip_access_token.nil?
   end
@@ -112,14 +130,17 @@ class MoipApi
     api.client.auth.instance_variable_set(:'@oauth', platform_token)
   end
 
-  def generate_self_token
-    api.connect.authorize(
-      client_id: ENV['MOIP_SANDBOX_ID'],
-      client_secret: ENV['MOIP_SANDBOX_SECRET'],
-      code: ENV['MOIP_SANDBOX_CODE'],
-      redirect_uri: ENV['MOIP_REDIRECT_URI'],
-      grant_type: "authorization_code"
-      )
+  def token
+    api.client.auth.instance_variable_get(:'@oauth')
+  end
+
+  def pay(order)
+    uri = URI.parse("https://sandbox.moip.com.br/simulador/authorize?payment_id=#{order.payment.moip_id}&amount=#{order.total.fractional}")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.start
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
   end
 
   private
@@ -191,7 +212,7 @@ class MoipApi
       birthDate: "1990-10-22",
       taxDocument: {
         type: "CPF",
-        number: "57261905054",
+        number: sales_order.payment.cpf,
       },
       shippingAddress: {
         street: sales_order.payment.street,
@@ -204,6 +225,39 @@ class MoipApi
         zipCode: sales_order.payment.postal_code,
       },
     })
+  end
+
+  def tour_store_post_data(store)
+    {
+      email: {
+        address: store.user.email,
+      },
+      person: {
+        name: store.user.first_name,
+        lastName: store.user.last_name,
+        taxDocument: {
+          type: "CPF",
+          number: store.legal_representant_id,
+        },
+        birthDate: "1990-01-01",
+        phone: {
+          countryCode: "55",
+          areaCode: "11",
+          number: store.phone,
+        },
+        address: {
+          street: store.street_name,
+          streetNumber: store.street_number,
+          district: store.neighborhood,
+          zipCode: store.postal_code,
+          city: store.city,
+          state: store.state_code,
+          country: "BRA",
+        },
+      },
+      type: "MERCHANT",
+      transparentAccount: true
+    }
   end
 
   def payment_post_data(sales_order, hash)
@@ -245,64 +299,6 @@ class MoipApi
     })
   end
 
-  def tour_store_post_data(store)
-    {
-      email: {
-        address: store.user.email,
-      },
-      person: {
-        name: store.user.first_name,
-        lastName: store.user.last_name,
-        taxDocument: {
-          type: "CPF",
-          number: store.legal_representant_id,
-        },
-        birthDate: "1990-01-01",
-        phone: {
-          countryCode: "55",
-          areaCode: "11",
-          number: store.phone,
-        },
-        address: {
-          street: store.street_name,
-          streetNumber: store.street_number,
-          district: store.neighborhood,
-          zipCode: store.postal_code,
-          city: store.city,
-          state: store.state_code,
-          country: 'BRA',
-        },
-      },
-      type: "MERCHANT",
-      transparentAccount: true,
-      company: {
-        name: store.name,
-        businessName: store.name,
-        taxDocument: {
-          type: 'CNPJ',
-          number: store.business_tax_id
-        },
-        phone: {
-          countryCode: "55",
-          areaCode: "11",
-          number: store.phone,
-        },
-        mainActivity: {
-          description: store.description
-        },
-        address: {
-          street: store.street_name,
-          streetNumber: store.street_number,
-          district: store.neighborhood,
-          zipCode: store.postal_code,
-          city: store.city,
-          state: store.state_code,
-          country: 'BRA',
-        }
-      }
-    }
-  end
-
   def bank_post_data(banking_information)
     {
       bankNumber: banking_information.bank_code,
@@ -320,5 +316,30 @@ class MoipApi
       }
     }
   end
-end
 
+  def transfer_post_data(transfer)
+    bank = transfer.tour_store.banking_information
+    {
+      amount: transfer.amount.fractional,
+      transferInstrument: {
+        method: "BANK_ACCOUNT",
+        bankAccount: {
+          type: bank.account_type,
+          bankNumber: bank.bank_code,
+          # agencyNumber: 8000,
+          agencyNumber: bank.bank_ag,
+          agencyCheckNumber: bank.ag_digit,
+          accountNumber: bank.bank_cc.to_i,
+          accountCheckNumber: bank.cc_digit.to_i,
+          holder: {
+            fullname: bank.holder_name,
+            taxDocument: {
+              type: bank.holder_id_type,
+              number: bank.holder_id
+            }
+          }
+        }
+      }
+    }
+  end
+end

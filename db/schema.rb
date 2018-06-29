@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180626212519) do
+ActiveRecord::Schema.define(version: 20180629001436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,18 +98,15 @@ ActiveRecord::Schema.define(version: 20180626212519) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "order_total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "moip_id"
     t.string "status"
-    t.string "platform"
     t.string "encrypted_data"
   end
 
   create_table "payments", force: :cascade do |t|
     t.string "name"
-    t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "order_id"
@@ -173,9 +170,6 @@ ActiveRecord::Schema.define(version: 20180626212519) do
     t.string "state"
     t.string "state_code"
     t.string "iugu_account_id"
-    t.string "api_live_token"
-    t.string "api_test_token"
-    t.string "api_user_token"
     t.string "instagram_link"
     t.string "facebook_link"
     t.string "trip_advisor_link"
@@ -188,6 +182,16 @@ ActiveRecord::Schema.define(version: 20180626212519) do
     t.string "moip_access_token"
     t.string "moip_channel_id"
     t.index ["user_id"], name: "index_tour_stores_on_user_id"
+  end
+
+  create_table "transfers", force: :cascade do |t|
+    t.string "moip_id"
+    t.bigint "tour_store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "amount_cents", default: 0, null: false
+    t.string "status"
+    t.index ["tour_store_id"], name: "index_transfers_on_tour_store_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -218,4 +222,5 @@ ActiveRecord::Schema.define(version: 20180626212519) do
   add_foreign_key "events", "activities"
   add_foreign_key "payments", "orders"
   add_foreign_key "tour_stores", "users"
+  add_foreign_key "transfers", "tour_stores"
 end

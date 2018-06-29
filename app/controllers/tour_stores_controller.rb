@@ -58,6 +58,7 @@ class TourStoresController < ApplicationController
   end
 
   def bank
+    @transfer = Transfer.new(tour_store: @tour_store)
   end
 
   def users

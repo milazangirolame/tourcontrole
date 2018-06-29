@@ -2,6 +2,7 @@ class TourStore < ApplicationRecord
   belongs_to :user
   has_one :banking_information, dependent: :destroy
   has_many :activities, dependent: :destroy
+  has_many :transfers
   has_many :photos, dependent: :destroy
   has_many :tour_store_admins, dependent: :destroy
   has_many :users, through: :tour_store_admins
@@ -44,44 +45,6 @@ class TourStore < ApplicationRecord
 
   def comission_percent
     5
-  end
-
-  # campos de pagamento
-
-  def price_range
-    'Até R$ 10000,00'
-  end
-
-  def physical_products
-    false
-  end
-
-  def automatic_transfer
-    true
-  end
-
-  def cnpj
-    regulator_id
-  end
-
-  def cpf
-    regulator_id
-  end
-
-  def business_type
-    description
-  end
-
-  def resp_name
-    "#{user.first_name} #{user.last_name}"
-  end
-
-  def resp_cpf
-    person_type == 'pj' ? legal_representant_id : business_tax_id
-  end
-
-  def telefone
-    phone
   end
 
   def address

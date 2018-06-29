@@ -34,7 +34,7 @@ module ApplicationHelper
     page?('tour_stores#dashboard, tour_stores#events, tour_stores#edit,
       tour_stores#users, tour_stores#tours, tour_stores#company, tour_stores#bank,
       banking_informations#new, banking_informations#edit, activities#new,
-      activities#edit, activities#audit, orders#show, events#show')
+      activities#edit, activities#audit, orders#show, events#show, transfers')
   end
 
   def show_navbar

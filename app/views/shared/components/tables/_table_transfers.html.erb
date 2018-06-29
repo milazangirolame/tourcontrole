@@ -1,0 +1,14 @@
+<table class= 'table'>
+  <tr>
+    <th>Dada</th>
+    <th>Valor</th>
+    <th>Status</th>
+  </tr>
+    <% transfers.each do |transfer|  %>
+    <tr>
+      <td><%= transfer.date  %></td>
+      <td><%= humanized_money_with_symbol transfer.amount %></td>
+      <td><%= transfer.moip_status  %></td>
+    </tr>
+    <% end %>
+</table>
