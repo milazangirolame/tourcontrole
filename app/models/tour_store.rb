@@ -13,7 +13,7 @@ class TourStore < ApplicationRecord
   accepts_nested_attributes_for :banking_information
   mount_uploader :logo, PhotoUploader
   mount_uploader :image_banner, PhotoUploader
-  after_update :set_slug
+  after_create :set_slug
   geocoded_by :form_address
   after_validation :geocode, if: :will_save_change_to_form_address?
   reverse_geocoded_by :latitude, :longitude do |obj,results|
