@@ -64,8 +64,6 @@ function validateCreditCard(){
 function setEncryptedData() {
   let input = document.getElementById('encrypt');
   let pubKey =  document.getElementById('public-key').value;
-  console.log(pubKey)
-
     MoipCreditCard
     .setEncrypter(jsencrypt, 'ionic')
     .setPubKey(pubKey)
@@ -94,6 +92,10 @@ function encryptCard(){
 // };
 
 // export {update};
+
+let keyFromActiveRecord = <%= @tour_store.public_key %> ;
+
+export {keyFromActiveRecord};
 
 export {encryptCard};
 export {validateCreditCard};

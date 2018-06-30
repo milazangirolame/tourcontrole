@@ -11,6 +11,7 @@
     "moip-sdk-js": "^2.1.0"
   },
   "devDependencies": {
+    "rails-erb-loader": "^5.4.2",
     "webpack-dev-server": "2.11.2"
   }
 }

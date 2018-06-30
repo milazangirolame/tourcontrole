@@ -1,5 +1,6 @@
 import "bootstrap";
 import { encryptCard } from '../components/moip';
+import { keyFromActiveRecord } from '../components/moip';
 import { validateCreditCard } from '../components/moip';
 import { installCheck } from '../components/form_check';
 
@@ -11,6 +12,8 @@ $('.thumbnail').click(function(){
   	$('#myModal').modal({show:true});
 });
 });
+
+console.log(keyFromActiveRecord);
 
 encryptCard();
 validateCreditCard();
