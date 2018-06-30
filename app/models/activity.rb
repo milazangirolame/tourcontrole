@@ -2,7 +2,6 @@ class Activity < ApplicationRecord
   serialize :recurring, Hash
   validates :starts_at, :ends_at, :max_spots, :name, presence: true
   after_create :set_start_day
-  after_update :set_start_day
   after_create :set_slug
   belongs_to :tour_store
   has_many :photos, dependent: :destroy

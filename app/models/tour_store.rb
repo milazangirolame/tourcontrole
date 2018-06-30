@@ -2,7 +2,7 @@ class TourStore < ApplicationRecord
   belongs_to :user
   has_one :banking_information, dependent: :destroy
   has_many :activities, dependent: :destroy
-  has_many :transfers
+  has_many :transfers, dependent: :destroy
   has_many :photos, dependent: :destroy
   has_many :tour_store_admins, dependent: :destroy
   has_many :users, through: :tour_store_admins
