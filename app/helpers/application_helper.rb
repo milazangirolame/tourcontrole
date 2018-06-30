@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def landing_page?
-    page?('pages') ? current_page?(landing_page_path) || current_page?(root_path) : false
+    page?('pages') ? (current_page?(landing_page_path) || current_page?(root_path)) : false
   end
 
   def padding_bottom
@@ -41,7 +41,7 @@ module ApplicationHelper
     case
      when customer_page?
       'navbar_tour_store'
-    when tourcontrole_page? && !landing_page?
+    when (tourcontrole_page? && !landing_page?)
       'navbar_tourcontrole'
      when pro_page?
       'navbar_pro'
