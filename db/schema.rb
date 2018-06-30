@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180629185615) do
+ActiveRecord::Schema.define(version: 20180630175657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,7 +172,6 @@ ActiveRecord::Schema.define(version: 20180629185615) do
     t.string "country_code"
     t.string "state"
     t.string "state_code"
-    t.string "iugu_account_id"
     t.string "instagram_link"
     t.string "facebook_link"
     t.string "trip_advisor_link"
