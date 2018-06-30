@@ -43,7 +43,7 @@
 }
 
 form{
-  .terms-box{
+  .big-checkbox{
     width: 25px;
     height: 25px;
     .form-check-label{
@@ -52,37 +52,80 @@ form{
 }
 
 
-
-.usable-creditcard-form, .usable-creditcard-form * {
-    font-size: 13px;
-}
-/* Non Credit Card Form - Token Area */
-.token-area {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 1px dotted #CCC;
-    display: block;
-    padding: 20px;
-    background: #EFEFEF;
-}
-
 .terms-link {
-  color: gray;
+  color: $darker-gray;
   font-style: italic;
-  font-size: 22px;
+  font-size: 18px;
 }
 
-.new_order {
+#new_order {
+  margin-top: 15px;
+  background-color: $light-blue;
+  margin: 2px;
+  padding: 2px 2px 16px 2px;
+  box-shadow: 1px 1px 2px rgba(0,3,1,0.2);
+  border-radius: 12px;
+  input, select{
+    border-radius:9px;
+  }
+
   #payment{
     .payment_fields{
+      margin: 2px;
+      padding: 2px;
+
+      .form-order{
+        border: solid 3px $deep80;
+        border-radius: 12px;
+        margin: 5px 5px 10px 5px;
+        padding: 10px 10px 15px 10px;
+        background: $mid20;
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        h4, h5, label{
+          color: $deep;
+        }
+      }
       .payment-card{
         .active{
           background-color: $active;
           font-weight: bold;
           color: $deep;
         }
-
       }
     }
+  }
+  #guest{
+    .form-guest{
+      margin: 2px ;
+      padding: 2px;
+      .add_fields {
+        padding-left: 14px;
+        margin-left: 9px;
+      }
+      h4, h3{
+        color:$mid;
+      }
+      .remove_fields{
+        margin: 10px 0px 0px 0px;
+      }
+      .bookings_fields {
+        border: solid 3px $mid;
+        background: $light80;
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        margin: 5px 5px 10px 5px;
+        padding: 10px 10px 15px 10px;
+        border-radius: 12px;
+        .guest_fields{
+          margin: 5px;
+          padding: 5px;
+        }
+      }
+    }
+  }
+  .terms-input, #submit-button{
+    margin:15px;
+  }
+  .terms-input{
+    background-color: $contrast;
   }
 }

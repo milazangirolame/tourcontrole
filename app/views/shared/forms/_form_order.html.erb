@@ -8,20 +8,22 @@
   </div>
 
   <div  id="guest">
-    <%= f.simple_fields_for(:bookings)do |booking| %>
-      <%= render 'shared/forms/nested/bookings_fields', f: booking %>
-    <% end %>
-    <div class="links">
-      <%= link_to_add_association '<i class="fas fa-user-plus fa-lg"></i>'.html_safe, f, :bookings,
-       partial: 'shared/forms/nested/bookings_fields',
-       class: 'btn btn-md btn-primary',
-       wrap_object: Proc.new { |booking| booking.build_guest; booking } %>
+    <div class="form-guest">
+      <%= f.simple_fields_for(:bookings)do |booking| %>
+        <%= render 'shared/forms/nested/bookings_fields', f: booking %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association '<i class="fas fa-user-plus fa-lg"></i> Adicionar acompanhante'.html_safe, f, :bookings,
+         partial: 'shared/forms/nested/bookings_fields',
+         class: 'btn btn-md btn-primary',
+         wrap_object: Proc.new { |booking| booking.build_guest; booking } %>
+      </div>
     </div>
   </div>
 
   <%= hidden_field_tag(:date, params[:date]) %>
   <%= f.input :encrypted_data, label: false, input_html: {id: 'encrypt', type:'hidden'}  %>
-  <%=f.input :terms, as: :boolean,input_html:{class:'big-checkbox terms-box'}, label: (link_to 'Li e concordo com Política de Privacidade e Termos de Serviço', terms_path, class: 'terms-link', target:'blank'),
+  <%=f.input :terms, as: :boolean,input_html:{class: 'big-checkbox terms-input'}, label: (link_to 'Li e concordo com Política de Privacidade e Termos de Serviço', terms_path, class: 'terms-link', target:'blank'),
   required: true, error: 'Não esquece concordar com os termos de serviço'%>
-  <%= f.button :submit, class: 'btn btn-primary btn-md align-right',value: 'Comprar', id: 'submit-button' %>
+  <%= f.button :submit, class: 'btn btn-success btn-lg',value: 'Comprar', id: 'submit-button' %>
 <% end %>

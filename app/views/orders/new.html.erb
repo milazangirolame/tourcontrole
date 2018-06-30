@@ -1,10 +1,11 @@
 <%= render 'shared/components/banners/activity_banner' %>
 
 <div class="container">
-  <h2>Confirme a sua resserva</h2>
+  <h2>Confirme a sua reserva</h2>
   <h3> <%= @event.activity.name  %></h3>
-  <h3>Dada: <%= @event.date  %> </h3>
+  <h3>Data: <%= @event.date  %> </h3>
   <h3>Horário: <%= @event.time %> </h3>
+  <h3>Valor por pessoa: <%=  humanized_money_with_symbol @event.price %></h3>
 
   <%= render 'shared/forms/form_order', activity: @activity, order: @order %>
 </div>
