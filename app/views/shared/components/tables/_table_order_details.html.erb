@@ -1,4 +1,4 @@
-<table class='table'>
+<table class='table-format reg-fonts'>
   <tr>
     <th>Tour</th>
     <td><%= @order.activity.name%></td>
@@ -16,15 +16,23 @@
     <td><%= @order.spots %></td>
   </tr>
   <tr>
-    <th>Comprador</th>
-    <td><%= @order.buyer.full_name%>   <%= @order.buyer.email %></td>
+    <th>Nome Comprador</th>
+    <td><%= @order.buyer.full_name%> </td>
+  </tr>
+   <tr>
+    <th>Email Comprador</th>
+    <td><%= @order.buyer.email %></td>
+  </tr>
+   <tr>
+    <th>Telefone Comprador</th>
+    <td><%= @order.buyer.phone%></td>
   </tr>
   <tr>
     <th>Status do Pagamento</th>
     <td><%= @order.payment_status %></td>
   </tr>
   <tr>
-    <th>Total</th>
+    <th>Total liquido</th>
     <td><%= humanized_money_with_symbol @order.net_payment  %></td>
   </tr>
 </table>

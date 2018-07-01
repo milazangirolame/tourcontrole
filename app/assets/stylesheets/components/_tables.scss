@@ -8,26 +8,73 @@ table {
   }
 }
 
-.saldo{
-  margin-top: 5px;
-  padding: 5px;
-  .title{
-    text-align: center;
-    color:$darkest-gray;
-    font-size:25px;
-    padding:20px;
+
+.table-format {
+  margin: 15px;
+  background-color: $light-blue;
+  padding: 2px 2px 16px 2px;
+  box-shadow: 1px 1px 2px rgba(0,3,1,0.2);
+  border-radius: 12px;
+  tr{
+    border: 2px solid $mid-gray;
+    border-radius:12px;
+  }
+
+  td,th{
+    margin:20px;
+    padding:10px;
   }
   th{
-    font-size: 20px;
     color: $deep;
+    font-weight: bold;
+    background: $mid20;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  }
+  td{
+    color:$mid;
+  }
+}
+
+.saldo {
+  th{
+    font-size: 35px;
+  }
+  td{
+    font-size: 40px;
+    padding-left:15px;
+    text-align:right;
+  }
+  th,td{
+    padding:10px;
+  }
+}
+
+.bank-info-table{
+  th{
+    font-size: 20px;
   }
   td{
     font-size: 25px;
-    color: $mid;
     padding-left:10px;
     text-align:right;
-
   }
   th,td{
+    padding:10px;
   }
 }
+
+.reg-fonts{
+  th{
+    font-size: 25px;
+  }
+  td{
+    font-size: 23px;
+    padding-left:10px;
+  }
+  th,td{
+    padding:10px;
+    text-align:left;
+
+  }
+}
+

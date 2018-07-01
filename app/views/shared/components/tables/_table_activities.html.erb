@@ -1,6 +1,6 @@
 <% if @activities.present? %>
 
-    <table class='table'>
+    <table class=' table-format reg-fonts'>
       <tr>
         <th>
           Tour
@@ -22,7 +22,7 @@
             <%= activity.name  %>
           </td>
           <td>
-            <%= activity.starts_at  %>
+            <%= date(activity.starts_at)  %>
           </td>
           <td>
             <%= activity.max_spots %>
