@@ -10,8 +10,6 @@ environment.plugins.prepend('Provide',
   })
 )
 
-
-
 // environment.config.merge({
 //   module: {
 //     rules: [
@@ -27,8 +25,5 @@ environment.plugins.prepend('Provide',
 //     ]
 //   }
 // });
-
-
-
 
 module.exports = environment

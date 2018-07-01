@@ -52,14 +52,11 @@ function validateSecurityCode(){
   }
 }
 
-
-
 function validateCreditCard(){
   validateNumber();
   validateCardExpiration();
   validateSecurityCode();
 }
-
 
 function setEncryptedData() {
   let input = document.getElementById('encrypt');
@@ -96,6 +93,5 @@ function encryptCard(){
 let keyFromActiveRecord = <%= @tour_store.public_key %> ;
 
 export {keyFromActiveRecord};
-
 export {encryptCard};
 export {validateCreditCard};
