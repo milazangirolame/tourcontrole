@@ -1,7 +1,8 @@
 class TourStoresController < ApplicationController
   before_action :set_tour_store, only: [:edit, :update, :show, :destroy]
   before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_tour_store_data_sources, only: [:dashboard, :tours, :users, :events, :company, :bank]
+  before_action :set_tour_store_data_sources, only: [:dashboard, :tours, :users,
+   :events, :company, :bank, :balance_details, :transfer_index]
 
   def index
     @tour_stores = policy_scope(TourStore)
@@ -66,6 +67,13 @@ class TourStoresController < ApplicationController
   end
 
   def company
+  end
+
+  def balance_details
+  end
+
+  def transfer_index
+    @transfers = @tour_store.show_transfers
   end
 
   def create_moip_account

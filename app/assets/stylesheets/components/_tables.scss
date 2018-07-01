@@ -7,3 +7,27 @@ table {
     }
   }
 }
+
+.saldo{
+  margin-top: 5px;
+  padding: 5px;
+  .title{
+    text-align: center;
+    color:$darkest-gray;
+    font-size:25px;
+    padding:20px;
+  }
+  th{
+    font-size: 20px;
+    color: $deep;
+  }
+  td{
+    font-size: 25px;
+    color: $mid;
+    padding-left:10px;
+    text-align:right;
+
+  }
+  th,td{
+  }
+}

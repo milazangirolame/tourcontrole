@@ -4,11 +4,11 @@ class Event < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :guests, through: :bookings
 
-   def spots_taken
-     guests.count
-   end
+  def spots_taken
+    guests.count
+  end
 
-   def spots_available
+  def spots_available
     available_spots
   end
 

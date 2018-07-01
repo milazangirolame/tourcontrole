@@ -1,5 +1,5 @@
 class TransfersController < ApplicationController
-  before_action :set_tour_store, only: [:new, :create, :show, :index]
+  before_action :set_tour_store, only: [:new, :create, :show, :index, :list]
   before_action :set_transfer, only: [:show]
 
   def new
@@ -26,10 +26,6 @@ class TransfersController < ApplicationController
   end
 
   def show
-  end
-
-  def index
-    @transfers = policy_scope(Transfer).where(tour_store: @tour_store)
   end
 
   def create_moip_transfer

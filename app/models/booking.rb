@@ -5,8 +5,6 @@ class Booking < ApplicationRecord
   belongs_to :order
   accepts_nested_attributes_for :guest, reject_if: :all_blank
 
-  private
-
   def has_spots
     if event.available_spots == 0
       errors.add(:guest,"Este evento já não tem mais vagas disponíveis")

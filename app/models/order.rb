@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  # validate :has_spots
   has_many :bookings, inverse_of: :order, dependent: :destroy
   has_many :events,through: :bookings
   has_many :guests, through: :bookings, class_name: 'Guest'
@@ -30,6 +31,7 @@ class Order < ApplicationRecord
     event.activity
   end
 
+
   def tour_store
     activity.tour_store
   end
@@ -51,10 +53,14 @@ class Order < ApplicationRecord
     Money.new(a[:liquid], a[:currency])
   end
 
-
-
   def commission
     fees[payment.installments]
+  end
+
+  def has_spots
+    if spots > event.available_spots
+      errors.add(:order,"Este evento já não tem mais vagas disponíveis")
+    end
   end
 
 

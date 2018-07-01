@@ -55,6 +55,10 @@ class TourStore < ApplicationRecord
     MoipApi.new(self).get_balance
   end
 
+  def balance_details
+    MoipApi.new(self).balance_details
+  end
+
   def future_balance
     b = balance[:future].first
     Money.new(b[:amount],b[:currency])
@@ -67,6 +71,10 @@ class TourStore < ApplicationRecord
 
   def moip_orders
     MoipApi.new(self).get_orders.to_hash[:orders]
+  end
+
+  def show_transfers
+    MoipApi.new(self).get_transfers ? MoipApi.new(self).get_transfers : []
   end
 
   private

@@ -16,16 +16,6 @@ module ApplicationHelper
     page?('tour_stores#show, activities#show, orders#new')
   end
 
-  def is_admin?
-    if @tour_store.present?
-      @tour_store.users.include?(current_user)
-      elsif @activity.present?
-        @activity.tour_store.users.include?(current_user)
-    else
-      false
-    end
-  end
-
   def active(path)
     current_page?(path) ? 'active' : ''
   end
@@ -33,8 +23,8 @@ module ApplicationHelper
   def pro_page?
     page?('tour_stores#dashboard, tour_stores#events, tour_stores#edit,
       tour_stores#users, tour_stores#tours, tour_stores#company, tour_stores#bank,
-      banking_informations#new, banking_informations#edit, activities#new,
-      activities#edit, activities#audit, orders#show, events#show, transfers')
+      tour_stores#balance_details, tour_stores#transfer_index, banking_informations#new, banking_informations#edit, activities#new,
+      activities#edit, activities#audit, orders#show, events#show, transfers,')
   end
 
   def show_navbar
@@ -123,6 +113,18 @@ module ApplicationHelper
 
   def buyer_icon(guest)
     guest.buyer ? '<i class="fas fa-money-bill-alt"></i>'.html_safe : ''
+  end
+
+  def date(string)
+    string.to_date.to_formatted_s(:rfc822)
+  end
+
+  def is_manager?
+    user_signed_in? ? get_tour_store.tour_store_admins.find_by(user: current_user).manager : false
+  end
+
+  def is_admin?
+    user_signed_in? ? get_tour_store.tour_store_admins.include?(current_user) : false
   end
 
 end

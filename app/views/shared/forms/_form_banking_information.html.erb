@@ -1,36 +1,53 @@
-<%= simple_form_for([tour_store, banking_information]) do |f|  %>
+<%= simple_form_for([tour_store, banking_information], html: {class: ''}) do |f|  %>
   <div class="form-row">
-    <div class="col-xs-12 col-sm-6">
-      <h4>Dados bancários</h4>
-      <div class="col-xs-9">
-        <%= f.input :bank, label: 'Banco', collection: banking_information.bank_options %>
+    <div class="col-sm-12 col-md-8 form-format">
+      <div class="row form-segment">
+        <h4>Conta</h4>
+        <div class="form-row">
+          <div class="col-sm-12 col-md-9">
+            <%= f.input :bank, label: 'Banco', collection: banking_information.bank_options %>
+          </div>
+          <div class="col-sm-12 col-md-3">
+            <%= f.input :account_type, label:'Tipo de conta',collection: banking_information.account_type_options %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-sm-12 col-md-9">
+            <%= f.input :bank_ag , label: 'Agência' %>
+          </div>
+          <div class="col-sm-12 col-md-3">
+            <%= f.input :ag_digit, label: 'Digito Agência', hint: 'Se houver' %>
+          </div>
+        </div>
+        <div class="form-row">
+
+          <div class="col-sm-12 col-md-9">
+            <%= f.input :bank_cc, label: 'Numero de conta'  %>
+          </div>
+          <div class="col-sm-12 col-md-3">
+            <%= f.input :cc_digit, label: 'Digito Conta', hint: 'Cero se não tiver'  %>
+          </div>
+        </div>
       </div>
-      <div class="col-xs-3">
-        <%= f.input :account_type, label:'Tipo de conta',collection: banking_information.account_type_options %>
+      <div class="row form-segment">
+        <h4>Titular</h4>
+        <div class="form-row">
+          <div class="col-sm-12 col-md-12">
+            <%= f.input :holder_name, label: 'Nome do titular da conta'  %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-sm-12 col-md-4">
+            <%= f.input :holder_id_type, label: 'Typo de documento', collection: ['CNPJ','CPF'], selected: 'CPF' %>
+          </div>
+          <div class="col-sm-12 col-md-8">
+            <%= f.input :holder_id, label: 'Documento' %>
+          </div>
+        </div>
       </div>
-      <div class="col-xs-9">
-        <%= f.input :bank_ag , label: 'Agência' %>
-      </div>
-      <div class="col-xs-3">
-        <%= f.input :ag_digit, label: 'Digito Agência', hint: 'Se houver' %>
-      </div>
-      <div class="col-xs-9">
-        <%= f.input :bank_cc, label: 'Numero de conta'  %>
-      </div>
-      <div class="col-xs-3">
-        <%= f.input :cc_digit, label: 'Digito Conta', hint: 'Cero se não tiver'  %>
-      </div>
-      <h4>Dados do titular</h4>
-      <div class="col-xs-12">
-        <%= f.input :holder_name, label: 'Nome do titular da conta'  %>
-      </div>
-      <div class="col-xs-3">
-        <%= f.input :holder_id_type, label: 'Typo de documento', collection: ['CNPJ','CPF'], selected: 'CPF' %>
-      </div>
-      <div class="col-xs-9">
-        <%= f.input :holder_id, label: 'Documento' %>
-      </div>
-      <%= f.submit class: 'btn btn-lg btn-primary' %>
+      <div class="form-row">
+       <%= f.submit class: 'btn btn-lg btn-success align-right', value:'Criar conta' %>
+     </div>
     </div>
   </div>
 <% end %>

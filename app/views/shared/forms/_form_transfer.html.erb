@@ -1,4 +1,8 @@
 <%= simple_form_for([@tour_store,@transfer], method: :post, url: tour_store_transfers_path(@tour_store),html: {class: 'form-inline'}) do |f| %>
-  <%= f.input :amount, label:'Valor', placeholder: 'R$ 0,00' %>
-  <%= f.submit value: 'Resgatar', class: 'btn btn-md btn-success'%>
+  <div class="row form-format">
+    <div class="row form-segment">
+      <%= f.input :amount, label:'Valor R$  ', placeholder: 'R$ 0,00' %>
+    </div>
+    <%= f.submit value: 'Resgatar', class: 'btn btn-md btn-success align-right'%>
+  </div>
 <% end %>

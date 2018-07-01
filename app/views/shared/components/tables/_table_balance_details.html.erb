@@ -1,0 +1,22 @@
+<table class = 'table'>
+  <tr>
+    <th>Data da operação</th>
+    <th>Data de liquidação</th>
+    <th>Status</th>
+    <th>Valor da operção</th>
+    <th>Receita liquida</th>
+    <th>Pedido</th>
+  </tr>
+  <% balance_details.each do |op|  %>
+    <tr>
+      <th><%= date(op['createdAt']) %></th>
+      <th><%= date(op['scheduledFor']) %></th>
+      <th><%= op['status'] %></th>
+      <th><%= humanized_money_with_symbol(Money.new(op['grossAmount'])) %></th>
+      <th><%= humanized_money_with_symbol(Money.new(op['liquidAmount'])) %></th>
+      <%  order = Order.find(op['references'].first['value']) %>
+      <th><%= link_to "<i class='fas fa-receipt'></i> #{order.id}".html_safe, tour_store_order_path(order.tour_store, order),class: 'table-link'  %></th>
+    </tr>
+  <% end %>
+
+</table>

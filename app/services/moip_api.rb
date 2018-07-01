@@ -93,6 +93,11 @@ class MoipApi
     api.balances.show().to_hash
   end
 
+  def balance_details
+    api.entries.find_all
+  end
+
+
   def post_moip_order(order)
     uri = URI.parse('https://sandbox.moip.com.br/v2/orders')
     request = Net::HTTP::Post.new(uri.path)
@@ -160,7 +165,7 @@ class MoipApi
   def order_post_data(sales_order)
     (
     {
-      ownId: sales_order.api_other_id,
+      ownId: sales_order.id,
       amount: {
         currency: 'BRL',
         subtotals: {

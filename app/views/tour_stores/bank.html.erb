@@ -1,11 +1,9 @@
 <%= render 'shared/components/navbars/sidebar' %>
-<div class="col-xs-10">
-  <div class= 'row'>
-    <div class='balance-container col-xs-6'>
-      <table class='table '>
-        <tr>
-          <th colspan='2'>Saldo</th>
-        </tr>
+<div class=" bank-wrapper ">
+  <div class= 'bank-container col-xs-10'>
+    <div class='balance-container bank-segment row'>
+      <h2>Saldo</h2>
+      <table class='saldo '>
         <tr>
           <th>A receber</th>
           <td><%= humanized_money_with_symbol @tour_store.future_balance  %></td>
@@ -16,28 +14,32 @@
         </tr>
       </table>
     </div>
-    <div class="col-xs-6">
-      <h4>Transfira para a sua conta corrente</h4>
-      <%= render 'shared/forms/form_transfer' %>
+    <div class=" transfer-container bank-segment row">
+      <h2>Resgate para a sua conta Bancaria</h2>
+      <div class="col-xs-12 col-sm-6">
+        <%= render 'shared/forms/form_transfer' %>
+        <%= link_to 'Ver resgates', tour_store_transfer_index_path(@tour_store), class: 'btn btn-sm btn-primary '   %>
+
+      </div>
     </div>
+    <div class="lancamentos-container bank-segment row">
+      <h2>Lançamentos recentes</h2>
+      <%= render 'shared/components/tables/table_balance_details', balance_details: @tour_store.balance_details.take(10)  %>
+      <%= link_to 'Ver lançamentos', tour_store_balance_details_path(@tour_store), class: 'btn  btn-md btn-primary'  %>
     </div>
-    <div class="row">
-      <div class="col-xs-6">
-        <% if @tour_store.banking_information %>
-          <%= link_to '<i class="fas fa-edit"></i> Editar Conta Bancaria'.html_safe, edit_tour_store_banking_information_path(@tour_store,@banking_information),class: 'btn btn-primary btn-sm align-right' %>
+
+    </div>
+    <div class="bank-info-container bank-segment row">
+      <div class="col-sm-6 col-xs-12">
           <h1>Detalhes da conta bancaria</h1>
           <%= render 'shared/components/tables/table_banking_information' %>
+          <% if @tour_store.banking_information %>
+          <%= link_to '<i class="fas fa-edit"></i> Editar Conta Bancaria'.html_safe, edit_tour_store_banking_information_path(@tour_store,@banking_information),class: 'btn btn-primary btn-sm ' %>
         <% else %>
-          <h1>Adicione sua conta bancaria</h1>
+          <h2>Adicione sua conta bancaria</h2>
           <%= link_to '<i class="fas fa-plus"></i> Adicionar Conta Bancaria'.html_safe, new_tour_store_banking_information_path(@tour_store),class: 'btn btn-success btn-sm' %>
         <% end %>
       </div>
    </div>
-   <div class="row">
-     <div class="col-xs-6">
-       <%= link_to 'Hitórico de resgates', tour_store_transfers_path(@tour_store), class: 'btn btn-sm btn-primary'   %>
-     </div>
-   </div>
-
 </div>
 

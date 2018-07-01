@@ -1,0 +1,9 @@
+<%= render 'shared/components/navbars/sidebar' %>
+<div class="col-xs-10">
+  <h1>Histórico de resgates</h1>
+  <div class="row">
+    <div class="col-xs-10">
+      <%= render 'shared/components/tables/table_transfers', transfers: @transfers  %>
+    </div>
+  </div>
+</div>

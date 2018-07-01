@@ -12,9 +12,4 @@ class TransferPolicy < ApplicationPolicy
   def show?
     manager?(record.tour_store)
   end
-
-  def index?
-    manager?(record.tour_store)
-  end
-
 end

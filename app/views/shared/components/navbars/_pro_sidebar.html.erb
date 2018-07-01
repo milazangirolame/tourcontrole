@@ -6,12 +6,14 @@
         Dashboard
       </a>
     </li>
-    <li role="presentation" class="<%= active(tour_store_bank_path(@tour_store)) %>">
-      <a href="<%= tour_store_bank_path(@tour_store)%>">
-        <i class="fas fa-wallet"></i>
-        Pagamentos
-      </a>
-    </li>
+    <% if is_manager? %>
+      <li role="presentation" class="<%= active(tour_store_bank_path(@tour_store)) %>">
+        <a href="<%= tour_store_bank_path(@tour_store)%>">
+          <i class="fas fa-dollar-sign"></i>
+          Pagamentos
+        </a>
+      </li>
+    <%end  %>
     <li role="presentation" class="<%= active(tour_store_tours_path(@tour_store))  %>">
       <a href="<%= tour_store_tours_path(@tour_store)  %>">
         <span class="glyphicon glyphicon-tent" aria-hidden='true'></span>

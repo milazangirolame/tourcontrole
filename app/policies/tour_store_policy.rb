@@ -38,6 +38,14 @@ class TourStorePolicy < ApplicationPolicy
   end
 
   def bank?
-    store_admin?
+    store_manager?
+  end
+
+  def balance_details?
+    store_manager?
+  end
+
+  def transfer_index?
+    store_manager?
   end
 end
