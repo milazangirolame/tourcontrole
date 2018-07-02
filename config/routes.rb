@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     resources :banking_informations, only: [:new, :edit, :create, :update]
     get 'dashboard', to: 'tour_stores#dashboard', as: :dashboard
     get 'tours', to: 'tour_stores#tours'
-    get 'users', to: 'tour_stores#users'
     get 'events', to: 'tour_stores#events'
     get 'company', to: 'tour_stores#company'
     get 'bank', to: 'tour_stores#bank'

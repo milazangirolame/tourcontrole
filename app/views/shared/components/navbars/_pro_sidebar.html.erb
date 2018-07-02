@@ -13,7 +13,16 @@
           Pagamentos
         </a>
       </li>
-    <%end  %>
+    <% end %>
+    <% if is_manager? %>
+      <li role="presentation" class="<%= active(tour_store_company_path(@tour_store))  %>">
+        <a href="<%= tour_store_company_path(@tour_store)  %>">
+          <i class="fas fa-cogs"></i>
+          Configurações
+        </a>
+      </li>
+    <% end %>
+
     <li role="presentation" class="<%= active(tour_store_tours_path(@tour_store))  %>">
       <a href="<%= tour_store_tours_path(@tour_store)  %>">
         <span class="glyphicon glyphicon-tent" aria-hidden='true'></span>
@@ -24,18 +33,6 @@
       <a href="<%= tour_store_events_path(@tour_store)  %>">
         <i class="fas fa-clipboard-list"></i>
         Saídas
-      </a>
-    </li>
-    <li role="presentation" class="<%= active(tour_store_users_path(@tour_store))  %>">
-      <a href="<%= tour_store_users_path(@tour_store)  %>">
-        <span class="glyphicon glyphicon-user" aria-hidden='true'></span>
-        Usuarios
-      </a>
-    </li>
-    <li role="presentation" class="<%= active(tour_store_company_path(@tour_store))  %>">
-      <a href="<%= tour_store_company_path(@tour_store)  %>">
-        <i class="fas fa-cogs"></i>
-        Configurações
       </a>
     </li>
   </ul>

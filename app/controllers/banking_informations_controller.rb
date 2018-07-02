@@ -10,8 +10,8 @@ class BankingInformationsController < ApplicationController
     @banking_information = BankingInformation.new(set_params)
     @banking_information.tour_store = @tour_store
     authorize @banking_information
-    if @banking_information.save
-      create_moip_bank
+    if @banking_information.save && create_moip_bank[:errors].nil?
+      flash[:notice] = 'Conta bancaria criada com sucesso'
       redirect_to tour_store_dashboard_path(@tour_store)
     else
       flash[:alert] = @banking_information.errors.first.second
@@ -24,8 +24,8 @@ class BankingInformationsController < ApplicationController
 
   def update
     @banking_information.update(set_params)
-    if @banking_information.save
-      update_moip_bank
+    if @banking_information.save && update_moip_bank[:errors].nil?
+      flash[:notice] = 'Conta bancaria editada com sucesso'
       redirect_to tour_store_bank_path(@tour_store)
     else
       flash[:alert] = @banking_information.errors.first.second

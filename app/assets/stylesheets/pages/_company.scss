@@ -1,12 +1,51 @@
-.company-info {
-
-  h5{
-    color: black;
+.pro-container{
+  margin: 10px;
+  padding: 20px;
+  h1{
+    text-align: left;
   }
-  p {
-    background-color: lightgray;
+  .section{
+    margin: 20px 0 20px 0px;
+    padding:15px 10px 15px 10px;
+
+
+    background-color: $light-blue;
+    box-shadow: 1px 1px 2px rgba(0,3,1,0.2);
+    border-radius: 12px;
+    h2{
+      margin: 10px;
+      color: $darker-gray;
+    }
+
+    .segment{
+      select {
+        border-radius: 12px;
+      }
+      h4{
+        margin-left:15px;
+        color: $darkest-gray;
+        font-size: 22px;
+        font-weight: bolder;
+
+      }
+      .label, p, .sub-label{
+        text-align: left;
+      }
+      .label{
+        color: $deep;
+        font-size: 25px;
+        font-weight: bold;
+      }
+      .sub-label{
+        font-size: 20px;
+        color: $deep;
+
+
+      }
+      p {
+        color: $mid;
+        font-size: 25px
+      }
+    }
   }
-
-
-
 }

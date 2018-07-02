@@ -1,19 +1,24 @@
 <%= simple_form_for([tour_store]) do |f| %>
-  <div class="form-row">
-    <div class="col-xs-12 col-sm-8 col-md-6">
-      <%= f.input :name, label: 'Nome da empresa'  %>
-      <%= f.input :description, label:'Descrição', placeholder:'Esa descrição ajuda seus tours serem achados no Google outros motors de busca' %>
-      <%= f.input :website, label:'Site', placeholder: 'exemplo: www.seusite.com' %>
-      <%= f.input :phone, label: 'Telefone', placeholder: 'Algúns clientes vão querer ligar para você' %>
-      <%= f.input :form_address, as: :string, label: 'Endereço', placeholder: 'Coloque o endereço da sua agência/escritório/loja fisica', input_html: {autocomplete: 'off'} %>
-      <label>Tipo de razão social</label><br>
-      <%= f.collection_radio_buttons :person_type, [['pj','Pessoa Jurídica'],['pf',"Pessoa Física"]], :first, :second  %>
-      <%= f.input :business_tax_id, label: 'Código fiscal', placeholder: 'Importante para sua faturação', hint: 'CNPJ se pessoa jurica ou CPF se pessoa fisica' %>
-      <%= f.input :legal_representant_id, label: 'CPF do reponsável da empresa', hint: 'Só se a empresa for Pessoa Jurídica ' %>
-      <%= f.input :regulator_id, label: 'Código Cadastur', placeholder: 'Caso possua, coloque seu cadastro do Cadastur' %>
-      <%= f.input :logo, label:'Logotipo - Adicone a imagem que sera usada nos seus tours'%>
-      <%= f.input :image_banner, label:'Imagem de capa - Destaque sua empresa com a sua foto de capa'%>
-      <%= f.submit class:' btn btn-lg btn-primary', value: 'Criar Empresa' %>
+  <div class="row form-format">
+    <div class='row form-segment'>
+      <div class="col-xs-12 col-sm-6">
+
+        <%= f.input :name, label: 'Nome da empresa'  %>
+        <%= f.input :description, label:'Descrição', placeholder:'Esa descrição ajuda seus tours serem achados no Google outros motors de busca' %>
+        <%= f.input :website, label:'Site', placeholder: 'exemplo: www.seusite.com' %>
+        <%= f.input :phone, label: 'Telefone', placeholder: 'Algúns clientes vão querer ligar para você' %>
+        <%= f.input :form_address, as: :string, label: 'Endereço', placeholder: 'Coloque o endereço da sua agência/escritório/loja fisica', autocomplete: 'off' %>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <label>Tipo de razão social</label><br>
+        <%= f.collection_radio_buttons :person_type, [['pj','Pessoa Jurídica'],['pf',"Pessoa Física"]], :first, :second  %>
+        <%= f.input :business_tax_id, label: 'Código fiscal', placeholder: 'Importante para sua faturação', hint: 'CNPJ se pessoa jurica ou CPF se pessoa fisica' %>
+        <%= f.input :legal_representant_id, label: 'CPF do reponsável da empresa', hint: 'Só se a empresa for Pessoa Jurídica ' %>
+        <%= f.input :regulator_id, label: 'Código Cadastur', placeholder: 'Caso possua, coloque seu cadastro do Cadastur' %>
+        <%= f.input :logo, label:'Logotipo - Adicone a imagem que sera usada nos seus tours'%>
+        <%= f.input :image_banner, label:'Imagem de capa - Destaque sua empresa com a sua foto de capa'%>
+      </div>
     </div>
+    <%= f.submit class: ' btn btn-lg btn-success align-right', value: 'Criar Empresa' %>
   </div>
 <% end %>

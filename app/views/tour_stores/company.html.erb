@@ -1,63 +1,130 @@
 
 
 <%= render 'shared/components/navbars/sidebar' %>
-<div class="col-xs-10">
-  <%= link_to '<i class="fas fa-edit"></i> Editar Informações'.html_safe, edit_tour_store_path(@tour_store), class: 'btn btn-primary btn-lg'   %>
-  <h1>Informações da Empresa</h1>
-  <div class="col-xs-12 col-sm-8 company-info">
+<div class="col-xs-10 ">
+  <div class="row pro-container">
+    <h1>Configurações</h1>
+    <div class="row section">
+      <h2>Parcelas</h2>
+      <div class="row parcelas-segment segment">
+        <div class="col-xs-12 col-sm-2">
+          <h4>Limite de parcelas</h4>
+        </div>
+        <div class="col-xs-12 col-sm-5">
+          <h5 class='label'>Limite atual: <%= @tour_store.installments_limit  %></h5>
+          <p>Por padrão sua loja turistica tem habilitado o pagamento de parcelas em até em 12 vezes sem juros porém você pode alterar essa configuração aqui</p>
+          <p>Alem disso no momento que você cria um tour você pode estabelecer um limite de parcelas especifico para cada tour o qual tera prioridade sobre o limite padrão da sua loja </p>
+        </div>
+        <div class="col-xs-12 col-sm-5">
+          <h5 class= 'label'> Alterar limite</h5>
 
-    <div class="row">
-      <h3>Imformações de Contato</h3>
-      <div class="col-xs-12 col-sm-6 ">
-        <h5 class='label'> Nome da Empresa</h5>
-        <p><%= @tour_store.name  %></p>
-        <h5 class='label'> Descrição</h5>
-        <p><%= @tour_store.description  %></p>
-      </div>
-      <div class="col-xs-12 col-sm-6 ">
-        <h5 class='label'> Website</h5>
-        <p><%= @tour_store.website  %></p>
-        <h5 class='label'> Telefone</h5>
-        <p><%= @tour_store.phone  %></p>
-        <h5 class='label'> Endereço</h5>
-        <p><%= @tour_store.address  %></p>
+          <div class="col-xs-12 col-sm-10">
+            <%= simple_form_for( @tour_store, method: :put, url: tour_store_path(@tour_store), html: {class: 'inline-fomr'}) do |f|  %>
+              <div class="row form-format light80-background">
+                <div class="row form-segment">
+                  <%= f.input :installments_limit, label: false,collection: 1..12 %>
+                </div>
+                <%= f.submit value: 'Alterar', class: 'btn bnt-md btn-success align-right' %>
+              </div>
+
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <h3>Detalhes de Cadastro</h3>
-      <div class="col-xs-12 col-sm-6 ">
-        <h5 class='label'> CNPJ </h5>
-        <p><%= @tour_store.business_tax_id  %></p>
-      </div>
-      <div class="col-xs-12 col-sm-6 ">
-        <h5 class='label'> Código Cadastur </h5>
-        <p><%= @tour_store.regulator_id  %></p>
-      </div>
-    </div>
-    <div class="row">
-      <h3>Links de Redes Sociaís</h3>
-      <div class="col-xs-12 col-sm-6 ">
-        <h5 class='label'> <i class= 'fab fa-instagram'></i> Instagram </h5>
-        <p><%= @tour_store.instagram_link %></p>
-        <h5 class='label'> <i class= 'fab fa-facebook'></i>Facebook </h5>
-        <p><%= @tour_store.facebook_link %></p>
-      </div>
-      <div class="col-xs-12 col-sm-6 ">
-        <h5 class='label'> <i class= 'fab fa-tripadvisor'></i>Trip Advisor </h5>
-        <p><%= @tour_store.trip_advisor_link %></p>
-         <h5 class='label'> <i class= 'fab fa-twitter'></i>Twitter </h5>
-        <p><%= @tour_store.twitter_link %></p>
+
+    <div class="row section">
+      <h2>Usuários</h2>
+      <div class="row amdin-users-segment segment">
+        <div class="col-xs-12 col-sm-2">
+          <h4>Usuários admins e managers</h4>
+        </div>
+        <div class="col-xs-12 col-sm-5">
+          <h4 class= 'sub-label'>Usuarios admin</h4>
+          <p>Podem criar e alterar tours mas não podem alterar as informações da empresa nem realizar nehuma ação relacionada a pagamentos nem dar de alta novos usuários</p>
+          <h4 class= 'sub-label'>Usuarios managers</h4>
+          <p>Além de criar e alterar tours também podem sim alterar as informações da empresa fazer qualquer ação relacionada a pagamentos e criar novos usuários</p>
+        </div>
+        <div class="col-xs-12 col-sm-5">
+          <h5 class= 'label'> Usuários atuáis</h5>
+           <%= render 'shared/components/tables/table_admin_users' %>
+          <h4 class= 'sub-label'> Adicionar Usuário </h4>
+          <%= render 'shared/forms/form_tour_store_admin', tour_store_admin: @tour_store_admin %>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <h3>Imagéns da Empresa</h3>
-      <div class="col-xs-12 col-sm-6 ">
-        <h5 class='label'> Logotipo </h5>
-        <%= cl_image_tag @tour_store.logo, widht:100, height: 100  %>
+
+    <div class="row section">
+      <h2>Informações da Empresa</h2>
+      <div class="row settings-segment segment">
+        <div class="col-xs-12 col-sm-2">
+          <h4>Informações de Contato</h4>
+        </div>
+        <div class="col-xs-12 col-sm-5 ">
+          <h5 class='label'> Nome da Empresa</h5>
+          <p><%= @tour_store.name  %></p>
+          <h5 class='label'> Descrição</h5>
+          <p><%= @tour_store.description  %></p>
+        </div>
+        <div class="col-xs-12 col-sm-5 ">
+          <h5 class='label'> Website</h5>
+          <p><%= @tour_store.website  %></p>
+          <h5 class='label'> Telefone</h5>
+          <p><%= @tour_store.phone  %></p>
+          <h5 class='label'> Endereço</h5>
+          <p><%= @tour_store.address  %></p>
+        </div>
       </div>
-      <div class="col-xs-12 col-sm-6 ">
-        <h5 class='label'> Imagem de capa </h5>
-        <%= cl_image_tag @tour_store.image_banner, widht:400, height: 300  %>
+      <div class="row legal-segment segment">
+        <div class="col-xs-12 col-sm-2">
+          <h4>Detalhes de Cadastro</h4>
+        </div>
+        <div class="col-xs-12 col-sm-5 ">
+          <h5 class='label'> CNPJ </h5>
+          <p><%= @tour_store.business_tax_id  %></p>
+        </div>
+        <div class="col-xs-12 col-sm-5 ">
+          <h5 class='label'> Código Cadastur </h5>
+          <p><%= @tour_store.regulator_id  %></p>
+        </div>
+      </div>
+
+      <div class="row social-media-segment segment">
+        <div class="col-xs-12 col-sm-2">
+          <h4>Links de Redes Sociaís</h4>
+        </div>
+        <div class="col-xs-12 col-sm-5">
+          <h5 class='label'> <i class= 'fab fa-instagram'></i> Instagram </h5>
+          <p><%= @tour_store.instagram_link %></p>
+          <h5 class='label'> <i class= 'fab fa-facebook'></i>Facebook </h5>
+          <p><%= @tour_store.facebook_link %></p>
+        </div>
+        <div class="col-xs-12 col-sm-5">
+          <h5 class='label'> <i class= 'fab fa-tripadvisor'></i>Trip Advisor </h5>
+          <p><%= @tour_store.trip_advisor_link %></p>
+          <h5 class='label'> <i class= 'fab fa-twitter'></i>Twitter </h5>
+          <p><%= @tour_store.twitter_link %></p>
+        </div>
+      </div>
+
+      <div class="row image-segment segment">
+        <div class="col-xs-12 col-sm-2">
+          <h4>Imagéns</h4>
+        </div>
+        <div class="col-xs-12 col-sm-5">
+          <h5 class='label'> Logotipo </h5>
+          <%= cl_image_tag @tour_store.logo, widht:400, height: 300  %>
+        </div>
+        <div class="col-xs-12 col-sm-5">
+          <h5 class='label'> Imagem de capa </h5>
+          <%= cl_image_tag @tour_store.image_banner, widht:400, height: 300  %>
+        </div>
+      </div>
+      <div class="row button-segment segment">
+        <div class="col-xs-12">
+          <%= link_to '<i class="fas fa-edit"></i> Editar Informações'.html_safe, edit_tour_store_path(@tour_store), class: 'btn btn-primary btn-lg'   %>
+        </div>
       </div>
     </div>
+  </div>
 </div>

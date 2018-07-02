@@ -4,13 +4,14 @@ class TourStoreAdminsController < ApplicationController
     email = set_params[:email]
     user = User.find_by(email: email)
     user ? user : user = User.create(email: email)
-    @tour_store_admin = TourStoreAdmin.create(user: user, tour_store: @tour_store)
+    @tour_store_admin = TourStoreAdmin.create(user: user, tour_store: @tour_store, manager: set_params[:manager])
+    authorize @tour_store_admin
     if @tour_store_admin.save
       flash[:notice] = "Usuário Admin criado com sucesso"
-      redirect_back fallback_location: tour_store_users_path(@tour_store)
+      redirect_back fallback_location: tour_store_company_path(@tour_store)
       else
-      flash[:alert] = @tour_store_admin.errors
-      redirect_back fallback_location: tour_store_users_path(@tour_store)
+      flash[:alert] = @tour_store_admin.errors.first
+      redirect_back fallback_location: tour_store_company_path(@tour_store)
     end
   end
 
@@ -18,6 +19,16 @@ class TourStoreAdminsController < ApplicationController
   end
 
   def destroy
+    @tour_store_admin = TourStoreAdmin.find(params[:id])
+    authorize @tour_store_admin
+    @tour_store_admin.destroy
+    if @tour_store_admin.destroy
+      flash[:notice] = "Usuário excluido  com sucesso"
+      redirect_back fallback_location: tour_store_company_path(@tour_store_admin.tour_store)
+    else
+      flash[:alert] = @tour_store_admin.errors.first
+      redirect_back fallback_location: tour_store_company_path(@tour_store_admin.tour_store)
+    end
   end
 
   private
@@ -28,7 +39,7 @@ class TourStoreAdminsController < ApplicationController
   end
 
   def set_params
-    params.require(:tour_store_admin).permit(:email)
+    params.require(:tour_store_admin).permit(:email, :manager)
   end
 
 end

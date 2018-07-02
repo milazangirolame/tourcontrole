@@ -34,8 +34,10 @@ class TourStoresController < ApplicationController
   def update
     @tour_store.update(set_params)
     if @tour_store.save
-      redirect_to tour_store_path(@tour_store)
+      flash[:notice] = 'Alterações salvas com sucesso'
+      redirect_to tour_store_company_path(@tour_store)
     else
+      flash[:alert] = @tour_store.errors.first
       render :edit
     end
   end
@@ -84,7 +86,7 @@ class TourStoresController < ApplicationController
 
   def set_params
     params.require(:tour_store).permit(:form_address, :phone, :website, :name, :description,
-                                      :business_tax_id, :regulator_id, :logo, :legal_representant_id, :user_id,
+                                      :business_tax_id, :installments_limit, :regulator_id, :logo, :legal_representant_id, :user_id,
                                        :photo, :photo_cache, :image_banner, :instagram_link,
                                        :trip_advisor_link, :facebook_link, :twitter_link,
                                        banking_information_attributes:[
@@ -105,6 +107,7 @@ class TourStoresController < ApplicationController
     authorize @tour_store
     @activities = policy_scope(Activity).where(tour_store: @tour_store)
     @activity = Activity.new
+    @tour_store_admin = TourStoreAdmin.new
     @banking_information = @tour_store.banking_information
   end
 

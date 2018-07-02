@@ -1,16 +1,23 @@
-<table class = 'table table-format reg-fonts'>
+<table class = ' table-format sm-fonts'>
   <tr>
     <th>Nome</th>
     <th>Email</th>
+    <th>Admin</th>
+    <th>Manager</th>
     <th>Ações</th>
+
   </tr>
   <% @tour_store.users.each do |user| %>
     <tr>
       <td><%= user.full_name %></td>
       <td><%= user.email %></td>
+      <td><i class="fas fa-check"></i></td>
+      <% manager = @tour_store.tour_store_admins.find_by(user: user).manager %>
+      <% admin_user = @tour_store.tour_store_admins.find_by(user: user) %>
+      <td><%= manager ? '<i class="fas fa-check"></i>'.html_safe : ''%></td>
       <td>
         <%= link_to '<i class="far fa-trash-alt"></i>'.html_safe,
-        tour_store_admin_path(user), method: :destroy,
+        tour_store_admin_path(admin_user), method: :delete,
         data: {confirm: "Excluir o #{user.full_name} como administrador?"},
         class: 'btn btn-xs btn-danger' %>
       </td>
